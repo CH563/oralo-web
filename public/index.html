@@ -1,0 +1,112 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#faf9f5">
+  <title>Oralo — AI Teleprompter, at Your Pace</title>
+  <meta name="description" content="An upcoming AI teleprompter for iPhone, designed to follow your voice and help you find your next line. Speak naturally. Join the Oralo waitlist.">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Oralo">
+  <meta property="og:url" content="https://oralo.fun/">
+  <meta property="og:locale" content="en_US">
+  <meta property="og:locale:alternate" content="zh_CN">
+  <meta property="og:title" content="Oralo — AI Teleprompter, at Your Pace">
+  <meta property="og:description" content="An upcoming AI teleprompter for iPhone, designed to follow your voice and help you find your next line. Speak naturally. Join the Oralo waitlist.">
+  <meta property="og:image" content="https://oralo.fun/assets/oralo-social-v1.jpg">
+  <meta property="og:image:secure_url" content="https://oralo.fun/assets/oralo-social-v1.jpg">
+  <meta property="og:image:type" content="image/jpeg">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="Oralo: Speak naturally. Stay on track. AI teleprompter, at your pace. Coming soon for iPhone. Join the waitlist at oralo.fun.">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Oralo — AI Teleprompter, at Your Pace">
+  <meta name="twitter:description" content="An upcoming AI teleprompter for iPhone, designed to follow your voice and help you find your next line. Speak naturally. Join the Oralo waitlist.">
+  <meta name="twitter:image" content="https://oralo.fun/assets/oralo-social-v1.jpg">
+  <meta name="twitter:image:alt" content="Oralo: Speak naturally. Stay on track. AI teleprompter, at your pace. Coming soon for iPhone. Join the waitlist at oralo.fun.">
+  <link rel="icon" type="image/png" sizes="48x48" href="assets/favicon-48.png"><link rel="apple-touch-icon" sizes="180x180" href="assets/apple-touch-icon.png">
+  <link rel="canonical" href="https://oralo.fun/"><link rel="stylesheet" href="styles.css">
+  <script src="app.js" defer></script>
+</head>
+<body>
+<a class="skip" href="#main" data-i18n="skip">跳到正文</a>
+<div class="announcement"><span class="status-dot"></span><span data-i18n="announcement">一个更懂你节奏的提词器，正在准备中。</span><a href="#waitlist" data-i18n="early">抢先体验 ↗</a></div>
+<header class="header wrap">
+  <a class="brand" href="#" aria-label="Oralo 首页"><img src="assets/oralo-icon-96.webp" srcset="assets/oralo-icon-48.webp 48w, assets/oralo-icon-96.webp 96w, assets/oralo-icon-192.webp 192w, assets/oralo-icon-288.webp 288w" sizes="(max-width: 700px) 36px, 42px" width="42" height="42" decoding="async" alt=""><span>Oralo<span class="brand-cn">接着讲</span></span></a>
+  <nav aria-label="Main navigation"><a href="#how" data-i18n="navHow">如何跟随</a><a href="#pronunciation" data-i18n="navPron">读音辅助</a><a href="#faq" data-i18n="navFaq">常见问题</a></nav>
+  <div class="header-actions"><div class="languages" aria-label="Language"><button type="button" data-lang="zh" aria-pressed="true">中</button><button type="button" data-lang="en" aria-pressed="false">EN</button></div><a class="button small" href="#waitlist" data-i18n="join">加入候补名单</a></div>
+</header>
+<main id="main">
+  <section class="hero wrap" aria-labelledby="hero-title">
+    <div class="sticker-stage" aria-hidden="true">
+      <div class="paper-sticker"><span class="tiny-wave"><i></i><i></i><i></i><i></i><i></i></span><span class="mini-lines"><i></i><i></i><i></i></span></div>
+      <span class="scribble star">✳</span>
+      <img class="hero-icon" src="assets/oralo-icon-192.webp" srcset="assets/oralo-icon-48.webp 48w, assets/oralo-icon-96.webp 96w, assets/oralo-icon-192.webp 192w, assets/oralo-icon-288.webp 288w" sizes="(max-width: 700px) 80px, 96px" width="96" height="96" decoding="async" alt="">
+      <span class="handnote" data-i18n="iconNote">你的随身接话搭子</span>
+      <div class="word-sticker"><span>hāng shí</span><strong>夯实</strong><span class="tick">✓</span></div>
+    </div>
+    <p class="eyebrow" data-i18n="heroEyebrow">接着讲 · 跟随你的 AI 提词器</p>
+    <h1 id="hero-title" data-i18n-html="heroTitle">抬头，<span class="soft">尽情讲。</span><br>低头，<mark>接着讲。</mark></h1>
+    <p class="hero-description" data-i18n-html="heroDesc">讲快一点、停一停，或临场发挥。<br>让稿子跟上你的节奏，下一句，随时接得住。</p>
+    <form class="waitlist-form hero-form" data-placement="hero">
+      <label class="sr-only" for="hero-email" data-i18n="emailLabel">电子邮箱</label><input id="hero-email" name="email" type="email" autocomplete="email" placeholder="你的电子邮箱" required maxlength="254" data-i18n-placeholder="emailPlaceholder">
+      <input class="honeypot" name="company" tabindex="-1" autocomplete="off" aria-hidden="true">
+      <button class="button" type="submit"><span data-i18n="join">加入候补名单</span><span aria-hidden="true">↗</span></button>
+      <p class="form-status" role="status" aria-live="polite"></p>
+    </form>
+    <p class="form-note"><span data-i18n="formNote">免费加入，开放测试时优先通知。</span> <button class="text-button privacy-open" data-i18n="privacy">隐私说明</button></p>
+    <a href="#how" class="demo-link"><span class="play-icon" aria-hidden="true">▶</span><span data-i18n="tryDemo">先看看，它怎么跟随你</span><span aria-hidden="true">↓</span></a>
+    <div class="hero-bottom"><span data-i18n="iphoneFirst">为 iPhone 而设计</span><span class="little-separator">✦</span><span data-i18n="launchStatus">App 筹备中 · 加入早期体验</span></div>
+  </section>
+
+  <section class="story wrap narrow">
+    <p data-i18n-html="story">你认真准备了很久。<br>可一上台，<span class="soft">紧张、忘词、节奏被打乱。</span><br>我们想让你少一分找稿的慌张，<br>多一点 <span class="underline">把话讲好的从容。</span></p>
+    <span class="story-sign" data-i18n="storySign">这就是我们做 Oralo 的原因。</span>
+  </section>
+
+  <section id="how" class="section wrap" aria-labelledby="how-title">
+    <div class="section-heading"><span class="kicker" data-i18n="followKicker">01 / 你的节奏，就是稿子的节奏</span><h2 id="how-title" data-i18n-html="followTitle">你来讲，<mark>它来跟。</mark></h2><p data-i18n="followDesc">AI 根据你正在讲的内容跟随位置。讲快一点，或者停一停，都由你决定。</p></div>
+    <div class="follow-demo">
+      <div class="demo-controls">
+        <span class="demo-label"><span class="status-dot"></span><span data-i18n="interactive">点击体验 · 交互示意</span></span>
+        <div class="mode-buttons" role="group" aria-label="Demo states">
+          <button type="button" data-mode="follow" aria-pressed="true"><span class="mode-icon">〰</span><span><strong data-i18n="modeFollow">正常讲</strong><small data-i18n="modeFollowDesc">稿子跟着你，稳稳向前</small></span><span class="mode-arrow">↗</span></button>
+          <button type="button" data-mode="pause" aria-pressed="false"><span class="mode-icon">Ⅱ</span><span><strong data-i18n="modePause">停下来想想</strong><small data-i18n="modePauseDesc">位置停住，给你一点时间</small></span><span class="mode-arrow">↗</span></button>
+          <button type="button" data-mode="improv" aria-pressed="false"><span class="mode-icon">✳</span><span><strong data-i18n="modeImprov">自由发挥</strong><small data-i18n="modeImprovDesc">离开稿子，也留好回来的位置</small></span><span class="mode-arrow">↗</span></button>
+        </div>
+        <p class="demo-footnote" data-i18n="demoFootnote">这里演示的是产品交互，不会调用麦克风。实际语音跟随能力将在测试版验证。</p>
+      </div>
+      <div class="teleprompter" aria-live="polite">
+        <div class="tele-top"><span data-i18n="quarterly">季度报告</span><span class="tele-status"><span class="status-dot"></span><span id="demo-status">正在跟随</span></span></div>
+        <div class="tele-reading"><p class="previous" data-i18n="demoPrevious">这一季度，我们有了新的进展。</p><div class="current-line"><span class="reading-arrow">›</span><p id="demo-line">把重要的事，<br><span class="spoken">讲得更清楚。</span></p></div><p class="next" id="demo-next">下一步，让每一次交付更稳。</p></div>
+        <div id="demo-recovery" class="demo-recovery" hidden><span data-i18n="held">已为你保留位置</span><button type="button" id="resume-demo" data-i18n="resume">从下一句接着讲 ↗</button></div>
+        <div class="tele-bottom"><span class="wave"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></span><span id="demo-caption">语速由你，位置交给 Oralo</span><span class="time">04:28</span></div>
+      </div>
+    </div>
+    <p class="center-note" data-i18n="followNote">重要数据照稿讲，故事和想法，留给你自由发挥。</p>
+  </section>
+
+  <section id="return" class="section wrap return-section">
+    <div class="feature-copy"><span class="kicker" data-i18n="returnKicker">02 / 说到哪，都有路回来</span><h2 data-i18n-html="returnTitle">发挥尽兴了，<br><mark>接回下一句。</mark></h2><p data-i18n="returnDesc">一个临时想到的故事，一段想多说几句的解释。你可以放心离稿，再从附近的后文接上。</p><div class="feature-line"><span class="number">1</span><div><h3 data-i18n="returnAuto">回到稿子，继续跟随</h3><p data-i18n="returnAutoDesc">识别到明确的原稿内容后，尝试接回相应位置。</p></div></div><div class="feature-line"><span class="number">2</span><div><h3 data-i18n="returnManual">需要时，自己选一句</h3><p data-i18n="returnManualDesc">点按「接回原稿」，选中想讲的句子，马上继续。</p></div></div><span class="handwritten" data-i18n="returnNote">有底气，所以敢发挥。 ↗</span></div>
+    <div class="phone-scene"><span class="floating-label" data-i18n="phoneLabel">想接哪句，由你决定。</span><div class="phone-frame"><img src="assets/recovery-480.webp" srcset="assets/recovery-240.webp 240w, assets/recovery-480.webp 480w, assets/recovery-720.webp 720w" sizes="(max-width: 700px) 198px, 218px" width="850" height="1850" loading="lazy" decoding="async" alt="Oralo 接回原稿界面：点选一句继续演讲" data-i18n-alt="recoveryAlt"></div><span class="image-caption" data-i18n="concept">App 设计预览</span><span class="scene-spark" aria-hidden="true">✳</span></div>
+  </section>
+
+  <section id="pronunciation" class="section pronunciation-section">
+    <div class="wrap pronunciation-grid"><div class="pronunciation-paper"><div class="paper-top"><span data-i18n="prep">备稿时间</span><span class="paper-dots">● ● ●</span></div><div class="ruby-sentence"><span data-i18n="pronText1">继续</span> <ruby>夯实<rt>hāng shí</rt></ruby> <span data-i18n="pronText2">基础，</span><br><span data-i18n="pronText3">完善</span> <ruby class="english-ruby">roadmap<rt>/ˈroʊd ˌmæp/</rt></ruby><span>。</span></div><div class="pronunciation-player"><span class="sound-glyph" aria-hidden="true">◖))</span><div><strong>roadmap</strong><small data-i18n="american">美式发音示例</small></div><button id="listen" type="button" aria-label="Listen to roadmap"><span aria-hidden="true">▶</span> <span data-i18n="listen">听发音</span></button></div><p id="audio-status" role="status" data-i18n="audioNote">备稿时听清楚，上台时看一眼就够。</p><span class="paper-fold" aria-hidden="true"></span></div><div class="feature-copy"><span class="kicker" data-i18n="pronKicker">03 / 难读的词，也能从容说出口</span><h2 data-i18n-html="pronTitle">拼音在上，<br><mark>底气在心里。</mark></h2><p data-i18n="pronDesc">中文生僻字配拼音，英文单词配音标。提示紧贴对应字词，只在你需要的地方出现。</p><div class="pron-tags"><span data-i18n="pinyinTag">中文拼音</span><span data-i18n="ipaTag">英文音标</span><span data-i18n="audioTag">备稿试听</span></div><p class="small-copy" data-i18n="pronSmall">演讲时安静提示，备稿时主动试听。这里的声音由浏览器提供，仅作体验示例。</p></div></div>
+  </section>
+
+  <section class="section wrap use-cases"><span class="kicker" data-i18n="scenesKicker">给每一个想把话讲好的人</span><h2 data-i18n-html="scenesTitle">你的话，<span class="soft">值得被听见。</span></h2><div class="scenario-row"><div><span class="scenario-icon">↗</span><h3 data-i18n="scene1">工作汇报</h3><p data-i18n="scene1Desc">数据准确，结论清楚。</p></div><div><span class="scenario-icon">✳</span><h3 data-i18n="scene2">现场分享</h3><p data-i18n="scene2Desc">抬头交流，低头接稿。</p></div><div><span class="scenario-icon">“</span><h3 data-i18n="scene3">会议发言</h3><p data-i18n="scene3Desc">临场有想法，表达有章法。</p></div></div></section>
+
+  <section id="faq" class="section wrap faq-section"><h2 data-i18n="faqTitle">你可能还想知道。</h2><div class="faq-list">
+    <details><summary data-i18n="q1">现在可以下载了吗？</summary><p data-i18n="a1">Oralo 还在筹备中，暂未开放下载。加入候补名单后，我们会在测试开放和正式上线时通知你，不承诺具体日期。</p></details>
+    <details><summary data-i18n="q2">它和自动滚动的提词器有什么不同？</summary><p data-i18n="a2">Oralo 的设计目标是根据你正在讲的内容移动位置，而不是按设定速度不停滚动。停顿时等待，自由发挥时保留可靠位置，回到原稿后再跟随。实际效果需要通过真实演讲测试验证。</p></details>
+    <details><summary data-i18n="q3">自由发挥很久，也能自动接回来吗？</summary><p data-i18n="a3">我们优先做好回到原句和附近后文的接稿，不承诺任意跨段都能自动找准。噪声、距离和多人讲话也会影响识别。需要时可以手动选一句继续，主动选择始终优先。</p></details>
+    <details><summary data-i18n="q4">支持什么设备和语言？</summary><p data-i18n="a4">首版面向 iPhone，最低兼容目标为 iOS 18。优先打磨中文演讲与中英混排的读音辅助；具体语音识别语言、离线能力及不同系统上的体验，以测试结果和发布说明为准。</p></details>
+    <details><summary data-i18n="q5">AI 会根据我的排练不断学习吗？</summary><p data-i18n="a5">首版重点是演讲当下的内容与节奏跟随。根据排练提供分句、停顿建议是后续探索方向，我们会先征求你的确认，再应用建议。</p></details>
+  </div></section>
+
+  <section id="waitlist" class="final-section wrap"><div class="final-mark" aria-hidden="true"><img src="assets/oralo-icon-96.webp" srcset="assets/oralo-icon-48.webp 48w, assets/oralo-icon-96.webp 96w, assets/oralo-icon-192.webp 192w, assets/oralo-icon-288.webp 288w" sizes="(max-width: 700px) 65px, 76px" width="76" height="76" loading="lazy" decoding="async" alt=""><span>↙</span></div><span class="kicker" data-i18n="finalKicker">下一次上台，带上 Oralo</span><h2 data-i18n-html="finalTitle">好好准备。<br><mark>自在开口。</mark></h2><p data-i18n="finalDesc">留下邮箱，成为第一批体验「接着讲」的人。</p><form class="waitlist-form final-form" data-placement="footer"><label class="sr-only" for="footer-email" data-i18n="emailLabel">电子邮箱</label><input id="footer-email" name="email" type="email" required maxlength="254" autocomplete="email" placeholder="你的电子邮箱" data-i18n-placeholder="emailPlaceholder"><input class="honeypot" name="company" tabindex="-1" autocomplete="off" aria-hidden="true"><button type="submit" class="button"><span data-i18n="join">加入候补名单</span><span aria-hidden="true">↗</span></button><div class="scenario-input"><label for="scenario" data-i18n="scenarioLabel">最想用在哪？（选填）</label><select id="scenario" name="scenario"><option value="" data-i18n="choose">请选择</option value="report" data-i18n="scene1">工作汇报</option><option value="talk" data-i18n="scene2">现场分享</option><option value="meeting" data-i18n="scene3">会议发言</option><option value="other" data-i18n="other">其他场景</option></select></div><p class="form-status" role="status" aria-live="polite"></p></form><p class="form-note"><span data-i18n="privacyNote">提交即同意接收 Oralo 测试与上线通知。</span> <button type="button" class="text-button privacy-open" data-i18n="privacy">隐私说明</button></p><button id="leave-waitlist" class="text-button" type="button" hidden data-i18n="leave">撤回本次候补登记</button><p id="leave-status" role="status"></p></section>
+</main>
+<footer class="footer wrap"><a class="brand" href="#"><img src="assets/oralo-icon-48.webp" srcset="assets/oralo-icon-48.webp 48w, assets/oralo-icon-96.webp 96w, assets/oralo-icon-192.webp 192w, assets/oralo-icon-288.webp 288w" sizes="(max-width: 700px) 29px, 32px" width="32" height="32" loading="lazy" decoding="async" alt=""><span>Oralo</span></a><p data-i18n="tagline">AI Teleprompter, at Your Pace.</p><div><span>© 2026 Oralo</span><button type="button" class="text-button privacy-open" data-i18n="privacy">隐私说明</button></div></footer>
+<dialog id="privacy-dialog" aria-labelledby="privacy-title"><div class="dialog-heading"><h2 id="privacy-title" data-i18n="privacy">隐私说明</h2><button type="button" class="dialog-close" aria-label="Close">×</button></div><div data-i18n-html="privacyBody"><p>候补登记仅保存你的邮箱、所选场景、界面语言和登记时间，用于 Oralo 测试邀请与上线通知。数据保存在 Vercel 私有存储中，不公开展示。</p><p>本页面不会访问麦克风，也不收集讲稿或录音。语音跟随演示是交互示意；读音试听使用浏览器提供的语音服务。</p><p>登记成功后，本次会话会保留撤回凭据，你可点击页面底部的「撤回本次候补登记」删除记录。请在关闭标签页前处理撤回；未来通知邮件也应提供退订方式。</p><p>我们在本机保存你的语言偏好，不使用广告追踪。此说明仅覆盖当前候补名单官网，App 的数据处理说明会在测试前另行提供。</p></div></dialog>
+</body>
+</html>

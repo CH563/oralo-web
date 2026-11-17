@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://oralo.fun/sitemap.xml

@@ -1,0 +1,15 @@
+# Local state and credentials
+.env*
+.vercel/
+node_modules/
+.DS_Store
+
+# Local design artifacts and internal documentation
+design/
+docs/
+prd/
+
+# Development files are not part of the deployment upload.
+tests/
+scripts/
+README.md
