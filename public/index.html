@@ -4,14 +4,14 @@
   <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="theme-color" content="#faf9f5">
   <title>Oralo — AI Teleprompter, at Your Pace</title>
-  <meta name="description" content="An AI teleprompter in development for iPhone and iPad. Follow your voice, prepare pronunciation hints, and revisit rehearsals. Join the Oralo waitlist.">
+  <meta name="description" content="An AI teleprompter for iPhone and iPad, in development. Voice following, floating prompts, and pronunciation hints. Join the Oralo waitlist.">
   <meta property="og:type" content="website">
   <meta property="og:site_name" content="Oralo">
   <meta property="og:url" content="https://oralo.fun/">
   <meta property="og:locale" content="en_US">
   <meta property="og:locale:alternate" content="zh_CN">
   <meta property="og:title" content="Oralo — AI Teleprompter, at Your Pace">
-  <meta property="og:description" content="An AI teleprompter in development for iPhone and iPad. Follow your voice, prepare pronunciation hints, and revisit rehearsals. Join the Oralo waitlist.">
+  <meta property="og:description" content="An AI teleprompter for iPhone and iPad, in development. Voice following, floating prompts, and pronunciation hints. Join the Oralo waitlist.">
   <meta property="og:image" content="https://oralo.fun/assets/oralo-social-v1.jpg">
   <meta property="og:image:secure_url" content="https://oralo.fun/assets/oralo-social-v1.jpg">
   <meta property="og:image:type" content="image/jpeg">
@@ -20,7 +20,7 @@
   <meta property="og:image:alt" content="Oralo: Speak naturally. Stay on track. AI teleprompter, at your pace. Coming soon for iPhone. Join the waitlist at oralo.fun.">
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="Oralo — AI Teleprompter, at Your Pace">
-  <meta name="twitter:description" content="An AI teleprompter in development for iPhone and iPad. Follow your voice, prepare pronunciation hints, and revisit rehearsals. Join the Oralo waitlist.">
+  <meta name="twitter:description" content="An AI teleprompter for iPhone and iPad, in development. Voice following, floating prompts, and pronunciation hints. Join the Oralo waitlist.">
   <meta name="twitter:image" content="https://oralo.fun/assets/oralo-social-v1.jpg">
   <meta name="twitter:image:alt" content="Oralo: Speak naturally. Stay on track. AI teleprompter, at your pace. Coming soon for iPhone. Join the waitlist at oralo.fun.">
   <link rel="icon" type="image/png" sizes="48x48" href="assets/favicon-48.png"><link rel="apple-touch-icon" sizes="180x180" href="assets/apple-touch-icon.png">
@@ -32,7 +32,7 @@
 <div class="announcement"><span class="status-dot"></span><span data-i18n="announcement">跟随你的节奏，正在打磨中的 AI 提词器。</span><a href="#waitlist" data-i18n="early">抢先体验 ↗</a></div>
 <header class="header wrap">
   <a class="brand" href="#" aria-label="Oralo 首页"><img src="assets/oralo-icon-96.webp" srcset="assets/oralo-icon-48.webp 48w, assets/oralo-icon-96.webp 96w, assets/oralo-icon-192.webp 192w, assets/oralo-icon-288.webp 288w" sizes="(max-width: 700px) 36px, 42px" width="42" height="42" decoding="async" alt=""><span>Oralo<span class="brand-cn">接着讲</span></span></a>
-  <nav aria-label="Main navigation"><a href="#inside" data-i18n="navHow">功能一览</a><a href="#pronunciation" data-i18n="navPron">读音辅助</a><a href="#faq" data-i18n="navFaq">常见问题</a></nav>
+  <nav aria-label="Main navigation"><a href="#inside" data-i18n="navHow">功能一览</a><a href="#floating" data-i18n="navFloating">小窗提词</a><a href="#faq" data-i18n="navFaq">常见问题</a></nav>
   <div class="header-actions"><div class="languages" aria-label="Language"><button type="button" data-lang="zh" aria-pressed="true">中</button><button type="button" data-lang="en" aria-pressed="false">EN</button></div><a class="button small" href="#waitlist" data-i18n="join">加入候补名单</a></div>
 </header>
 <main id="main">
@@ -98,7 +98,23 @@
     <div class="wrap pronunciation-grid"><figure class="pronunciation-screen"><a class="screenshot-link" href="assets/app-pronunciation-640.webp" target="_blank" rel="noopener"><img src="assets/app-pronunciation-320.webp" srcset="assets/app-pronunciation-320.webp 320w, assets/app-pronunciation-640.webp 640w" sizes="(max-width: 700px) 240px, 260px" width="1206" height="2622" loading="lazy" decoding="async" alt="Oralo 开发版读音设置：roadmap 的美式音标、试听和演讲时显示开关" data-i18n-alt="pronScreenshotAlt"></a><figcaption class="screenshot-note" data-i18n="pronCaption">开发版 App 实际截图 · 选词添加读音</figcaption></figure><div class="feature-copy"><span class="kicker" data-i18n="pronKicker">03 / 难读的词，也能从容说出口</span><h2 data-i18n-html="pronTitle">拼音在上，<br><mark>底气在心里。</mark></h2><p data-i18n="pronDesc">备稿时选中中文或英文词，添加、核对并保存拼音或音标。开讲后，注音紧贴对应字词显示。</p><div class="pron-tags"><span data-i18n="pinyinTag">中文拼音</span><span data-i18n="ipaTag">英文音标</span><span data-i18n="audioTag">备稿试听</span></div><p class="small-copy" data-i18n="pronSmall">App 在备稿时提供英文原词的参考试听，演讲时仅显示注音。下方按钮是浏览器发音示例。</p><div class="pronunciation-player"><span class="sound-glyph" aria-hidden="true">◖))</span><div><strong>roadmap</strong><small data-i18n="american">美式发音示例</small></div><button id="listen" type="button" aria-label="Listen to roadmap"><span aria-hidden="true">▶</span> <span data-i18n="listen">听发音</span></button></div><p id="audio-status" role="status" data-i18n="audioNote">备稿时听清楚，上台时看一眼就够。</p></div></div>
   </section>
 
-  <section class="section wrap workspace-section" aria-labelledby="workspace-title"><div class="section-heading"><span class="kicker" data-i18n="workspaceKicker">04 / 给你的话，多一点空间</span><h2 id="workspace-title" data-i18n-html="workspaceTitle">大屏备稿，<br><mark>自在开讲。</mark></h2><p data-i18n="workspaceDesc">在 iPad 上并排查看稿库与正文；开讲后进入全屏。用你习惯的方向、字号和外观，把注意力留给要讲的话。</p></div><figure class="ipad-preview"><a class="screenshot-link" href="assets/app-ipad-1280.webp" target="_blank" rel="noopener"><img src="assets/app-ipad-640.webp" srcset="assets/app-ipad-640.webp 640w, assets/app-ipad-1280.webp 1280w" sizes="(max-width: 1000px) calc(100vw - 40px), 900px" width="2420" height="1668" loading="lazy" decoding="async" alt="Oralo 开发版 iPad 分栏：左侧稿库，右侧带拼音与音标的讲稿" data-i18n-alt="ipadAlt"></a><figcaption class="screenshot-note" data-i18n="ipadCaption">开发版 App 实际截图 · iPad 稿库与备稿</figcaption></figure><div class="reading-features"><div><h3 data-i18n="readingTitle">横竖屏都从容</h3><p data-i18n="readingDesc">旋转设备，保留当前句与暂停状态。字号和浅深外观也可自行调整。</p></div><div><h3 data-i18n="mirrorTitle">镜面设备，也能用</h3><p data-i18n="mirrorDesc">左右翻转正文、注音与高亮，控制按钮保持正常，方便使用镜面提词设备。</p></div><div><h3 data-i18n="localTitle">稿子留在你的设备</h3><p data-i18n="localDesc">讲稿、读音提示和排练记录保存在本机。App 不向我们的服务器上传讲稿或麦克风音频。</p></div></div></section>
+  <section id="floating" class="section wrap floating-section" aria-labelledby="floating-title">
+    <div class="feature-copy">
+      <span class="kicker" data-i18n="floatingKicker">04 / 小小窗口，接住下一句</span>
+      <h2 id="floating-title" data-i18n-html="floatingTitle">切换 App，<br><mark>稿子还在眼前。</mark></h2>
+      <p data-i18n="floatingDesc">把讲稿放进 iPhone 或 iPad 的画中画小窗。按设定的速度滚动，或让设备端语音跟随你开口。</p>
+      <div class="feature-line"><span class="number">1</span><div><h3 data-i18n="floatingPaceTitle">定好速度，从容开始</h3><p data-i18n="floatingPaceDesc">调整滚动速度，经过 3 秒倒计时开始。定速模式不使用麦克风。</p></div></div>
+      <div class="feature-line"><span class="number">2</span><div><h3 data-i18n="floatingVoiceTitle">你开口，小窗跟随</h3><p data-i18n="floatingVoiceDesc">先在 Oralo 中开始语音跟随，再切换 App。麦克风被中断时，保留当前位置，等你回来继续。</p></div></div>
+      <div class="feature-line"><span class="number">3</span><div><h3 data-i18n="floatingHintsTitle">读音提示，也一起带上</h3><p data-i18n="floatingHintsDesc">已保存的拼音和音标仍贴着对应字词。调整文字大小，返回 Oralo 时暂停。</p></div></div>
+      <p class="floating-compatibility" data-i18n="floatingCompatibility">小窗功能仍在测试中；录像和通话时的兼容性正在验证。</p>
+    </div>
+    <figure class="floating-preview">
+      <a class="screenshot-link" href="assets/app-floating-960.webp" target="_blank" rel="noopener"><img src="assets/app-floating-480.webp" srcset="assets/app-floating-480.webp 480w, assets/app-floating-960.webp 960w" sizes="(max-width: 460px) calc(100vw - 40px), (max-width: 700px) 420px, (max-width: 1000px) calc((100vw - 104px) / 2), 420px" width="1668" height="2420" loading="lazy" decoding="async" alt="Oralo 开发版在 iPad 主屏幕上的画中画提词小窗，示例讲稿中 milestone 一词上方显示音标" data-i18n-alt="floatingAlt"></a>
+      <figcaption class="screenshot-note"><span data-i18n="floatingCaption">开发版 App 实际截图 · iPad 画中画小窗</span><span data-i18n="floatingCaptionNote">示例讲稿 · 点击图片查看大图</span></figcaption>
+    </figure>
+  </section>
+
+  <section class="section wrap workspace-section" aria-labelledby="workspace-title"><div class="section-heading"><span class="kicker" data-i18n="workspaceKicker">05 / 给你的话，多一点空间</span><h2 id="workspace-title" data-i18n-html="workspaceTitle">大屏备稿，<br><mark>自在开讲。</mark></h2><p data-i18n="workspaceDesc">在 iPad 上并排查看稿库与正文；开讲后进入全屏。用你习惯的方向、字号和外观，把注意力留给要讲的话。</p></div><figure class="ipad-preview"><a class="screenshot-link" href="assets/app-ipad-1280.webp" target="_blank" rel="noopener"><img src="assets/app-ipad-640.webp" srcset="assets/app-ipad-640.webp 640w, assets/app-ipad-1280.webp 1280w" sizes="(max-width: 1000px) calc(100vw - 40px), 900px" width="2420" height="1668" loading="lazy" decoding="async" alt="Oralo 开发版 iPad 分栏：左侧稿库，右侧带拼音与音标的讲稿" data-i18n-alt="ipadAlt"></a><figcaption class="screenshot-note" data-i18n="ipadCaption">开发版 App 实际截图 · iPad 稿库与备稿</figcaption></figure><div class="reading-features"><div><h3 data-i18n="readingTitle">横竖屏都从容</h3><p data-i18n="readingDesc">旋转设备，保留当前句与暂停状态。字号和浅深外观也可自行调整。</p></div><div><h3 data-i18n="mirrorTitle">镜面设备，也能用</h3><p data-i18n="mirrorDesc">左右翻转正文、注音与高亮，控制按钮保持正常，方便使用镜面提词设备。</p></div><div><h3 data-i18n="localTitle">稿子留在你的设备</h3><p data-i18n="localDesc">讲稿、读音提示和排练记录保存在本机。App 不向我们的服务器上传讲稿或麦克风音频。</p></div></div></section>
 
   <section class="section wrap use-cases"><span class="kicker" data-i18n="scenesKicker">给每一个想把话讲好的人</span><h2 data-i18n-html="scenesTitle">你的话，<span class="soft">值得被听见。</span></h2><div class="scenario-row"><div><span class="scenario-icon">↗</span><h3 data-i18n="scene1">工作汇报</h3><p data-i18n="scene1Desc">数据准确，结论清楚。</p></div><div><span class="scenario-icon">✳</span><h3 data-i18n="scene2">现场分享</h3><p data-i18n="scene2Desc">抬头交流，低头接稿。</p></div><div><span class="scenario-icon">“</span><h3 data-i18n="scene3">会议发言</h3><p data-i18n="scene3Desc">临场有想法，表达有章法。</p></div></div></section>
 
@@ -109,6 +125,7 @@
     <details><summary data-i18n="q4">支持哪些设备和语言？</summary><p data-i18n="a4">当前开发版支持 iPhone 与 iPad，最低 iOS / iPadOS 18。界面提供英文、简体中文和繁体中文，读音辅助包含中文拼音与英文音标。语音跟随需要设备支持相应语言并安装系统模型。</p></details>
     <details><summary data-i18n="q5">排练之后，可以回看什么？</summary><p data-i18n="a5">可以查看时长、暂停与接稿事件，以及有充分依据的安静或整句重读线索，再回看原句、编辑当前稿或主动核对读音。这些记录帮助你复盘，不是演讲评分，也不会自动判定某个词读错。</p></details>
     <details><summary data-i18n="q6">离线时可以用吗？</summary><p data-i18n="a6">讲稿编辑和阅读使用本机数据。语音跟随需要受支持且已下载的系统语言模型；首次下载模型或声音可能需要联网。如果设备端识别不可用，仍可手动提词，App 不会改用云端识别上传音频。</p></details>
+    <details><summary data-i18n="q7">小窗可以和相机、通话一起使用吗？</summary><p data-i18n="a7">当前开发版提供画中画提词，可选择定速滚动或语音跟随。定速模式不需要麦克风；语音模式需先在 Oralo 中启动。如果其他 App 的录音或通话中断了麦克风，小窗会保留位置。录像与通话场景的兼容性仍在验证，表现取决于设备、系统和所用 App。</p></details>
   </div></section>
 
   <section id="waitlist" class="final-section wrap"><div class="final-mark" aria-hidden="true"><img src="assets/oralo-icon-96.webp" srcset="assets/oralo-icon-48.webp 48w, assets/oralo-icon-96.webp 96w, assets/oralo-icon-192.webp 192w, assets/oralo-icon-288.webp 288w" sizes="(max-width: 700px) 65px, 76px" width="76" height="76" loading="lazy" decoding="async" alt=""><span>↙</span></div><span class="kicker" data-i18n="finalKicker">下一次上台，带上 Oralo</span><h2 data-i18n-html="finalTitle">好好准备。<br><mark>自在开口。</mark></h2><p data-i18n="finalDesc">留下邮箱，成为第一批体验「接着讲」的人。</p><form class="waitlist-form final-form" data-placement="footer"><label class="sr-only" for="footer-email" data-i18n="emailLabel">电子邮箱</label><input id="footer-email" name="email" type="email" required maxlength="254" autocomplete="email" placeholder="你的电子邮箱" data-i18n-placeholder="emailPlaceholder"><input class="honeypot" name="company" tabindex="-1" autocomplete="off" aria-hidden="true"><button type="submit" class="button"><span data-i18n="join">加入候补名单</span><span aria-hidden="true">↗</span></button><div class="scenario-input"><label for="scenario" data-i18n="scenarioLabel">最想用在哪？（选填）</label><select id="scenario" name="scenario"><option value="" data-i18n="choose">请选择</option value="report" data-i18n="scene1">工作汇报</option><option value="talk" data-i18n="scene2">现场分享</option><option value="meeting" data-i18n="scene3">会议发言</option><option value="other" data-i18n="other">其他场景</option></select></div><p class="form-status" role="status" aria-live="polite"></p></form><p class="form-note"><span data-i18n="privacyNote">提交即同意接收 Oralo 测试与上线通知。</span> <button type="button" class="text-button privacy-open" data-i18n="privacy">隐私说明</button></p><button id="leave-waitlist" class="text-button" type="button" hidden data-i18n="leave">撤回本次候补登记</button><p id="leave-status" role="status"></p></section>

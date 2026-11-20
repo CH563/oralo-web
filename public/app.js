@@ -4,7 +4,22 @@ const translations = {
     "announcement": "Your words. Your pace. Oralo is taking shape.",
     "early": "Get early access ↗",
     "navHow": "Inside Oralo",
-    "navPron": "Pronunciation",
+    "navFloating": "Floating prompt",
+    "floatingKicker": "04 / A SMALL WINDOW FOR YOUR NEXT LINE",
+    "floatingTitle": "Switch apps.<br><mark>Keep your place.</mark>",
+    "floatingDesc": "Bring your script into a Picture-in-Picture window on iPhone or iPad. Set a steady scrolling pace, or let on-device voice following move with you.",
+    "floatingPaceTitle": "Set a pace. Take a breath.",
+    "floatingPaceDesc": "Choose your scrolling speed and start after a 3-second countdown. Fixed pace uses no microphone.",
+    "floatingVoiceTitle": "Speak, and the window follows.",
+    "floatingVoiceDesc": "Start voice following in Oralo before switching apps. If microphone input is interrupted, your place is held until you return.",
+    "floatingHintsTitle": "Your reading hints come too.",
+    "floatingHintsDesc": "Saved pinyin and IPA stay above their words. Adjust the text size, and return to Oralo to pause.",
+    "floatingCompatibility": "Floating prompts are in testing. Compatibility during video recording and calls is still being verified.",
+    "floatingAlt": "Oralo development app: a Picture-in-Picture prompt on the iPad Home Screen, with an IPA hint above milestone in a sample script",
+    "floatingCaption": "Actual development app · Picture-in-Picture on iPad",
+    "floatingCaptionNote": "Sample script · Tap the image for a closer look",
+    "q7": "Can I use the floating prompt with Camera or a call?",
+    "a7": "The development app offers Picture-in-Picture prompting with fixed-pace scrolling or voice following. Fixed pace needs no microphone; voice following starts inside Oralo. If recording or a call in another app interrupts microphone input, your place is held. Compatibility during video recording and calls is still being verified and depends on your device, system, and the other app.",
     "navFaq": "FAQ",
     "join": "Join the waitlist",
     "iconNote": "A little backup for your big ideas",
@@ -126,7 +141,7 @@ const translations = {
     "galleryNote": "Actual development-app screenshots using sample scripts. Features and screens are still being refined ahead of public release.",
     "pronScreenshotAlt": "Oralo development app: US English IPA for roadmap, reference playback, and a toggle to show the hint while speaking",
     "pronCaption": "Actual development app · Add a reading hint",
-    "workspaceKicker": "04 / ROOM FOR YOUR WORDS",
+    "workspaceKicker": "05 / ROOM FOR YOUR WORDS",
     "workspaceTitle": "A little more room.<br><mark>The same flow.</mark>",
     "workspaceDesc": "Keep your library and draft side by side on iPad, then go full screen to speak. Choose the orientation, text size, and appearance that feel right for you.",
     "ipadAlt": "Oralo development app on iPad: script library beside an editable draft with pinyin and IPA hints",
@@ -179,7 +194,7 @@ function setLanguage(next){
   document.querySelectorAll('[data-lang]').forEach(el=>el.setAttribute('aria-pressed',String(el.dataset.lang===language)));
   document.querySelectorAll('.form-status[data-message]').forEach(el=>el.textContent=t(el.dataset.message));
   document.title=language==='en'?'Oralo — AI Teleprompter, at Your Pace':'Oralo 接着讲 — 跟随你的 AI 提词器';
-  document.querySelector('meta[name=description]').content=language==='en'?'An AI teleprompter in development for iPhone and iPad. Follow your voice, prepare pronunciation hints, and revisit rehearsals. Join the Oralo waitlist.':'按你的节奏讲，自由发挥后接回原稿。AI 语音跟随、中文拼音和英文音标，为上台增加一点底气。加入 Oralo 候补名单。';
+  document.querySelector('meta[name=description]').content=language==='en'?'An AI teleprompter for iPhone and iPad, in development. Voice following, floating prompts, and pronunciation hints. Join the Oralo waitlist.':'为 iPhone 与 iPad 开发中的 AI 提词器。语音跟随、小窗提词、拼音与音标提示，让下一句随时在眼前。加入 Oralo 候补名单。';
   try{localStorage.setItem('oralo-language',language)}catch{}
   const url=new URL(location.href);url.searchParams.set('lang',language);history.replaceState(null,'',url);renderDemo();
 }

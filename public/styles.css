@@ -42,3 +42,15 @@
  .reading-features>div{padding-top:18px}.reading-features p{font-size:13px}.reading-features h3{font-size:17px;margin-bottom:9px}
  .footer>div{flex-wrap:wrap;gap:14px}
 }
+
+/* Native Picture-in-Picture capture, displayed without cropping or redrawing. */
+.floating-section{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:80px;align-items:center;padding-block:100px}
+.floating-section .feature-copy>p{max-width:440px}
+.floating-section .feature-line{max-width:440px}
+.floating-section .feature-copy>.floating-compatibility{font-size:12px;line-height:1.7;padding-top:20px;border-top:1px solid var(--line);margin-top:28px}
+.floating-preview{margin:0;min-width:0}
+.floating-preview .screenshot-link{max-width:420px;border-radius:24px}
+.floating-preview .screenshot-note{max-width:420px;margin-top:20px}
+.floating-preview figcaption span{display:block}
+@media(max-width:1000px){.floating-section{gap:48px}}
+@media(max-width:700px){.floating-section{grid-template-columns:1fr;gap:36px;padding-block:65px}.floating-preview{width:100%;max-width:420px;margin-inline:auto}.floating-preview .screenshot-link{border-radius:20px}.floating-section .feature-copy>.floating-compatibility{font-size:11px}}

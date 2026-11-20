@@ -30,13 +30,13 @@ if (!screenshotsOnly) {
 // Run npm run images:optimize -- --screenshots to rebuild just the app screenshots.
 const temporary = await mkdtemp(path.join(tmpdir(), 'oralo-screenshots-'));
 try {
-  for (const name of ['library', 'prepare', 'review', 'reader', 'pronunciation', 'ipad']) {
+  for (const name of ['library', 'prepare', 'review', 'reader', 'pronunciation', 'ipad', 'floating']) {
     const source = path.join(root, 'design/source/screenshots', `${name}.png`);
     await stat(source).catch(() => { throw new Error(`Missing local screenshot source: ${source}`); });
     // Simulator captures can store landscape orientation in metadata. Apply it before stripping.
     const normalized = path.join(temporary, `${name}.png`);
     execFileSync('magick', [source, '-auto-orient', '-strip', normalized]);
-    for (const width of name === 'ipad' ? [640, 1280] : [320, 640]) {
+    for (const width of name === 'ipad' ? [640, 1280] : name === 'floating' ? [480, 960] : [320, 640]) {
       const output = path.join(assets, `app-${name}-${width}.webp`);
       execFileSync('cwebp', ['-quiet', '-q', '86', '-m', '6', '-sharp_yuv', '-metadata', 'none', '-resize', String(width), '0', normalized, '-o', output]);
       generated.push(output);
