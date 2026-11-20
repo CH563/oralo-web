@@ -2,7 +2,8 @@
 // Requires the cwebp and ImageMagick command-line tools. Original design files stay intact.
 import { fileURLToPath } from 'node:url';
 import path from 'node:path';
-import { mkdir, stat } from 'node:fs/promises';
+import { mkdir, stat, mkdtemp, rm } from 'node:fs/promises';
+import { tmpdir } from 'node:os';
 import { execFileSync } from 'node:child_process';
 
 const root = fileURLToPath(new URL('../', import.meta.url));
@@ -27,13 +28,21 @@ if (!screenshotsOnly) {
 }
 // PNG originals are local-only. Copy native captures into design/source/screenshots/.
 // Run npm run images:optimize -- --screenshots to rebuild just the app screenshots.
-for (const name of ['library', 'prepare', 'review', 'reader', 'pronunciation', 'ipad']) {
-  const source = path.join(root, 'design/source/screenshots', `${name}.png`);
-  await stat(source).catch(() => { throw new Error(`Missing local screenshot source: ${source}`); });
-  for (const width of name === 'ipad' ? [640, 1280] : [320, 640]) {
-    const output = path.join(assets, `app-${name}-${width}.webp`);
-    execFileSync('cwebp', ['-quiet', '-q', '86', '-m', '6', '-sharp_yuv', '-metadata', 'none', '-resize', String(width), '0', source, '-o', output]);
-    generated.push(output);
+const temporary = await mkdtemp(path.join(tmpdir(), 'oralo-screenshots-'));
+try {
+  for (const name of ['library', 'prepare', 'review', 'reader', 'pronunciation', 'ipad']) {
+    const source = path.join(root, 'design/source/screenshots', `${name}.png`);
+    await stat(source).catch(() => { throw new Error(`Missing local screenshot source: ${source}`); });
+    // Simulator captures can store landscape orientation in metadata. Apply it before stripping.
+    const normalized = path.join(temporary, `${name}.png`);
+    execFileSync('magick', [source, '-auto-orient', '-strip', normalized]);
+    for (const width of name === 'ipad' ? [640, 1280] : [320, 640]) {
+      const output = path.join(assets, `app-${name}-${width}.webp`);
+      execFileSync('cwebp', ['-quiet', '-q', '86', '-m', '6', '-sharp_yuv', '-metadata', 'none', '-resize', String(width), '0', normalized, '-o', output]);
+      generated.push(output);
+    }
   }
+} finally {
+  await rm(temporary, { recursive: true, force: true });
 }
 for (const output of generated) console.log(`${path.basename(output)}\t${(await stat(output)).size} bytes`);
