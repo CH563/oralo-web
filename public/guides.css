@@ -1,0 +1,23 @@
+.guide-page{padding-top:35px}
+.guide-heading{max-width:880px;padding:20px 0 56px}
+.guide-back{display:inline-block;color:var(--muted);font-size:13px;margin-bottom:42px}
+.guide-heading .kicker{color:var(--blue)}
+.guide-heading h1{font-size:clamp(40px,5vw,68px);line-height:1.12;letter-spacing:-.045em;max-width:850px}
+.guide-intro{font-size:20px;line-height:1.75;color:var(--muted);max-width:760px;margin-top:28px}
+.guide-layout{display:grid;grid-template-columns:minmax(0,1.25fr) minmax(0,1fr);gap:88px;align-items:start;border-top:1px solid var(--line);padding-top:50px}
+.guide-block{margin-bottom:40px}
+.guide-block h2,html[lang=en] .guide-block h2{font-size:27px;line-height:1.25;letter-spacing:-.025em;margin-bottom:15px}
+.guide-block p{font-size:16px;line-height:1.9;color:var(--muted);margin-top:15px}
+.guide-note{border-left:3px solid var(--marker);padding:14px 20px;font-size:13px;line-height:1.8;color:var(--muted);background:#f1f0e9}
+.guide-visual{position:sticky;top:28px;text-align:center;min-width:0}
+.guide-reader{margin:0}.guide-reader .screenshot-link{max-width:260px}
+.guide-visual .section-link{font-size:14px;margin-top:28px}
+.guide-faq{max-width:850px;margin:90px auto 0}
+.guide-faq>h2,html[lang=en] .guide-faq>h2{font-size:40px;margin-bottom:30px}
+.guide-cta{max-width:900px;margin:80px auto;padding:55px 40px;text-align:center;background:#eeedff;border-radius:28px}
+.guide-cta h2,html[lang=en] .guide-cta h2{font-size:44px;line-height:1.15;max-width:700px;margin:0 auto 28px}
+.guide-cta .button{width:fit-content;margin:0 auto 20px}
+.guide-cta>p{font-size:13px;line-height:1.8;color:var(--muted)}
+.guide-cta .section-link{font-size:14px}
+@media(max-width:1000px){.guide-layout{gap:42px}}
+@media(max-width:700px){.guide-page{padding-top:10px}.guide-heading{padding-bottom:35px}.guide-back{margin-bottom:30px}.guide-heading h1{font-size:42px}.guide-intro{font-size:16px;margin-top:22px}.guide-layout{grid-template-columns:1fr;gap:40px;padding-top:35px}.guide-visual{position:static;order:-1;max-width:350px;margin:auto;width:100%}.guide-reader .screenshot-link{max-width:220px}.guide-block h2,html[lang=en] .guide-block h2{font-size:24px}.guide-block p{font-size:15px}.guide-faq{margin-top:55px}.guide-faq>h2,html[lang=en] .guide-faq>h2{font-size:32px}.guide-cta{margin-block:50px;padding:35px 22px;border-radius:22px}.guide-cta h2,html[lang=en] .guide-cta h2{font-size:32px}}

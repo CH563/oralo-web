@@ -1,0 +1,140 @@
+{
+  "voice-following": {
+    "zh": {
+      "fields": {
+        "title": "语音跟随如何工作 — Oralo",
+        "description": "Oralo 用设备端语音识别对照讲稿，跟随你讲到的位置。停顿会等待，也可以手动选句。了解限制、离线范围，并加入候补名单。",
+        "H1": "你来讲，它来跟。",
+        "正文": "- Oralo 使用设备端语音识别，对照你正在使用的讲稿，标出当前讲到的位置。",
+        "演示说明（若首页示意仍保留）": "此页或首页中的跟随示意不使用麦克风。完整语音跟随在 App 内进行。",
+        "CTA 标题": "想在开放体验时收到通知？",
+        "CTA 按钮": "加入候补名单",
+        "CTA 附注": "免费登记，只用于测试与上线通知。不承诺具体日期。"
+      },
+      "paragraphs": [
+        "Oralo 使用设备端语音识别，对照你正在使用的讲稿，标出当前讲到的位置。",
+        "你停顿时，它会等待；你按稿继续时，它跟着向前。",
+        "临时离稿后，只有在识别到明确的原稿内容时，才会尝试接回原句或附近后文。它不承诺从任意段落自动找准位置。",
+        "需要时，可以自己选一句再继续。一旦你手动选句，以你的选择为准。",
+        "噪声、距离、多人讲话、设备与语言都会影响识别。语音跟随仍在真实使用中打磨，效果会因场景而异。",
+        "讲稿编辑和阅读使用本机数据。语音跟随需要设备已下载受支持的系统语音模型；首次下载模型或声音可能需要联网。如果设备端识别不可用，仍可手动提词，App 不会改用云端识别上传音频。"
+      ],
+      "faqs": [
+        [
+          "停顿或讲快一点，稿子跟得上吗？",
+          "设计上会在停顿时等待，并在你按稿继续时跟上。实际是否跟稳，取决于环境、设备、语言和已安装的系统模型，仍在测试中。"
+        ],
+        [
+          "离稿后会自动回来吗？",
+          "只会尝试回到原句或附近后文，而且需要识别到明确的原稿内容。不保证跨段都能自动接准。随时可以手动选一句。"
+        ],
+        [
+          "没有网络能不能用语音跟随？",
+          "若系统模型已经下载在本机，语音跟随可以在设备端进行。第一次下载模型或声音可能需要联网。不能把这一点理解为全程无需联网，或所有功能都已离线验收。"
+        ]
+      ]
+    },
+    "en": {
+      "fields": {
+        "title": "How voice following works — Oralo",
+        "description": "Oralo uses on-device speech recognition to follow your place in a script. It waits when you pause, and you can also choose a line yourself. See the limits, what works offline, and join the waitlist.",
+        "H1": "You speak. It follows.",
+        "Body": "- Oralo uses on-device speech recognition to match the script you are using and mark where you are.",
+        "Demo note (if the existing preview remains)": "The on-site preview uses no microphone. Voice following happens in the app.",
+        "CTA title": "Want to be notified when testing opens?",
+        "CTA button": "Join the waitlist",
+        "CTA note": "Free to join, for testing and launch updates only. No date promised."
+      },
+      "paragraphs": [
+        "Oralo uses on-device speech recognition to match the script you are using and mark where you are.",
+        "When you pause, it waits. When you continue from the script, it moves forward with you.",
+        "After you step away, it may try to return to the same sentence or a nearby later line only if it clearly recognizes the original wording. It does not promise to find your place automatically from any part of the script.",
+        "You can select a line yourself at any time. If you do, that choice takes priority.",
+        "Noise, distance, other voices, your device, and language all affect recognition. Voice following is still being refined in real use, and results vary.",
+        "Script editing and reading use data on your device. Voice following needs a supported system speech model already downloaded; the first download of a model or voice may require the internet. If on-device recognition is unavailable, you can still prompt manually, and the app will not send audio to a cloud recognizer instead."
+      ],
+      "faqs": [
+        [
+          "If I pause or speed up, will it stay with me?",
+          "It is designed to wait when you pause and to follow when you continue from the script. How steady that feels depends on your environment, device, language, and installed system model, and is still being tested."
+        ],
+        [
+          "Will it bring me back automatically after I go off script?",
+          "It only tries to return to the same sentence or nearby lines, and only when it clearly recognizes the original wording. It does not guarantee an accurate return from any point in the script. You can always choose a line yourself."
+        ],
+        [
+          "Can I use voice following offline?",
+          "If the system model is already on your device, voice following can run on-device. The first download of a model or voice may need the internet. This is not a claim that every feature works fully offline, or that offline use has been independently verified end to end."
+        ]
+      ]
+    }
+  },
+  "floating-prompt": {
+    "zh": {
+      "fields": {
+        "title": "小窗提词如何使用 — Oralo",
+        "description": "把 Oralo 讲稿放进 iPhone 或 iPad 的画中画小窗。可定速滚动，或先在 App 内启动语音跟随。了解已测试范围与限制，并加入候补名单。",
+        "H1": "切换 App，稿子还在眼前。",
+        "正文": "- 当前开发版支持把讲稿放进 iPhone 或 iPad 的画中画小窗，便于在直播或录制时看到下一句。",
+        "CTA 标题": "想在开放体验时收到通知？",
+        "CTA 按钮": "加入候补名单",
+        "CTA 附注": "免费登记，只用于测试与上线通知。不承诺具体日期。"
+      },
+      "paragraphs": [
+        "当前开发版支持把讲稿放进 iPhone 或 iPad 的画中画小窗，便于在直播或录制时看到下一句。",
+        "定速模式：设定滚动速度，经过 3 秒倒计时开始。定速模式不使用麦克风。",
+        "语音模式：先在 Oralo 中开始语音跟随，再开启小窗并切换到其他 App。",
+        "如果其他 App 的录音或通话中断了麦克风，小窗会保留当前位置。可回到 Oralo 后重新启动语音跟随，或改用定速。",
+        "已保存的拼音和音标仍会贴着对应字词。文字大小在 Oralo 内调整；返回 Oralo 时会暂停。",
+        "小窗与系统相机录像已有真机测试通过；其他设备和通话 App 的表现可能不同。这不表示已覆盖全部设备，也不表示所有录像或通话 App 都可用。"
+      ],
+      "faqs": [
+        [
+          "小窗里的语音跟随要怎么开？",
+          "先在 Oralo 内启动语音跟随，再打开画中画并切换 App。定速模式不必开麦克风，也不能代替语音跟随。"
+        ],
+        [
+          "可以和系统相机一起用吗？",
+          "与系统相机录像已有真机测试通过。换到其他录像或通话 App、或其他设备时，表现可能不同，取决于设备、系统和当时使用的 App。"
+        ],
+        [
+          "麦克风被占用了怎么办？",
+          "小窗会先保留当前位置。回到 Oralo 后，可以重新启动语音跟随，或改用定速滚动。"
+        ]
+      ]
+    },
+    "en": {
+      "fields": {
+        "title": "How the floating prompt works — Oralo",
+        "description": "Keep your Oralo script in a Picture-in-Picture window on iPhone or iPad. Use fixed-pace scrolling, or start voice following in the app first. See what has been tested, where results can vary, and join the waitlist.",
+        "H1": "Switch apps. Keep your place.",
+        "Body": "- The development app can place your script in a Picture-in-Picture window on iPhone or iPad, so the next line can stay visible while you record or go live.",
+        "CTA title": "Want to be notified when testing opens?",
+        "CTA button": "Join the waitlist",
+        "CTA note": "Free to join, for testing and launch updates only. No date promised."
+      },
+      "paragraphs": [
+        "The development app can place your script in a Picture-in-Picture window on iPhone or iPad, so the next line can stay visible while you record or go live.",
+        "Fixed pace: set a scroll speed and start after a 3-second countdown. Fixed pace uses no microphone.",
+        "Voice following: start voice following in Oralo, then open the window and switch apps.",
+        "If recording or a call in another app interrupts the microphone, the window holds your place. Return to Oralo to restart voice following, or switch to fixed pace.",
+        "Saved pinyin and IPA stay with their words. Change text size in Oralo; returning to Oralo pauses the window.",
+        "Floating prompts have been tested with system Camera recording. Behavior can vary on other devices and in calling apps. This does not mean every device is covered, or that every recording or calling app is supported."
+      ],
+      "faqs": [
+        [
+          "How do I start voice following in the floating window?",
+          "Start voice following inside Oralo, then open Picture-in-Picture and switch apps. Fixed pace does not use the microphone and is not a substitute for voice following."
+        ],
+        [
+          "Can I use it with the system Camera?",
+          "Floating prompts have been tested with system Camera recording. In other recording or calling apps, or on other devices, behavior can vary by device, system, and the app in use."
+        ],
+        [
+          "What if the microphone is interrupted?",
+          "The window holds your current place. Return to Oralo to restart voice following, or continue with fixed-pace scrolling."
+        ]
+      ]
+    }
+  }
+}

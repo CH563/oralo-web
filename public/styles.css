@@ -90,3 +90,17 @@
 .mirror-video-error{font-size:12px;color:#a33c31;text-align:center;line-height:1.7;margin-top:12px}
 @media(max-width:1000px){.mirror-section{gap:48px}}
 @media(max-width:700px){.mirror-section{grid-template-columns:1fr;gap:32px;padding-block:65px}.mirror-copy,.mirror-demo{grid-column:auto;grid-row:auto}.mirror-demo{width:100%;max-width:420px;margin-inline:auto}.mirror-demo video{border-radius:20px}.mirror-copy>.mirror-hardware{font-size:11px}}
+
+/* Language routes render complete copy before JavaScript loads. */
+.languages a{display:grid;place-items:center;min-width:36px;height:36px;border-radius:50%;font-size:12px}
+.languages a[aria-current=page]{background:white;box-shadow:0 1px 4px #24212618;font-weight:700}
+.section-link{display:inline-block;margin-top:22px;color:var(--blue);font-size:15px;text-decoration:underline;text-underline-offset:4px;line-height:1.7}
+#how .section-heading{max-width:820px}
+html[lang=en] .hero h1{font-size:clamp(36px,5vw,72px);max-width:940px;margin-inline:auto;text-wrap:balance}
+html[lang=en] .final-section h2{font-size:clamp(36px,4.5vw,62px);max-width:980px;margin-inline:auto;text-wrap:balance}
+.final-section h2 mark{white-space:normal}
+.hero-description{max-width:730px}
+.form-note{max-width:620px;margin-inline:auto}
+@media(max-width:700px){.languages a{min-width:33px;height:33px}.section-link{font-size:13px}html[lang=en] .hero h1{font-size:36px;line-height:1.14}html[lang=en] .final-section h2{font-size:36px}.hero .form-note{max-width:350px}.hero-description{max-width:350px}}
+
+@media(max-width:700px){.final-section h2 mark::before{left:-3%;right:-3%}html[lang="zh-Hans"] .final-section h2{font-size:clamp(30px,8.5vw,38px)}}

@@ -1,2 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"><url><loc>https://oralo.fun/</loc></url></urlset>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <url><loc>https://oralo.fun/zh/</loc></url>
+  <url><loc>https://oralo.fun/zh/voice-following/</loc></url>
+  <url><loc>https://oralo.fun/zh/floating-prompt/</loc></url>
+  <url><loc>https://oralo.fun/en/</loc></url>
+  <url><loc>https://oralo.fun/en/voice-following/</loc></url>
+  <url><loc>https://oralo.fun/en/floating-prompt/</loc></url>
+  <url><loc>https://oralo.fun/privacy/</loc></url>
+  <url><loc>https://oralo.fun/support/</loc></url>
+</urlset>

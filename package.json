@@ -4,9 +4,10 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "test": "node --test tests/*.test.js",
+    "test": "npm run build && node --test tests/*.test.js",
     "images:optimize": "node scripts/optimize-images.mjs",
-    "videos:optimize": "node scripts/optimize-videos.mjs"
+    "videos:optimize": "node scripts/optimize-videos.mjs",
+    "build": "node scripts/build-site.mjs"
   },
   "dependencies": {
     "@vercel/blob": "2.9.0"

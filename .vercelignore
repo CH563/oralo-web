@@ -11,5 +11,6 @@ prd/
 
 # Development files are not part of the deployment upload.
 tests/
-scripts/
+scripts/*
+!scripts/build-site.mjs
 README.md

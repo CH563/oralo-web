@@ -1,0 +1,133 @@
+
+<a class="skip" href="#main" data-i18n="skip">{{skip}}</a>
+<div class="announcement"><span class="status-dot"></span><span data-i18n="announcement">{{announcement}}</span><a href="#waitlist" data-i18n="early">{{early}}</a></div>
+<header class="header wrap">
+  <a class="brand" href="{{homePath}}" aria-label="{{brandHome}}"><img src="/assets/oralo-icon-96.webp" srcset="/assets/oralo-icon-48.webp 48w, /assets/oralo-icon-96.webp 96w, /assets/oralo-icon-192.webp 192w, /assets/oralo-icon-288.webp 288w" sizes="(max-width: 700px) 36px, 42px" width="42" height="42" decoding="async" alt=""><span>Oralo<span class="brand-cn">接着讲</span></span></a>
+  <nav aria-label="{{navLabel}}"><a href="#inside" data-i18n="navHow">{{navHow}}</a><a href="#floating" data-i18n="navFloating">{{navFloating}}</a><a href="#mirror" data-i18n="navMirror">{{navMirror}}</a><a href="#faq" data-i18n="navFaq">{{navFaq}}</a></nav>
+  <div class="header-actions"><div class="languages" aria-label="{{languageLabel}}"><a href="{{zhPath}}" lang="zh-Hans" hreflang="zh-Hans" data-language-link="zh" aria-current="{{zhCurrent}}">中</a><a href="{{enPath}}" lang="en" hreflang="en" data-language-link="en" aria-current="{{enCurrent}}">EN</a></div><a class="button small" href="#waitlist" data-i18n="join">{{join}}</a></div>
+</header>
+<main id="main">
+  <section class="hero wrap" aria-labelledby="hero-title">
+    <div class="sticker-stage" aria-hidden="true">
+      <div class="paper-sticker"><span class="tiny-wave"><i></i><i></i><i></i><i></i><i></i></span><span class="mini-lines"><i></i><i></i><i></i></span></div>
+      <span class="scribble star">✳</span>
+      <img class="hero-icon" src="/assets/oralo-icon-192.webp" srcset="/assets/oralo-icon-48.webp 48w, /assets/oralo-icon-96.webp 96w, /assets/oralo-icon-192.webp 192w, /assets/oralo-icon-288.webp 288w" sizes="(max-width: 700px) 80px, 96px" width="96" height="96" decoding="async" alt="">
+      <span class="handnote" data-i18n="iconNote">{{iconNote}}</span>
+      <div class="word-sticker"><span>hāng shí</span><strong>夯实</strong><span class="tick">✓</span></div>
+    </div>
+    <p class="eyebrow" data-i18n="heroEyebrow">{{heroEyebrow}}</p>
+    <h1 id="hero-title" data-i18n-html="heroTitle">{{{heroTitle}}}</h1>
+    <p class="hero-description" data-i18n-html="heroDesc">{{{heroDesc}}}</p>
+    <form class="waitlist-form hero-form" data-placement="hero">
+      <label class="sr-only" for="hero-email" data-i18n="emailLabel">{{emailLabel}}</label><input id="hero-email" name="email" type="email" autocomplete="email" placeholder="{{emailPlaceholder}}" required maxlength="254" data-i18n-placeholder="{{emailPlaceholder}}">
+      <input class="honeypot" name="company" tabindex="-1" autocomplete="off" aria-hidden="true">
+      <button class="button" type="submit"><span data-i18n="join">{{join}}</span><span aria-hidden="true">↗</span></button>
+      <p class="form-status" role="status" aria-live="polite"></p>
+    </form>
+    <p class="form-note"><span data-i18n="formNote">{{formNote}}</span><br><span data-i18n="privacyNote">{{privacyNote}}</span> <button class="text-button privacy-open" data-i18n="privacy">{{privacy}}</button></p>
+    <a href="{{voicePath}}" class="demo-link"><span class="play-icon" aria-hidden="true">▶</span><span data-i18n="tryDemo">{{tryDemo}}</span><span aria-hidden="true">↗</span></a>
+    <div class="hero-bottom"><span data-i18n="iphoneFirst">{{iphoneFirst}}</span><span class="little-separator">✦</span><span data-i18n="launchStatus">{{launchStatus}}</span></div>
+  </section>
+
+  <section id="inside" class="section wrap app-preview" aria-labelledby="inside-title">
+    <div class="section-heading"><span class="kicker" data-i18n="galleryKicker">{{galleryKicker}}</span><h2 id="inside-title" data-i18n-html="galleryTitle">{{{galleryTitle}}}</h2><p data-i18n="galleryDesc">{{galleryDesc}}</p></div>
+    <div class="app-gallery">
+      <figure class="app-figure"><figcaption><span class="shot-number">01</span><h3 data-i18n="libraryTitle">{{libraryTitle}}</h3><p data-i18n="libraryDesc">{{libraryDesc}}</p></figcaption><a class="screenshot-link" href="/assets/app-library-640.webp" target="_blank" rel="noopener"><img src="/assets/app-library-320.webp" srcset="/assets/app-library-320.webp 320w, /assets/app-library-640.webp 640w" sizes="(max-width: 700px) 240px, 260px" width="1206" height="2622" loading="lazy" decoding="async" alt="{{libraryAlt}}" data-i18n-alt="{{libraryAlt}}"></a></figure>
+      <figure class="app-figure"><figcaption><span class="shot-number">02</span><h3 data-i18n="prepareTitle">{{prepareTitle}}</h3><p data-i18n="prepareDesc">{{prepareDesc}}</p></figcaption><a class="screenshot-link" href="/assets/app-prepare-640.webp" target="_blank" rel="noopener"><img src="/assets/app-prepare-320.webp" srcset="/assets/app-prepare-320.webp 320w, /assets/app-prepare-640.webp 640w" sizes="(max-width: 700px) 240px, 260px" width="1206" height="2622" loading="lazy" decoding="async" alt="{{prepareAlt}}" data-i18n-alt="{{prepareAlt}}"></a></figure>
+      <figure class="app-figure"><figcaption><span class="shot-number">03</span><h3 data-i18n="reviewTitle">{{reviewTitle}}</h3><p data-i18n="reviewDesc">{{reviewDesc}}</p></figcaption><a class="screenshot-link" href="/assets/app-review-640.webp" target="_blank" rel="noopener"><img src="/assets/app-review-320.webp" srcset="/assets/app-review-320.webp 320w, /assets/app-review-640.webp 640w" sizes="(max-width: 700px) 240px, 260px" width="1206" height="2622" loading="lazy" decoding="async" alt="{{reviewAlt}}" data-i18n-alt="{{reviewAlt}}"></a></figure>
+    </div><p class="screenshot-note" data-i18n="galleryNote">{{galleryNote}}</p>
+  </section>
+
+  <section id="how" class="section wrap" aria-labelledby="how-title">
+    <div class="section-heading"><span class="kicker" data-i18n="followKicker">{{followKicker}}</span><h2 id="how-title" data-i18n-html="followTitle">{{{followTitle}}}</h2><p data-i18n="followDesc">{{followDesc}}</p><a class="section-link" href="{{voicePath}}" data-i18n="voiceLearn">{{voiceLearn}}</a></div>
+    <div class="follow-demo">
+      <div class="demo-controls">
+        <span class="demo-label"><span class="status-dot"></span><span data-i18n="interactive">{{interactive}}</span></span>
+        <div class="mode-buttons" role="group" aria-label="{{demoStatesLabel}}">
+          <button type="button" data-mode="follow" aria-pressed="true"><span class="mode-icon">〰</span><span><strong data-i18n="modeFollow">{{modeFollow}}</strong><small data-i18n="modeFollowDesc">{{modeFollowDesc}}</small></span><span class="mode-arrow">↗</span></button>
+          <button type="button" data-mode="pause" aria-pressed="false"><span class="mode-icon">Ⅱ</span><span><strong data-i18n="modePause">{{modePause}}</strong><small data-i18n="modePauseDesc">{{modePauseDesc}}</small></span><span class="mode-arrow">↗</span></button>
+          <button type="button" data-mode="improv" aria-pressed="false"><span class="mode-icon">✳</span><span><strong data-i18n="modeImprov">{{modeImprov}}</strong><small data-i18n="modeImprovDesc">{{modeImprovDesc}}</small></span><span class="mode-arrow">↗</span></button>
+        </div>
+        <p class="demo-footnote" data-i18n="demoFootnote">{{demoFootnote}}</p>
+      </div>
+      <div class="teleprompter" aria-live="polite">
+        <div class="tele-top"><span data-i18n="quarterly">{{quarterly}}</span><span class="tele-status"><span class="status-dot"></span><span id="demo-status">{{demoFollow}}</span></span></div>
+        <div class="tele-reading"><p class="previous" data-i18n="demoPrevious">{{demoPrevious}}</p><div class="current-line"><span class="reading-arrow">›</span><p id="demo-line">{{{demoLine}}}</p></div><p class="next" id="demo-next">{{demoLineNext}}</p></div>
+        <div id="demo-recovery" class="demo-recovery" hidden><span data-i18n="held">{{held}}</span><button type="button" id="resume-demo" data-i18n="resume">{{resume}}</button></div>
+        <div class="tele-bottom"><span class="wave"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></span><span id="demo-caption">{{demoCaptionFollow}}</span><span class="time">04:28</span></div>
+      </div>
+    </div>
+    <p class="center-note" data-i18n="followNote">{{followNote}}</p>
+  </section>
+
+  <section id="return" class="section wrap return-section">
+    <div class="feature-copy"><span class="kicker" data-i18n="returnKicker">{{returnKicker}}</span><h2 data-i18n-html="returnTitle">{{{returnTitle}}}</h2><p data-i18n="returnDesc">{{returnDesc}}</p><div class="feature-line"><span class="number">1</span><div><h3 data-i18n="returnAuto">{{returnAuto}}</h3><p data-i18n="returnAutoDesc">{{returnAutoDesc}}</p></div></div><div class="feature-line"><span class="number">2</span><div><h3 data-i18n="returnManual">{{returnManual}}</h3><p data-i18n="returnManualDesc">{{returnManualDesc}}</p></div></div><span class="handwritten" data-i18n="returnNote">{{returnNote}}</span></div>
+    <div class="phone-scene"><span class="floating-label" data-i18n="phoneLabel">{{phoneLabel}}</span><div class="phone-frame actual-screen"><a class="screenshot-link" href="/assets/app-reader-640.webp" target="_blank" rel="noopener"><img src="/assets/app-reader-320.webp" srcset="/assets/app-reader-320.webp 320w, /assets/app-reader-640.webp 640w" sizes="(max-width: 700px) 240px, 260px" width="1206" height="2622" loading="lazy" decoding="async" alt="{{recoveryAlt}}" data-i18n-alt="{{recoveryAlt}}"></a></div><span class="image-caption" data-i18n="concept">{{concept}}</span><span class="scene-spark" aria-hidden="true">✳</span></div>
+  </section>
+
+  <section id="pronunciation" class="section pronunciation-section">
+    <div class="wrap pronunciation-grid"><figure class="pronunciation-screen"><a class="screenshot-link" href="/assets/app-pronunciation-640.webp" target="_blank" rel="noopener"><img src="/assets/app-pronunciation-320.webp" srcset="/assets/app-pronunciation-320.webp 320w, /assets/app-pronunciation-640.webp 640w" sizes="(max-width: 700px) 240px, 260px" width="1206" height="2622" loading="lazy" decoding="async" alt="{{pronScreenshotAlt}}" data-i18n-alt="{{pronScreenshotAlt}}"></a><figcaption class="screenshot-note" data-i18n="pronCaption">{{pronCaption}}</figcaption></figure><div class="feature-copy"><span class="kicker" data-i18n="pronKicker">{{pronKicker}}</span><h2 data-i18n-html="pronTitle">{{{pronTitle}}}</h2><p data-i18n="pronDesc">{{pronDesc}}</p><div class="pron-tags"><span data-i18n="pinyinTag">{{pinyinTag}}</span><span data-i18n="ipaTag">{{ipaTag}}</span><span data-i18n="audioTag">{{audioTag}}</span></div><p class="small-copy" data-i18n="pronSmall">{{pronSmall}}</p><div class="pronunciation-player"><span class="sound-glyph" aria-hidden="true">◖))</span><div><strong>roadmap</strong><small data-i18n="american">{{american}}</small></div><button id="listen" type="button" aria-label="{{listenLabel}}"><span aria-hidden="true">▶</span> <span data-i18n="listen">{{listen}}</span></button></div><p id="audio-status" role="status" data-i18n="audioNote">{{audioNote}}</p></div></div>
+  </section>
+
+  <section id="floating" class="section wrap floating-section" aria-labelledby="floating-title">
+    <div class="feature-copy">
+      <span class="kicker" data-i18n="floatingKicker">{{floatingKicker}}</span>
+      <h2 id="floating-title" data-i18n-html="floatingTitle">{{{floatingTitle}}}</h2>
+      <p data-i18n="floatingDesc">{{floatingDesc}}</p><a class="section-link" href="{{floatingPath}}" data-i18n="floatingLearn">{{floatingLearn}}</a>
+      <div class="feature-line"><span class="number">1</span><div><h3 data-i18n="floatingPaceTitle">{{floatingPaceTitle}}</h3><p data-i18n="floatingPaceDesc">{{floatingPaceDesc}}</p></div></div>
+      <div class="feature-line"><span class="number">2</span><div><h3 data-i18n="floatingVoiceTitle">{{floatingVoiceTitle}}</h3><p data-i18n="floatingVoiceDesc">{{floatingVoiceDesc}}</p></div></div>
+      <div class="feature-line"><span class="number">3</span><div><h3 data-i18n="floatingHintsTitle">{{floatingHintsTitle}}</h3><p data-i18n="floatingHintsDesc">{{floatingHintsDesc}}</p></div></div>
+      <p class="floating-compatibility" data-i18n="floatingCompatibility">{{floatingCompatibility}}</p>
+    </div>
+    <figure class="floating-preview">
+      <div class="stream-scene">
+        <img class="stream-photo" src="/assets/creator-live-480.webp" srcset="/assets/creator-live-480.webp 480w, /assets/creator-live-960.webp 960w" sizes="(max-width: 460px) calc(100vw - 40px), (max-width: 700px) 420px, (max-width: 1000px) calc((100vw - 104px) / 2), 420px" width="1086" height="1448" loading="lazy" decoding="async" alt="{{floatingAlt}}" data-i18n-alt="{{floatingAlt}}">
+        <div class="stream-topline"><span class="stream-live"><span aria-hidden="true"></span><span data-i18n="streamLive">{{streamLive}}</span></span><span class="stream-time">12:48</span></div>
+        <div class="stream-prompt">
+          <div class="stream-prompt-label"><span class="stream-pip-icon" aria-hidden="true"></span><span data-i18n="streamPromptLabel">{{streamPromptLabel}}</span></div>
+          <div class="stream-prompt-text"><p class="stream-prompt-previous" data-i18n="streamScriptPrevious">{{streamScriptPrevious}}</p><p class="stream-prompt-current" data-i18n="streamScriptCurrent">{{streamScriptCurrent}}</p><p class="stream-prompt-next" data-i18n="streamScriptNext">{{streamScriptNext}}</p></div>
+        </div>
+        <div class="stream-bottom" aria-hidden="true"><span class="stream-comment" data-i18n="streamComment">{{streamComment}}</span><span class="stream-heart">♡</span><span class="stream-more">···</span></div>
+      </div>
+      <figcaption class="screenshot-note" data-i18n="floatingCaption">{{floatingCaption}}</figcaption>
+    </figure>
+  </section>
+
+  <section id="mirror" class="section wrap mirror-section" aria-labelledby="mirror-title">
+    <div class="feature-copy mirror-copy">
+      <span class="kicker" data-i18n="mirrorKicker">{{mirrorKicker}}</span>
+      <h2 id="mirror-title" data-i18n-html="mirrorHeading">{{{mirrorHeading}}}</h2>
+      <p data-i18n="mirrorIntro">{{mirrorIntro}}</p>
+      <div class="feature-line"><span class="number">1</span><div><h3 data-i18n="mirrorFlipTitle">{{mirrorFlipTitle}}</h3><p data-i18n="mirrorFlipDesc">{{mirrorFlipDesc}}</p></div></div>
+      <div class="feature-line"><span class="number">2</span><div><h3 data-i18n="mirrorPlaceTitle">{{mirrorPlaceTitle}}</h3><p data-i18n="mirrorPlaceDesc">{{mirrorPlaceDesc}}</p></div></div>
+      <p class="mirror-hardware" data-i18n="mirrorHardware">{{mirrorHardware}}</p>
+    </div>
+    <figure class="mirror-demo">
+      <video id="mirror-video" width="720" height="960" controls muted loop playsinline preload="none" poster="/assets/mirror-poster.webp" aria-labelledby="mirror-title" aria-describedby="mirror-caption mirror-video-summary" data-source="/assets/oralo-mirror-demo.mp4">
+        <p data-i18n="mirrorFallback">{{mirrorFallback}}</p>
+      </video>
+      <div class="mirror-video-actions"><button type="button" id="mirror-play" aria-controls="mirror-video" hidden><span id="mirror-play-label" data-i18n="mirrorPlay">{{mirrorPlay}}</span></button><a href="/assets/oralo-mirror-demo.mp4" target="_blank" rel="noopener" data-i18n="mirrorOpen">{{mirrorOpen}}</a></div>
+      <figcaption id="mirror-caption" class="screenshot-note" data-i18n="mirrorCaption">{{mirrorCaption}}</figcaption>
+      <p id="mirror-video-summary" class="sr-only" data-i18n="mirrorVideoSummary">{{mirrorVideoSummary}}</p>
+      <p id="mirror-video-error" class="mirror-video-error" role="status" data-i18n="mirrorVideoError" hidden>{{mirrorVideoError}}</p>
+    </figure>
+  </section>
+
+  <section class="section wrap workspace-section" aria-labelledby="workspace-title"><div class="section-heading"><span class="kicker" data-i18n="workspaceKicker">{{workspaceKicker}}</span><h2 id="workspace-title" data-i18n-html="workspaceTitle">{{{workspaceTitle}}}</h2><p data-i18n="workspaceDesc">{{workspaceDesc}}</p></div><figure class="ipad-preview"><a class="screenshot-link" href="/assets/app-ipad-1280.webp" target="_blank" rel="noopener"><img src="/assets/app-ipad-640.webp" srcset="/assets/app-ipad-640.webp 640w, /assets/app-ipad-1280.webp 1280w" sizes="(max-width: 1000px) calc(100vw - 40px), 900px" width="2420" height="1668" loading="lazy" decoding="async" alt="{{ipadAlt}}" data-i18n-alt="{{ipadAlt}}"></a><figcaption class="screenshot-note" data-i18n="ipadCaption">{{ipadCaption}}</figcaption></figure><div class="reading-features"><div><h3 data-i18n="readingTitle">{{readingTitle}}</h3><p data-i18n="readingDesc">{{readingDesc}}</p></div><div><h3 data-i18n="mirrorTitle">{{mirrorTitle}}</h3><p data-i18n="mirrorDesc">{{mirrorDesc}}</p></div><div><h3 data-i18n="localTitle">{{localTitle}}</h3><p data-i18n="localDesc">{{localDesc}}</p></div></div></section>
+
+  <section class="section wrap use-cases"><span class="kicker" data-i18n="scenesKicker">{{scenesKicker}}</span><h2 data-i18n-html="scenesTitle">{{{scenesTitle}}}</h2><div class="scenario-row"><div><span class="scenario-icon">↗</span><h3 data-i18n="scene1">{{scene1}}</h3><p data-i18n="scene1Desc">{{scene1Desc}}</p></div><div><span class="scenario-icon">✳</span><h3 data-i18n="scene2">{{scene2}}</h3><p data-i18n="scene2Desc">{{scene2Desc}}</p></div><div><span class="scenario-icon">“</span><h3 data-i18n="scene3">{{scene3}}</h3><p data-i18n="scene3Desc">{{scene3Desc}}</p></div></div></section>
+
+  <section id="faq" class="section wrap faq-section"><h2 data-i18n="faqTitle">{{faqTitle}}</h2><div class="faq-list">
+    <details><summary data-i18n="q1">{{q1}}</summary><p data-i18n="a1">{{a1}}</p></details>
+    <details><summary data-i18n="q2">{{q2}}</summary><p data-i18n="a2">{{a2}}</p></details>
+    <details><summary data-i18n="q3">{{q3}}</summary><p data-i18n="a3">{{a3}}</p></details>
+    <details><summary data-i18n="q4">{{q4}}</summary><p data-i18n="a4">{{a4}}</p></details>
+    <details><summary data-i18n="q5">{{q5}}</summary><p data-i18n="a5">{{a5}}</p></details>
+    <details><summary data-i18n="q6">{{q6}}</summary><p data-i18n="a6">{{a6}}</p></details>
+    <details><summary data-i18n="q7">{{q7}}</summary><p data-i18n="a7">{{a7}}</p></details>
+  </div></section>
+
+  <section id="waitlist" class="final-section wrap"><div class="final-mark" aria-hidden="true"><img src="/assets/oralo-icon-96.webp" srcset="/assets/oralo-icon-48.webp 48w, /assets/oralo-icon-96.webp 96w, /assets/oralo-icon-192.webp 192w, /assets/oralo-icon-288.webp 288w" sizes="(max-width: 700px) 65px, 76px" width="76" height="76" loading="lazy" decoding="async" alt=""><span>↙</span></div><span class="kicker" data-i18n="finalKicker">{{finalKicker}}</span><h2 data-i18n-html="finalTitle">{{{finalTitle}}}</h2><p data-i18n="finalDesc">{{finalDesc}}</p><form class="waitlist-form final-form" data-placement="footer"><label class="sr-only" for="footer-email" data-i18n="emailLabel">{{emailLabel}}</label><input id="footer-email" name="email" type="email" required maxlength="254" autocomplete="email" placeholder="{{emailPlaceholder}}" data-i18n-placeholder="{{emailPlaceholder}}"><input class="honeypot" name="company" tabindex="-1" autocomplete="off" aria-hidden="true"><button type="submit" class="button"><span data-i18n="join">{{join}}</span><span aria-hidden="true">↗</span></button><div class="scenario-input"><label for="scenario" data-i18n="scenarioLabel">{{scenarioLabel}}</label><select id="scenario" name="scenario"><option value="" data-i18n="choose">{{choose}}</option><option value="report" data-i18n="scene1">{{scene1}}</option><option value="talk" data-i18n="scene2">{{scene2}}</option><option value="meeting" data-i18n="scene3">{{scene3}}</option><option value="other" data-i18n="other">{{other}}</option></select></div><p class="form-status" role="status" aria-live="polite"></p></form><p class="form-note"><span data-i18n="formNote">{{formNote}}</span><br><span data-i18n="privacyNote">{{privacyNote}}</span> <a class="text-button" href="/privacy/?lang={{language}}" data-info-link data-i18n="privacy">{{privacy}}</a></p><button id="leave-waitlist" class="text-button" type="button" hidden data-i18n="leave">{{leave}}</button><p id="leave-status" role="status"></p></section>
+</main>
+<footer class="footer wrap"><a class="brand" href="{{homePath}}"><img src="/assets/oralo-icon-48.webp" srcset="/assets/oralo-icon-48.webp 48w, /assets/oralo-icon-96.webp 96w, /assets/oralo-icon-192.webp 192w, /assets/oralo-icon-288.webp 288w" sizes="(max-width: 700px) 29px, 32px" width="32" height="32" loading="lazy" decoding="async" alt=""><span>Oralo</span></a><p data-i18n="tagline">{{tagline}}</p><div><span>© 2026 Oralo</span><a href="/support/?lang={{language}}" data-info-link data-i18n="supportLink">{{supportLink}}</a><a href="https://github.com/CH563/oralo" target="_blank" rel="noopener">GitHub ↗</a><a class="text-button" href="/privacy/?lang={{language}}" data-info-link data-i18n="privacy">{{privacy}}</a></div></footer>
+<dialog id="privacy-dialog" aria-labelledby="privacy-title"><div class="dialog-heading"><h2 id="privacy-title" data-i18n="privacy">{{privacy}}</h2><button type="button" class="dialog-close" aria-label="{{closeLabel}}">×</button></div><div data-i18n-html="privacyBody">{{{privacyBody}}}</div></dialog>
