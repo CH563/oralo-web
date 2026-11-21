@@ -1,0 +1,88 @@
+<!doctype html>
+<html lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#faf9f5">
+  <title>演讲时长估算器：字数与分钟换算 · Oralo</title>
+  <meta name="description" content="粘贴中英文讲稿，按可调语速估算时长；或输入分钟数反算备稿字数。免费、无需登录，讲稿仅在当前页面计算，不上传、不保存。">
+  <link rel="canonical" href="https://oralo.fun/zh/tools/speech-length/">
+  <link rel="alternate" hreflang="zh-Hans" href="https://oralo.fun/zh/tools/speech-length/">
+  <link rel="alternate" hreflang="en" href="https://oralo.fun/en/tools/speech-length/">
+  <link rel="alternate" hreflang="x-default" href="https://oralo.fun/en/tools/speech-length/">
+  <meta property="og:type" content="website"><meta property="og:site_name" content="Oralo">
+  <meta property="og:url" content="https://oralo.fun/zh/tools/speech-length/"><meta property="og:locale" content="zh_CN"><meta property="og:locale:alternate" content="en_US">
+  <meta property="og:title" content="演讲时长估算器：字数与分钟换算 · Oralo"><meta property="og:description" content="粘贴中英文讲稿，按可调语速估算时长；或输入分钟数反算备稿字数。免费、无需登录，讲稿仅在当前页面计算，不上传、不保存。">
+  <meta property="og:image" content="https://oralo.fun/assets/oralo-social-v1.jpg"><meta property="og:image:secure_url" content="https://oralo.fun/assets/oralo-social-v1.jpg">
+  <meta property="og:image:type" content="image/jpeg"><meta property="og:image:width" content="1200"><meta property="og:image:height" content="630"><meta property="og:image:alt" content="Oralo AI 提词器：自然表达，跟随你的节奏。">
+  <meta name="twitter:card" content="summary_large_image"><meta name="twitter:title" content="演讲时长估算器：字数与分钟换算 · Oralo"><meta name="twitter:description" content="粘贴中英文讲稿，按可调语速估算时长；或输入分钟数反算备稿字数。免费、无需登录，讲稿仅在当前页面计算，不上传、不保存。">
+  <meta name="twitter:image" content="https://oralo.fun/assets/oralo-social-v1.jpg"><meta name="twitter:image:alt" content="Oralo AI 提词器：自然表达，跟随你的节奏。">
+  <link rel="icon" type="image/png" sizes="48x48" href="/assets/favicon-48.png"><link rel="apple-touch-icon" sizes="180x180" href="/assets/apple-touch-icon.png">
+  <link rel="stylesheet" href="/styles.css"><link rel="stylesheet" href="/tools/speech-length.css">
+  <script type="module" src="/tools/speech-tool.js"></script>
+
+</head>
+<body><a class="skip" href="#main">跳到正文</a>
+<header class="header wrap">
+  <a class="brand" href="/zh/" aria-label="Oralo 首页"><img src="/assets/oralo-icon-96.webp" srcset="/assets/oralo-icon-48.webp 48w, /assets/oralo-icon-96.webp 96w, /assets/oralo-icon-192.webp 192w, /assets/oralo-icon-288.webp 288w" sizes="(max-width: 700px) 36px, 42px" width="42" height="42" decoding="async" alt=""><span>Oralo<span class="brand-cn">接着讲</span></span></a>
+  <nav aria-label="主导航"><a href="/zh/#inside" data-i18n="navHow">功能一览</a><a href="/zh/#floating" data-i18n="navFloating">小窗提词</a><a href="/zh/#mirror" data-i18n="navMirror">镜像提词</a><a href="/zh/#faq" data-i18n="navFaq">常见问题</a></nav>
+  <div class="header-actions"><div class="languages" aria-label="语言"><a href="/zh/tools/speech-length/" lang="zh-Hans" hreflang="zh-Hans" data-language-link="zh" aria-current="page">中</a><a href="/en/tools/speech-length/" lang="en" hreflang="en" data-language-link="en" aria-current="false">EN</a></div><a class="button small" href="/zh/#waitlist" data-i18n="join">加入候补名单</a></div>
+</header>
+<main id="main" class="wrap speech-page">
+  <nav class="tool-breadcrumb" aria-label="Oralo 首页 › 演讲时长估算器"><a href="/zh/">Oralo 首页</a><span aria-hidden="true">›</span><span>演讲时长估算器</span></nav>
+  <div class="tool-heading"><span class="kicker">免费在线工具</span><h1>这篇稿子，大约讲多久？</h1><p class="tool-intro">粘贴演讲稿、汇报稿或口播稿，按你的语速估算时长。还没写稿？先从时间限制反算字数。</p><p class="tool-privacy"><span aria-hidden="true">↳</span> 免费，无需登录。讲稿仅在当前页面计算，不上传、不保存。刷新、切换语言或离开后不保留，请自行保留副本。</p></div>
+  <noscript><p class="tool-nojs">计算需要启用 JavaScript。你仍可阅读下方公式和使用说明。</p></noscript>
+  <div class="calculator-layout">
+    <form id="speech-form" autocomplete="off" novalidate>
+      <fieldset id="calculator-controls" disabled>
+        <legend class="sr-only">演讲时长估算器</legend>
+        <div class="tool-tabs" role="tablist" aria-label="演讲时长估算器">
+          <button type="button" id="script-tab" role="tab" aria-selected="true" aria-controls="script-panel" data-tool-mode="script">讲稿估时</button>
+          <button type="button" id="budget-tab" role="tab" aria-selected="false" aria-controls="budget-panel" tabindex="-1" data-tool-mode="budget">按时长备稿</button>
+        </div>
+        <fieldset id="script-panel" role="tabpanel" aria-labelledby="script-tab">
+          <legend class="sr-only">讲稿估时</legend>
+          <div class="tool-field"><label for="speech-script">讲稿</label><textarea id="speech-script" name="script" rows="8" autocomplete="off" spellcheck="false" autocapitalize="off" placeholder="粘贴中文或英文讲稿。数字和符号请先改成实际要说出的文字。" aria-describedby="script-hint script-error"></textarea><p id="script-hint" class="tool-help">最多 20,000 个字符。请自行保留副本，离开本页后输入会清空。</p><p id="script-error" class="tool-error" hidden></p></div>
+          <h2 class="tool-settings-title">按你的语速来</h2>
+          <div class="tool-pace-grid">
+            <div class="tool-field" id="script-rc-field"><label for="script-rc">中文语速，汉字/分钟</label><input id="script-rc" name="scriptRc" type="text" inputmode="numeric" value="200" autocomplete="off" spellcheck="false" aria-describedby="script-pace-help script-rc-error"><p id="script-rc-error" class="tool-error" hidden></p></div>
+            <div class="tool-field" id="script-re-field"><label for="script-re">英文语速，单词/分钟</label><input id="script-re" name="scriptRe" type="text" inputmode="numeric" value="140" autocomplete="off" spellcheck="false" aria-describedby="script-pace-help script-re-error"><p id="script-re-error" class="tool-error" hidden></p></div>
+          </div>
+          <p id="script-pace-help" class="tool-help">默认语速只是可调的计算起点，不是标准。请用一次实际排练修正。</p>
+          <div class="tool-field allowance-field"><label for="script-p">额外预留时间，秒</label><input id="script-p" name="scriptP" type="text" inputmode="numeric" value="0" autocomplete="off" spellcheck="false" aria-describedby="script-p-help script-p-error"><p id="script-p-help" class="tool-help">只填写换页、互动等额外时间。语速已包含的日常短停顿不再重复添加。</p><p id="script-p-error" class="tool-error" hidden></p></div>
+        </fieldset>
+        <fieldset id="budget-panel" role="tabpanel" aria-labelledby="budget-tab" hidden disabled>
+          <legend class="sr-only">按时长备稿</legend>
+          <div class="tool-field"><label for="budget-language">备稿语言</label><select id="budget-language" name="budgetLanguage" autocomplete="off" aria-describedby="budget-mixed-help budget-language-error"><option value="zh" selected>纯中文</option><option value="en" >纯英文</option></select><p id="budget-mixed-help" class="tool-help">中英混排请使用“讲稿估时”，两部分分别计算后相加。</p><p id="budget-language-error" class="tool-error" hidden></p></div>
+          <div class="tool-field"><label for="budget-m">目标时长，分钟</label><input id="budget-m" name="budgetM" type="text" inputmode="decimal" value="5" autocomplete="off" spellcheck="false" aria-describedby="budget-m-error"><p id="budget-m-error" class="tool-error" hidden></p></div>
+          <div class="tool-field" id="budget-rc-field" ><label for="budget-rc">中文语速，汉字/分钟</label><input id="budget-rc" name="budgetRc" type="text" inputmode="numeric" value="200" autocomplete="off" spellcheck="false" aria-describedby="budget-pace-help budget-rc-error"><p id="budget-rc-error" class="tool-error" hidden></p></div>
+          <div class="tool-field" id="budget-re-field" hidden><label for="budget-re">英文语速，单词/分钟</label><input id="budget-re" name="budgetRe" type="text" inputmode="numeric" value="140" autocomplete="off" spellcheck="false" aria-describedby="budget-pace-help budget-re-error"><p id="budget-re-error" class="tool-error" hidden></p></div>
+          <p id="budget-pace-help" class="tool-help">默认语速只是可调的计算起点，不是标准。请用一次实际排练修正。</p>
+          <div class="tool-field allowance-field"><label for="budget-p">额外预留时间，秒</label><input id="budget-p" name="budgetP" type="text" inputmode="numeric" value="0" autocomplete="off" spellcheck="false" aria-describedby="budget-p-help budget-p-error"><p id="budget-p-help" class="tool-help">只填写换页、互动等额外时间。语速已包含的日常短停顿不再重复添加。</p><p id="budget-p-error" class="tool-error" hidden></p></div>
+        </fieldset>
+        <div class="tool-actions"><button type="submit" class="button" id="calculate">计算时长 <span aria-hidden="true">↗</span></button><button type="button" class="tool-clear" id="clear-tool">清空</button></div>
+      </fieldset>
+    </form>
+    <aside class="tool-result" aria-labelledby="result-title">
+      <span class="kicker">你的估算</span><h2 id="result-title">预计演讲时长</h2>
+      <div id="result-placeholder"><span class="result-dash" aria-hidden="true">—</span><p id="result-state">填写后点击计算，查看估算结果。</p></div>
+      <div id="result-content" hidden><p id="result-value"></p><p id="result-counts"></p><p id="result-parameters"></p><p id="budget-limit" hidden>这是当前参数下的数学预算，不是写作标准，也不是不超时保证。</p></div>
+      <p class="tool-counting-note">缩写按一个英文单词计，中文数字按汉字计。读法不同会改变时长，可先改写成你要说出的词。</p>
+      <p class="tool-rehearsal-note">这是估算，不是准确预测。停顿、强调、数字读法和现场互动会改变实际时长。定稿前请完整计时排练一次。</p>
+    </aside>
+  </div>
+  <p id="tool-announcement" class="sr-only" role="status" aria-live="polite" aria-atomic="true"></p>
+  <section class="tool-method" aria-labelledby="method-title"><div><span class="kicker">01 / 怎么计算？</span><h2 id="method-title">怎么计算？</h2><p>中文汉字数除以每分钟汉字数，英文单词数除以每分钟单词数。两部分时间相加，再加上你填写的额外预留秒数，最后四舍五入到秒。</p></div><div class="tool-formulas"><p>时长，单位为秒</p><code>60 × H ÷ Rc + 60 × E ÷ Re + P</code><p>汉字或英文单词的数量上限</p><code>floor((M × 60 − P) × R ÷ 60)</code><small>H 为汉字数，E 为英文单词数；Rc、Re 分别为两种语言的每分钟语速。P 为额外预留秒数，M 为目标分钟数，R 为所选语速。floor 表示向下取整。</small></div></section>
+  <section class="tool-limit" aria-labelledby="limit-title"><h2 id="limit-title">先估算，再完整排练</h2><p>支持最多 20,000 个 Unicode 字符的中英文稿件。汉字统计不等于语言识别，不适用于日语。请把数字和符号改写成实际要说出的文字；不支持的内容需要修改后才能得到结果。</p></section>
+  <section class="tool-faq" id="faq" aria-labelledby="tool-faq-title"><h2 id="tool-faq-title">你可能还想知道</h2><div class="faq-list"><details><summary>五分钟演讲应该写多少字？</summary><p>没有适合所有人的固定字数。选择“按时长备稿”，输入五分钟，再按你的语速和额外预留时间计算。默认值不能代替排练。</p></details>
+<details><summary>中文和英文怎么统计？</summary><p>中文逐字计数，英文按单词计数。词内连字符和 apostrophe 不分词，缩写按一词计。汉字统计不是语言识别，不适用于日语稿件。首版不支持假名、韩文和其他文字。</p></details>
+<details><summary>为什么要改写数字和符号？</summary><p>同一内容可以有不同读法，工具不会猜。把数字和符号写成你要说出的文字，能让统计口径更贴近稿件。</p></details>
+<details><summary>标点会增加停顿时间吗？</summary><p>不自动增加。语速包含日常短停顿，换页和互动等额外时间由你填写，不逐标点加秒。</p></details>
+<details><summary>讲稿会上传或保存吗？</summary><p>不会。讲稿只在当前页面内存处理，不上传、不写入本地存储。刷新、切换语言或离开后不保留，请自行留副本。</p></details>
+<details><summary>这是 Oralo 语音跟随吗？</summary><p>不是。这里不使用麦克风，只做字数和时长估算。iPhone 上的 Oralo 提供原生提词体验，具体功能和测试状态见产品介绍。</p></details></div></section>
+  <section class="tool-cta"><span class="kicker">Oralo · iPhone</span><h2>估好时长，再按自己的节奏开讲。</h2><p>想在 iPhone 上备稿和提词？了解 Oralo 的语音跟随与小窗提词。Oralo 仍在开发测试中，可到官网加入现有候补名单。</p><a class="button" href="/zh/">了解 Oralo 与候补通知 <span aria-hidden="true">↗</span></a><div class="tool-related"><a href="/zh/voice-following/">语音跟随如何工作 ↗</a><a href="/zh/floating-prompt/">小窗提词如何使用 ↗</a></div></section>
+</main>
+<footer class="footer wrap"><a class="brand" href="/zh/"><img src="/assets/oralo-icon-48.webp" srcset="/assets/oralo-icon-48.webp 48w, /assets/oralo-icon-96.webp 96w, /assets/oralo-icon-192.webp 192w, /assets/oralo-icon-288.webp 288w" sizes="(max-width: 700px) 29px, 32px" width="32" height="32" loading="lazy" decoding="async" alt=""><span>Oralo</span></a><p data-i18n="tagline">AI Teleprompter, at Your Pace.</p><div><span>© 2026 Oralo</span><a href="/zh/tools/speech-length/">免费估时工具</a><a href="/support/?lang=zh" data-info-link data-i18n="supportLink">支持</a><a href="https://github.com/CH563/oralo" target="_blank" rel="noopener">GitHub ↗</a><a class="text-button" href="/privacy/?lang=zh" data-info-link data-i18n="privacy">隐私说明</a></div></footer>
+<dialog id="tool-language-dialog" aria-labelledby="language-confirm-title"><h2 id="language-confirm-title">切换语言会清空本页输入。继续吗？</h2><div class="tool-dialog-actions"><button type="button" id="stay-language" class="tool-clear" autofocus>留在本页</button><button type="button" id="change-language" class="button">继续切换</button></div></dialog>
+<script type="application/json" id="tool-copy">{"pageTitle":"演讲时长估算器：字数与分钟换算 · Oralo","pageDescription":"粘贴中英文讲稿，按可调语速估算时长；或输入分钟数反算备稿字数。免费、无需登录，讲稿仅在当前页面计算，不上传、不保存。","breadcrumb":"Oralo 首页 › 演讲时长估算器","heading":"这篇稿子，大约讲多久？","intro":"粘贴演讲稿、汇报稿或口播稿，按你的语速估算时长。还没写稿？先从时间限制反算字数。","privacy":"免费，无需登录。讲稿仅在当前页面计算，不上传、不保存。刷新、切换语言或离开后不保留，请自行保留副本。","modeScript":"讲稿估时","modeBudget":"按时长备稿","scriptLabel":"讲稿","scriptPlaceholder":"粘贴中文或英文讲稿。数字和符号请先改成实际要说出的文字。","chinesePace":"中文语速，汉字/分钟","englishPace":"英文语速，单词/分钟","paceHelp":"默认语速只是可调的计算起点，不是标准。请用一次实际排练修正。","allowanceLabel":"额外预留时间，秒","allowanceHelp":"只填写换页、互动等额外时间。语速已包含的日常短停顿不再重复添加。","minutesLabel":"目标时长，分钟","languageLabel":"备稿语言","languageOptions":"纯中文；纯英文","mixedHelp":"中英混排请使用“讲稿估时”，两部分分别计算后相加。","estimateButton":"计算时长","budgetButton":"计算字数","clear":"清空","placeholder":"填写后点击计算，查看估算结果。","changed":"输入已修改，请重新计算。","noJs":"计算需要启用 JavaScript。你仍可阅读下方公式和使用说明。","languageConfirm":"切换语言会清空本页输入。继续吗？","confirmButtons":"继续切换；留在本页","timeTitle":"预计演讲时长","timeResult":"约 {minutes} 分 {seconds} 秒","counts":"已计入 {H} 个汉字、{E} 个英文单词。","timeParams":"中文语速：{Rc} 汉字/分钟。英文语速：{Re} 单词/分钟。额外预留：{P} 秒。","countingNote":"缩写按一个英文单词计，中文数字按汉字计。读法不同会改变时长，可先改写成你要说出的词。","budgetTitle":"按当前参数可容纳的数量上限","budgetZh":"最多约 {budget} 个汉字","budgetEn":"最多约 {budget} 个英文单词","budgetParams":"目标 {M} 分钟，额外预留 {P} 秒，语速 {R} {unit}。","estimateLimit":"这是估算，不是准确预测。停顿、强调、数字读法和现场互动会改变实际时长。定稿前请完整计时排练一次。","empty":"请输入至少一个汉字或英文单词。","tooLong":"讲稿超过 20,000 个字符。请缩短后再计算；本工具不会截断稿件。","numbers":"检测到未展开的数字。请改成你实际要说出的文字，再计算。","symbols":"检测到符号或 emoji。请删除不朗读的内容，或改成要说出的文字。","text":"首版仅统计中文汉字和不带重音的英文字母单词。请移除其他文字，或分别估算受支持的部分。","hidden":"检测到不支持的隐藏字符。请先粘贴为纯文本后再试。","Rc":"请输入 50 至 600 的整数，单位为汉字/分钟。","Re":"请输入 50 至 400 的整数，单位为单词/分钟。","P":"请输入 0 至 3600 的整数秒数。","M":"请输入 0.1 至 180 的分钟数，最多 1 位小数，例如 5 或 0.5。","allowanceTooLarge":"额外预留时间必须小于目标总时长。","zeroBudget":"当前参数不足以容纳一个汉字或英文单词。请增加时长或减少预留时间。","ctaTitle":"估好时长，再按自己的节奏开讲。","ctaBody":"想在 iPhone 上备稿和提词？了解 Oralo 的语音跟随与小窗提词。Oralo 仍在开发测试中，可到官网加入现有候补名单。","ctaButton":"了解 Oralo 与候补通知","voiceLink":"语音跟随如何工作","floatingLink":"小窗提词如何使用","methodTitle":"怎么计算？","methodBody":"中文汉字数除以每分钟汉字数，英文单词数除以每分钟单词数。两部分时间相加，再加上你填写的额外预留秒数，最后四舍五入到秒。","faqs":[["五分钟演讲应该写多少字？","没有适合所有人的固定字数。选择“按时长备稿”，输入五分钟，再按你的语速和额外预留时间计算。默认值不能代替排练。"],["中文和英文怎么统计？","中文逐字计数，英文按单词计数。词内连字符和 apostrophe 不分词，缩写按一词计。汉字统计不是语言识别，不适用于日语稿件。首版不支持假名、韩文和其他文字。"],["为什么要改写数字和符号？","同一内容可以有不同读法，工具不会猜。把数字和符号写成你要说出的文字，能让统计口径更贴近稿件。"],["标点会增加停顿时间吗？","不自动增加。语速包含日常短停顿，换页和互动等额外时间由你填写，不逐标点加秒。"],["讲稿会上传或保存吗？","不会。讲稿只在当前页面内存处理，不上传、不写入本地存储。刷新、切换语言或离开后不保留，请自行留副本。"],["这是 Oralo 语音跟随吗？","不是。这里不使用麦克风，只做字数和时长估算。iPhone 上的 Oralo 提供原生提词体验，具体功能和测试状态见产品介绍。"]],"kicker":"免费在线工具","resultEyebrow":"你的估算","settingsTitle":"按你的语速来","limitTitle":"先估算，再完整排练","faqTitle":"你可能还想知道","scriptHint":"最多 20,000 个字符。请自行保留副本，离开本页后输入会清空。","chineseOption":"纯中文","englishOption":"纯英文","continueLanguage":"继续切换","stayLanguage":"留在本页","language":"请选择纯中文或纯英文。","errorSummary":"未能计算，请检查标出的输入项。","cleared":"输入已清空，已恢复默认设置。","chineseUnit":"汉字/分钟","englishUnit":"单词/分钟","chineseParam":"中文语速：{Rc} 汉字/分钟。","englishParam":"英文语速：{Re} 单词/分钟。","allowanceParam":"额外预留：{P} 秒。","budgetLimit":"这是当前参数下的数学预算，不是写作标准，也不是不超时保证。","formulaTime":"时长，单位为秒","formulaBudget":"汉字或英文单词的数量上限","formulaHelp":"H 为汉字数，E 为英文单词数；Rc、Re 分别为两种语言的每分钟语速。P 为额外预留秒数，M 为目标分钟数，R 为所选语速。floor 表示向下取整。","limitBody":"支持最多 20,000 个 Unicode 字符的中英文稿件。汉字统计不等于语言识别，不适用于日语。请把数字和符号改写成实际要说出的文字；不支持的内容需要修改后才能得到结果。","homeLink":"免费工具：估算演讲时长","footerLink":"免费估时工具"}</script>
+</body>
+</html>

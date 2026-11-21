@@ -7,7 +7,8 @@
     "test": "npm run build && node --test tests/*.test.js",
     "images:optimize": "node scripts/optimize-images.mjs",
     "videos:optimize": "node scripts/optimize-videos.mjs",
-    "build": "node scripts/build-site.mjs"
+    "build": "node scripts/build-site.mjs",
+    "unicode:build": "node scripts/build-unicode-data.mjs"
   },
   "dependencies": {
     "@vercel/blob": "2.9.0"

@@ -186,5 +186,7 @@
   "socialAlt": "Oralo AI 提词器：自然表达，跟随你的节奏。",
   "demoStatesLabel": "演示状态",
   "listenLabel": "试听 roadmap",
-  "closeLabel": "关闭"
+  "closeLabel": "关闭",
+  "toolLink": "免费工具：估算演讲时长",
+  "toolFooter": "免费估时工具"
 }

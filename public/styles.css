@@ -104,3 +104,5 @@ html[lang=en] .final-section h2{font-size:clamp(36px,4.5vw,62px);max-width:980px
 @media(max-width:700px){.languages a{min-width:33px;height:33px}.section-link{font-size:13px}html[lang=en] .hero h1{font-size:36px;line-height:1.14}html[lang=en] .final-section h2{font-size:36px}.hero .form-note{max-width:350px}.hero-description{max-width:350px}}
 
 @media(max-width:700px){.final-section h2 mark::before{left:-3%;right:-3%}html[lang="zh-Hans"] .final-section h2{font-size:clamp(30px,8.5vw,38px)}}
+
+.home-tool-link{text-align:center;margin:24px 0 0}.home-tool-link .section-link{font-size:14px}

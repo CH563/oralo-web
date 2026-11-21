@@ -192,5 +192,7 @@
   "socialAlt": "Oralo: Speak naturally. Stay on track. AI teleprompter, at your pace.",
   "demoStatesLabel": "Demo states",
   "listenLabel": "Listen to roadmap",
-  "closeLabel": "Close"
+  "closeLabel": "Close",
+  "toolLink": "Free tool: Estimate speech length",
+  "toolFooter": "Speech length tool"
 }

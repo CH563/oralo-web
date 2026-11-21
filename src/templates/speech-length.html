@@ -1,0 +1,54 @@
+<a class="skip" href="#main">{{skip}}</a>
+{{{siteHeader}}}
+<main id="main" class="wrap speech-page">
+  <nav class="tool-breadcrumb" aria-label="{{breadcrumb}}"><a href="{{homePath}}">{{breadcrumbHome}}</a><span aria-hidden="true">›</span><span>{{pageName}}</span></nav>
+  <div class="tool-heading"><span class="kicker">{{kicker}}</span><h1>{{heading}}</h1><p class="tool-intro">{{intro}}</p><p class="tool-privacy"><span aria-hidden="true">↳</span> {{privacy}}</p></div>
+  <noscript><p class="tool-nojs">{{noJs}}</p></noscript>
+  <div class="calculator-layout">
+    <form id="speech-form" autocomplete="off" novalidate>
+      <fieldset id="calculator-controls" disabled>
+        <legend class="sr-only">{{pageName}}</legend>
+        <div class="tool-tabs" role="tablist" aria-label="{{pageName}}">
+          <button type="button" id="script-tab" role="tab" aria-selected="true" aria-controls="script-panel" data-tool-mode="script">{{modeScript}}</button>
+          <button type="button" id="budget-tab" role="tab" aria-selected="false" aria-controls="budget-panel" tabindex="-1" data-tool-mode="budget">{{modeBudget}}</button>
+        </div>
+        <fieldset id="script-panel" role="tabpanel" aria-labelledby="script-tab">
+          <legend class="sr-only">{{modeScript}}</legend>
+          <div class="tool-field"><label for="speech-script">{{scriptLabel}}</label><textarea id="speech-script" name="script" rows="8" autocomplete="off" spellcheck="false" autocapitalize="off" placeholder="{{scriptPlaceholder}}" aria-describedby="script-hint script-error"></textarea><p id="script-hint" class="tool-help">{{scriptHint}}</p><p id="script-error" class="tool-error" hidden></p></div>
+          <h2 class="tool-settings-title">{{settingsTitle}}</h2>
+          <div class="tool-pace-grid">
+            <div class="tool-field" id="script-rc-field"><label for="script-rc">{{chinesePace}}</label><input id="script-rc" name="scriptRc" type="text" inputmode="numeric" value="200" autocomplete="off" spellcheck="false" aria-describedby="script-pace-help script-rc-error"><p id="script-rc-error" class="tool-error" hidden></p></div>
+            <div class="tool-field" id="script-re-field"><label for="script-re">{{englishPace}}</label><input id="script-re" name="scriptRe" type="text" inputmode="numeric" value="140" autocomplete="off" spellcheck="false" aria-describedby="script-pace-help script-re-error"><p id="script-re-error" class="tool-error" hidden></p></div>
+          </div>
+          <p id="script-pace-help" class="tool-help">{{paceHelp}}</p>
+          <div class="tool-field allowance-field"><label for="script-p">{{allowanceLabel}}</label><input id="script-p" name="scriptP" type="text" inputmode="numeric" value="0" autocomplete="off" spellcheck="false" aria-describedby="script-p-help script-p-error"><p id="script-p-help" class="tool-help">{{allowanceHelp}}</p><p id="script-p-error" class="tool-error" hidden></p></div>
+        </fieldset>
+        <fieldset id="budget-panel" role="tabpanel" aria-labelledby="budget-tab" hidden disabled>
+          <legend class="sr-only">{{modeBudget}}</legend>
+          <div class="tool-field"><label for="budget-language">{{languageLabel}}</label><select id="budget-language" name="budgetLanguage" autocomplete="off" aria-describedby="budget-mixed-help budget-language-error"><option value="zh" {{zhSelected}}>{{chineseOption}}</option><option value="en" {{enSelected}}>{{englishOption}}</option></select><p id="budget-mixed-help" class="tool-help">{{mixedHelp}}</p><p id="budget-language-error" class="tool-error" hidden></p></div>
+          <div class="tool-field"><label for="budget-m">{{minutesLabel}}</label><input id="budget-m" name="budgetM" type="text" inputmode="decimal" value="5" autocomplete="off" spellcheck="false" aria-describedby="budget-m-error"><p id="budget-m-error" class="tool-error" hidden></p></div>
+          <div class="tool-field" id="budget-rc-field" {{zhHidden}}><label for="budget-rc">{{chinesePace}}</label><input id="budget-rc" name="budgetRc" type="text" inputmode="numeric" value="200" autocomplete="off" spellcheck="false" aria-describedby="budget-pace-help budget-rc-error"><p id="budget-rc-error" class="tool-error" hidden></p></div>
+          <div class="tool-field" id="budget-re-field" {{enHidden}}><label for="budget-re">{{englishPace}}</label><input id="budget-re" name="budgetRe" type="text" inputmode="numeric" value="140" autocomplete="off" spellcheck="false" aria-describedby="budget-pace-help budget-re-error"><p id="budget-re-error" class="tool-error" hidden></p></div>
+          <p id="budget-pace-help" class="tool-help">{{paceHelp}}</p>
+          <div class="tool-field allowance-field"><label for="budget-p">{{allowanceLabel}}</label><input id="budget-p" name="budgetP" type="text" inputmode="numeric" value="0" autocomplete="off" spellcheck="false" aria-describedby="budget-p-help budget-p-error"><p id="budget-p-help" class="tool-help">{{allowanceHelp}}</p><p id="budget-p-error" class="tool-error" hidden></p></div>
+        </fieldset>
+        <div class="tool-actions"><button type="submit" class="button" id="calculate">{{estimateButton}} <span aria-hidden="true">↗</span></button><button type="button" class="tool-clear" id="clear-tool">{{clear}}</button></div>
+      </fieldset>
+    </form>
+    <aside class="tool-result" aria-labelledby="result-title">
+      <span class="kicker">{{resultEyebrow}}</span><h2 id="result-title">{{timeTitle}}</h2>
+      <div id="result-placeholder"><span class="result-dash" aria-hidden="true">—</span><p id="result-state">{{placeholder}}</p></div>
+      <div id="result-content" hidden><p id="result-value"></p><p id="result-counts"></p><p id="result-parameters"></p><p id="budget-limit" hidden>{{budgetLimit}}</p></div>
+      <p class="tool-counting-note">{{countingNote}}</p>
+      <p class="tool-rehearsal-note">{{estimateLimit}}</p>
+    </aside>
+  </div>
+  <p id="tool-announcement" class="sr-only" role="status" aria-live="polite" aria-atomic="true"></p>
+  <section class="tool-method" aria-labelledby="method-title"><div><span class="kicker">01 / {{methodTitle}}</span><h2 id="method-title">{{methodTitle}}</h2><p>{{methodBody}}</p></div><div class="tool-formulas"><p>{{formulaTime}}</p><code>60 × H ÷ Rc + 60 × E ÷ Re + P</code><p>{{formulaBudget}}</p><code>floor((M × 60 − P) × R ÷ 60)</code><small>{{formulaHelp}}</small></div></section>
+  <section class="tool-limit" aria-labelledby="limit-title"><h2 id="limit-title">{{limitTitle}}</h2><p>{{limitBody}}</p></section>
+  <section class="tool-faq" id="faq" aria-labelledby="tool-faq-title"><h2 id="tool-faq-title">{{faqTitle}}</h2><div class="faq-list">{{{faqHtml}}}</div></section>
+  <section class="tool-cta"><span class="kicker">Oralo · iPhone</span><h2>{{ctaTitle}}</h2><p>{{ctaBody}}</p><a class="button" href="{{homePath}}">{{ctaButton}} <span aria-hidden="true">↗</span></a><div class="tool-related"><a href="{{voicePath}}">{{voiceLink}} ↗</a><a href="{{floatingPath}}">{{floatingLink}} ↗</a></div></section>
+</main>
+{{{siteFooter}}}
+<dialog id="tool-language-dialog" aria-labelledby="language-confirm-title"><h2 id="language-confirm-title">{{languageConfirm}}</h2><div class="tool-dialog-actions"><button type="button" id="stay-language" class="tool-clear" autofocus>{{stayLanguage}}</button><button type="button" id="change-language" class="button">{{continueLanguage}}</button></div></dialog>
+<script type="application/json" id="tool-copy">{{{runtimeCopy}}}</script>
