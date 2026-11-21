@@ -30,13 +30,13 @@ if (!screenshotsOnly) {
 // Run npm run images:optimize -- --screenshots to rebuild just the app screenshots.
 const temporary = await mkdtemp(path.join(tmpdir(), 'oralo-screenshots-'));
 try {
-  for (const name of ['library', 'prepare', 'review', 'reader', 'pronunciation', 'ipad', 'floating']) {
+  for (const name of ['library', 'prepare', 'review', 'reader', 'pronunciation', 'ipad']) {
     const source = path.join(root, 'design/source/screenshots', `${name}.png`);
     await stat(source).catch(() => { throw new Error(`Missing local screenshot source: ${source}`); });
     // Simulator captures can store landscape orientation in metadata. Apply it before stripping.
     const normalized = path.join(temporary, `${name}.png`);
     execFileSync('magick', [source, '-auto-orient', '-strip', normalized]);
-    for (const width of name === 'ipad' ? [640, 1280] : name === 'floating' ? [480, 960] : [320, 640]) {
+    for (const width of name === 'ipad' ? [640, 1280] : [320, 640]) {
       const output = path.join(assets, `app-${name}-${width}.webp`);
       execFileSync('cwebp', ['-quiet', '-q', '86', '-m', '6', '-sharp_yuv', '-metadata', 'none', '-resize', String(width), '0', normalized, '-o', output]);
       generated.push(output);
@@ -44,5 +44,14 @@ try {
   }
 } finally {
   await rm(temporary, { recursive: true, force: true });
+}
+// The livestream photograph is separate from native app captures; its original stays local.
+if (!screenshotsOnly) {
+  const source = path.join(root, 'design/source/creator-live-v1.png');
+  for (const width of [480, 960]) {
+    const output = path.join(assets, `creator-live-${width}.webp`);
+    execFileSync('cwebp', ['-quiet', '-q', '80', '-m', '6', '-sharp_yuv', '-metadata', 'none', '-resize', String(width), '0', source, '-o', output]);
+    generated.push(output);
+  }
 }
 for (const output of generated) console.log(`${path.basename(output)}\t${(await stat(output)).size} bytes`);
