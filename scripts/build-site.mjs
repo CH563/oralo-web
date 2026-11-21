@@ -50,7 +50,7 @@ function document(context, body, home) {
 </head>
 <body>${body}</body>
 </html>
-`;
+`.replace(/[ \t]+$/gm, '');
 }
 const sectionTitles = {
   'voice-following': {en:['Keep pace with your script','Find a way back','What affects recognition','Using Oralo offline'],zh:['跟着讲稿，标出位置','离稿之后，怎样接回','哪些因素会影响识别','离线时，哪些功能可用']},
