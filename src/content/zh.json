@@ -188,5 +188,7 @@
   "listenLabel": "试听 roadmap",
   "closeLabel": "关闭",
   "toolLink": "免费工具：估算演讲时长",
-  "toolFooter": "免费估时工具"
+  "toolFooter": "免费估时工具",
+  "previewLink": "免费工具：试听你的讲稿",
+  "previewFooter": "讲稿试听"
 }

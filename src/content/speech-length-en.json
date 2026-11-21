@@ -111,5 +111,8 @@
   "wordSingular": "English word",
   "wordPlural": "English words",
   "budgetZhOne": "Up to about {budget} Chinese character",
-  "budgetEnOne": "Up to about {budget} English word"
+  "budgetEnOne": "Up to about {budget} English word",
+  "toPreviewTitle": "Want to hear how your wording flows?",
+  "toPreviewBody": "Try the speech script preview with a browser-reported local voice. Your script does not transfer between tools. Keep your own copy and paste it manually.",
+  "toPreviewButton": "Open speech script preview"
 }

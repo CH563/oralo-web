@@ -194,5 +194,7 @@
   "listenLabel": "Listen to roadmap",
   "closeLabel": "Close",
   "toolLink": "Free tool: Estimate speech length",
-  "toolFooter": "Speech length tool"
+  "toolFooter": "Speech length tool",
+  "previewLink": "Free tool: Listen to your script",
+  "previewFooter": "Script preview"
 }
