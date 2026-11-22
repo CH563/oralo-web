@@ -1,10 +1,10 @@
 {
   "pageTitle": "Speech Length Estimator: Words to Minutes · Oralo",
-  "pageDescription": "Estimate speaking time for Chinese and English scripts, or turn minutes into a word budget. Free, no sign-up. Scripts stay in this page and are not uploaded or saved.",
+  "pageDescription": "Estimate speaking time for Chinese and English scripts, or turn minutes into a word budget. No sign-up. Scripts stay in this page and are not uploaded or saved.",
   "breadcrumb": "Oralo home › Speech length estimator",
   "heading": "How long will your speech take?",
   "intro": "Paste a speech, presentation, or video script to estimate its length at your pace. Working to a time limit? Start with a word budget.",
-  "privacy": "Free, no sign-up. Your script is processed in this page, not uploaded or saved. It is not retained after a refresh, language change, or leaving this page. Keep your own copy.",
+  "privacy": "No sign-up. Your script is processed in this page, not uploaded or saved. It is not retained after a refresh, language change, or leaving this page. Keep your own copy.",
   "modeScript": "Script to time",
   "modeBudget": "Time to word budget",
   "scriptLabel": "Your script",
@@ -81,7 +81,7 @@
       "No. This page uses no microphone. It estimates timing from text counts. See the product pages for the iPhone and iPad app's prompting experience, and features."
     ]
   ],
-  "kicker": "FREE ONLINE TOOL",
+  "kicker": "ONLINE TOOL",
   "resultEyebrow": "YOUR ESTIMATE",
   "settingsTitle": "Set your pace",
   "limitTitle": "A starting point for rehearsal",
@@ -104,8 +104,8 @@
   "formulaBudget": "Character or word budget",
   "formulaHelp": "H = Chinese characters; E = English words. Rc and Re are their respective per-minute paces. P = extra seconds; M = target minutes; R = the selected pace. Floor rounds the budget down.",
   "limitBody": "For Chinese and English scripts, up to 20,000 Unicode characters. Han character counting is not language detection and is not suitable for Japanese scripts. Write out numbers and symbols as you plan to say them. Unsupported content must be corrected before a result is shown.",
-  "homeLink": "Free tool: Estimate speech length",
-  "footerLink": "Free speech timer",
+  "homeLink": "Online tool: Estimate speech length",
+  "footerLink": "Online speech timer",
   "hanSingular": "Chinese character",
   "hanPlural": "Chinese characters",
   "wordSingular": "English word",

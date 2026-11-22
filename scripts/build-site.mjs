@@ -56,27 +56,45 @@ function document(context, body, home, tool = false) {
 </html>
 `.replace(/[ \t]+$/gm, '');
 }
-const sectionTitles = {
-  'voice-following': {en:['Keep pace with your script','Find a way back','What affects recognition','Using Oralo offline'],zh:['跟着讲稿，标出位置','离稿之后，怎样接回','哪些因素会影响识别','离线时，哪些功能可用']},
-  'floating-prompt': {en:['Set a steady pace','Start voice following in Oralo','If the microphone is interrupted','Keep your reading hints close','Compatibility and tested scope'],zh:['设定速度，从容开始','先在 Oralo 启动语音跟随','麦克风被中断时','把读音提示一起带上','兼容范围与已测试场景']}
+const guideImages = {
+  library: { widths: [320, 640], width: 1206, height: 2622 },
+  prepare: { widths: [320, 640], width: 1206, height: 2622 },
+  reader: { widths: [320, 640], width: 1206, height: 2622 },
+  floating: { widths: [480, 960], width: 960, height: 1393 }
 };
+function guideImage({asset, alt, caption}) {
+  const {widths, width, height} = guideImages[asset];
+  const source = size => `/assets/app-${asset}-${size}.webp`;
+  const wide = asset === 'floating';
+  return `<figure class="guide-capture${wide ? ' guide-capture-wide' : ''}"><a href="${source(widths[1])}" target="_blank" rel="noopener"><img src="${source(widths[0])}" srcset="${widths.map(size => `${source(size)} ${size}w`).join(', ')}" sizes="${wide ? '(max-width: 700px) calc(100vw - 48px), 380px' : '(max-width: 700px) 220px, 250px'}" width="${width}" height="${height}" loading="lazy" decoding="async" alt="${escape(alt)}"></a><figcaption>${escape(caption)}</figcaption></figure>`;
+}
+function guideSection(section) {
+  const entries = (items, ordered) => `<${ordered ? 'ol class="guide-steps"' : 'ul class="guide-checks"'}>${items.map(item => `<li><h3>${escape(item.title)}</h3><p>${escape(item.text)}</p></li>`).join('')}</${ordered ? 'ol' : 'ul'}>`;
+  const evidence = section.evidence;
+  return `<section id="${escape(section.id)}" class="guide-block${section.image ? ' guide-block-illustrated' : ''}" aria-labelledby="${escape(section.id)}-title"><div class="guide-copy"><h2 id="${escape(section.id)}-title">${escape(section.title)}</h2>
+    ${section.intro ? `<p class="guide-section-intro">${escape(section.intro)}</p>` : ''}
+    ${section.steps ? entries(section.steps, true) : ''}${section.items ? entries(section.items, false) : ''}
+    ${evidence ? `<div class="guide-evidence"><table><caption>${escape(section.title)}</caption><thead><tr>${evidence.headers.map(label => `<th scope="col">${escape(label)}</th>`).join('')}</tr></thead><tbody>${evidence.rows.map(row => `<tr>${row.map((cell, index) => index === 0 ? `<th scope="row">${escape(cell)}</th>` : `<td><span class="guide-evidence-label" aria-hidden="true">${escape(evidence.headers[index])}</span>${escape(cell)}</td>`).join('')}</tr>`).join('')}</tbody></table></div>` : ''}
+    ${section.note ? `<p class="guide-note">${escape(section.note)}</p>` : ''}
+  </div>${section.image ? guideImage(section.image) : ''}</section>`;
+}
 function guideBody(lang, slug, c) {
   const page = guides[slug][lang];
   const floating = slug === 'floating-prompt';
-  const groups = floating ? [[1],[2],[3],[4],[5]] : [[1],[2,3],[4],[5]];
-  const articles = groups.map((indexes,i)=>`<section class="guide-block"><h2>${escape(sectionTitles[slug][lang][i])}</h2>${indexes.map(index=>`<p>${escape(page.paragraphs[index])}</p>`).join('')}</section>`).join('\n');
-  const visual = floating ? render(templates.floating,c) : `<figure class="guide-reader"><a class="screenshot-link" href="/assets/app-reader-640.webp" target="_blank" rel="noopener"><img src="/assets/app-reader-320.webp" srcset="/assets/app-reader-320.webp 320w, /assets/app-reader-640.webp 640w" sizes="260px" width="1206" height="2622" loading="lazy" decoding="async" alt="${escape(c.recoveryAlt)}"></a><figcaption class="screenshot-note">${escape(c.concept)}</figcaption></figure>`;
+  const guide = page.guide;
   const otherPath = floating ? c.voicePath : c.floatingPath;
   const otherLabel = floating ? c.voiceLearn : c.floatingLearn;
+  const badge = `<a class="app-store-badge" href="${c.appStoreUrl}"><img src="/assets/app-store-badge.svg" alt="${escape(c.downloadLabel)}" width="120" height="40"></a>`;
   const chrome = html => render(html,c).replace(/href="#(.*?)"/g,`href="${c.homePath}#$1"`);
   return `
 <a class="skip" href="#main">${escape(c.skip)}</a>
 ${chrome(templates.header)}
 <main id="main" class="wrap guide-page">
-  <div class="guide-heading"><a class="guide-back" href="${c.homePath}">← ${escape(c.backHome)}</a><span class="kicker">${escape(floating?c.guideFloatingKicker:c.guideVoiceKicker)}</span><h1>${escape(page.fields.H1)}</h1><p class="guide-intro">${escape(page.paragraphs[0])}</p></div>
-  <div class="guide-layout"><article class="guide-article">${articles}${floating?'':`<p class="guide-note">${escape(page.fields[lang==='zh'?'演示说明（若首页示意仍保留）':'Demo note (if the existing preview remains)'])}</p>`}</article><aside class="guide-visual">${visual}<a class="section-link" href="${otherPath}">${escape(otherLabel)} ↗</a></aside></div>
+  <div class="guide-heading"><a class="guide-back" href="${c.homePath}">← ${escape(c.backHome)}</a><span class="kicker">${escape(guide.label)}</span><h1>${escape(page.fields.H1)}</h1><p class="guide-intro">${escape(page.paragraphs[0])}</p><div class="guide-actions">${badge}<a class="section-link" href="#prepare">${escape(guide.startLabel)} ↓</a></div></div>
+  <nav class="guide-contents" aria-label="${escape(guide.contentsLabel)}"><span>${escape(guide.contentsLabel)}</span><ul>${guide.sections.map(section => `<li><a href="#${escape(section.id)}">${escape(section.title)}</a></li>`).join('')}</ul></nav>
+  <article class="guide-article">${guide.sections.map(guideSection).join('\n')}</article>
   <section id="faq" class="guide-faq"><h2>${escape(c.guideFaqTitle)}</h2><div class="faq-list">${page.faqs.map(([q,a])=>`<details><summary>${escape(q)}</summary><p>${escape(a)}</p></details>`).join('\n')}</div></section>
-  <section class="guide-cta"><span class="kicker">${escape(c.guideRelated)}</span><h2>${escape(c.guideCtaTitle)}</h2><a class="app-store-badge" href="${c.appStoreUrl}"><img src="/assets/app-store-badge.svg" alt="${escape(c.downloadLabel)}" width="120" height="40" loading="lazy"></a><p>${escape(c.guideCtaNote)}</p><a class="section-link" href="${otherPath}">${escape(otherLabel)}</a></section>
+  <section class="guide-cta"><span class="kicker">${escape(c.guideRelated)}</span><h2>${escape(c.guideCtaTitle)}</h2>${badge}<p>${escape(c.guideCtaNote)}</p><a class="section-link" href="${otherPath}">${escape(otherLabel)} ↗</a></section>
 </main>
 ${chrome(templates.footer)}
 `;
