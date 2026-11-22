@@ -162,9 +162,9 @@
             ],
             "image": {
               "asset": "library",
-              "alt": "Oralo script library with a saved Quarterly report and the New script button",
+              "alt": "Oralo English script library with the Project update practice script",
               "caption": "The script library. Open a saved script or use New script at the bottom.",
-              "source": "Native UI capture · Oralo 1.0 (13) · iPhone 17 simulator · iOS 27.0 · 20 Nov 2026."
+              "source": "Native UI capture · Oralo 1.0 (14) · iPhone 17 simulator · iOS 27.0 · 22 Nov 2026."
             }
           },
           {
@@ -186,9 +186,9 @@
             ],
             "image": {
               "asset": "readiness",
-              "alt": "Oralo Before you start screen showing microphone and voice-following checks in Chinese",
-              "caption": "Before you start: check the microphone and voice following. This capture is from the rehearsal entry; its start button differs from Start speaking.",
-              "source": "Native UI capture · Oralo 1.0 (10) · iPhone simulator · iOS 27.0 · 19 Nov 2026. The capture record does not specify the iPhone model."
+              "alt": "Oralo Before you start screen for Project update, with English selected for voice following",
+              "caption": "Before you start, opened from Start speaking. The English project-update script is ready for its microphone and voice-following checks.",
+              "source": "Native UI capture · Oralo 1.0 (14) · iPhone 17 simulator · iOS 27.0 · 22 Nov 2026."
             }
           },
           {
@@ -210,9 +210,9 @@
             ],
             "image": {
               "asset": "reader",
-              "alt": "Actual Oralo reading screen with the current word highlighted and an IPA pronunciation hint",
-              "caption": "The reading view shows your place in the script. This capture shows the text view with controls hidden.",
-              "source": "Native UI capture · Oralo 1.0 (9) · iPhone 17 simulator · iOS 27.0 · 18 Nov 2026."
+              "alt": "Oralo reading view showing the English project-update script, its reading position and an IPA hint for Today",
+              "caption": "The English practice script in the reading view, with an IPA hint for “Today” and controls hidden. This capture uses manual reading.",
+              "source": "Native UI capture · Oralo 1.0 (14) · iPhone 17 simulator · iOS 27.0 · 22 Nov 2026."
             },
             "note": "If you hid the controls, tap the reading area to show them again."
           },
@@ -430,7 +430,7 @@
               "asset": "prepare",
               "alt": "Oralo Prepare screen with the top-right three-dot menu",
               "caption": "Open (…) on Prepare, then choose Floating prompt.",
-              "source": "Native UI capture · Oralo 1.0 (13) · iPhone 17 simulator · iOS 27.0 · 20 Nov 2026."
+              "source": "Native UI capture · Oralo 1.0 (14) · iPhone 17 simulator · iOS 27.0 · 22 Nov 2026."
             }
           },
           {
@@ -455,7 +455,7 @@
               "asset": "floating",
               "alt": "Actual iPad home-screen capture with an Oralo floating script window in the top-right corner",
               "caption": "Actual iPad screen capture: the script stays in a separate Picture-in-Picture window after leaving Oralo. This image shows the window layout, not Camera recording compatibility.",
-              "source": "Native UI test capture · Oralo 1.0 (13) · iPad Pro 11-inch (M5) simulator · iPadOS 27.0 · 20 Nov 2026."
+              "source": "Native UI capture · Oralo 1.0 (14) · iPad Pro 11-inch (M5) simulator · iPadOS 27.0 · 22 Nov 2026."
             }
           },
           {
@@ -497,9 +497,9 @@
             ],
             "image": {
               "asset": "floating-controls",
-              "alt": "Oralo floating-prompt mode selector with Voice follow selected and Microphone interrupted, Position held status",
+              "alt": "Oralo Voice follow settings with the English project-update script and Microphone interrupted, Position held status",
               "caption": "Voice follow after an input interruption: the place is held, with Try voice following and Choose passage available. This UI test replays input; it does not establish cross-app microphone compatibility.",
-              "source": "Native UI test capture · Oralo 1.0 (13) · iPhone 17 simulator · iOS 27.0 · 20 Nov 2026."
+              "source": "Native UI capture with replayed input · Oralo 1.0 (14) · iPhone 17 simulator · iOS 27.0 · 22 Nov 2026."
             }
           },
           {

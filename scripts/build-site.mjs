@@ -7,6 +7,7 @@ const root = fileURLToPath(new URL('../', import.meta.url));
 const read = name => readFile(path.join(root, name), 'utf8');
 const locales = Object.fromEntries(await Promise.all(['zh', 'en'].map(async lang => [lang, JSON.parse(await read(`src/content/${lang}.json`))])));
 const guides = JSON.parse(await read('src/content/guides.json'));
+const englishScreenshots = JSON.parse(await read('src/content/english-screenshots.json'));
 const samples = JSON.parse(await read('src/content/guide-samples.json'));
 const downloads = JSON.parse(await read('src/content/download.json'));
 const tools = Object.fromEntries(await Promise.all(['zh', 'en'].map(async lang => [lang, JSON.parse(await read(`src/content/speech-length-${lang}.json`))])));
@@ -24,7 +25,7 @@ function render(template, context) {
 }
 function contextFor(lang, slug = '') {
   const suffix = slug ? `${slug}/` : '';
-  return {...locales[lang], desktopDownload: desktopDownload(lang), desktopDownloadJump: lang === 'en' ? 'Scan QR code or copy link' : '扫码或复制下载链接', appStoreUrl, developerName:product.developer.name, developerUrl:product.developer.url, slug, language:lang, htmlLang:lang === 'zh' ? 'zh-Hans' : 'en',
+  return {...locales[lang], imageSuffix: lang === 'en' ? '-en' : '', ipadWidth: lang === 'en' ? englishScreenshots.screenshots.ipad.width : 2420, ipadHeight: lang === 'en' ? englishScreenshots.screenshots.ipad.height : 1668, mirrorHeight: lang === 'en' ? 1566 : 960, desktopDownload: desktopDownload(lang), desktopDownloadJump: lang === 'en' ? 'Scan QR code or copy link' : '扫码或复制下载链接', appStoreUrl, developerName:product.developer.name, developerUrl:product.developer.url, slug, language:lang, htmlLang:lang === 'zh' ? 'zh-Hans' : 'en',
     homePath:`/${lang}/`, voicePath:`/${lang}/voice-following/`, floatingPath:`/${lang}/floating-prompt/`, toolPath:`/${lang}/tools/speech-length/`, previewPath:`/${lang}/tools/speech-preview/`,
     enPath:`/en/${suffix}`, zhPath:`/zh/${suffix}`, enCurrent:lang === 'en' ? 'page' : 'false', zhCurrent:lang === 'zh' ? 'page' : 'false',
     canonical:`${origin}/${lang}/${suffix}`, ogLocale:lang === 'zh' ? 'zh_CN' : 'en_US', alternateLocale:lang === 'zh' ? 'en_US' : 'zh_CN'};
@@ -76,13 +77,13 @@ const guideImages = {
   reader: { widths: [320, 640], width: 1206, height: 2622 },
   floating: { widths: [480, 960], width: 960, height: 1393 }
 };
-function guideImage({asset, alt, caption, source: provenance}) {
-  const {widths, width, height} = guideImages[asset];
-  const source = size => `/assets/app-${asset}-${size}.webp`;
+function guideImage({asset, alt, caption, source: provenance}, lang) {
+  const {widths, width, height} = lang === 'en' ? englishScreenshots.screenshots[asset] : guideImages[asset];
+  const source = size => `/assets/app-${asset}${lang === 'en' ? '-en' : ''}-${size}.webp`;
   const wide = asset === 'floating';
   return `<figure class="guide-capture${wide ? ' guide-capture-wide' : ''}"><a href="${source(widths[1])}" target="_blank" rel="noopener"><img src="${source(widths[0])}" srcset="${widths.map(size => `${source(size)} ${size}w`).join(', ')}" sizes="${wide ? '(max-width: 700px) calc(100vw - 48px), 380px' : '(max-width: 700px) 220px, 250px'}" width="${width}" height="${height}" loading="lazy" decoding="async" alt="${escape(alt)}"></a><figcaption>${escape(caption)}${provenance ? `<span class="guide-capture-source">${escape(provenance)}</span>` : ''}</figcaption></figure>`;
 }
-function guideSection(section) {
+function guideSection(section, lang) {
   const entries = (items, ordered) => `<${ordered ? 'ol class="guide-steps"' : 'ul class="guide-checks"'}>${items.map(item => `<li><h3>${escape(item.title)}</h3><p>${escape(item.text)}</p></li>`).join('')}</${ordered ? 'ol' : 'ul'}>`;
   const evidence = section.evidence;
   return `<section id="${escape(section.id)}" class="guide-block${section.image ? ' guide-block-illustrated' : ''}" aria-labelledby="${escape(section.id)}-title"><div class="guide-copy"><h2 id="${escape(section.id)}-title">${escape(section.title)}</h2>
@@ -90,7 +91,7 @@ function guideSection(section) {
     ${section.steps ? entries(section.steps, true) : ''}${section.items ? entries(section.items, false) : ''}
     ${evidence ? `<div class="guide-evidence"><table><caption>${escape(section.title)}</caption><thead><tr>${evidence.headers.map(label => `<th scope="col">${escape(label)}</th>`).join('')}</tr></thead><tbody>${evidence.rows.map(row => `<tr>${row.map((cell, index) => index === 0 ? `<th scope="row">${escape(cell)}</th>` : `<td><span class="guide-evidence-label" aria-hidden="true">${escape(evidence.headers[index])}</span>${escape(cell)}</td>`).join('')}</tr>`).join('')}</tbody></table></div>` : ''}
     ${section.note ? `<p class="guide-note">${escape(section.note)}</p>` : ''}
-  </div>${section.image ? guideImage(section.image) : ''}</section>`;
+  </div>${section.image ? guideImage(section.image, lang) : ''}</section>`;
 }
 function desktopDownload(lang) {
   const copy = downloads[lang];
@@ -119,7 +120,7 @@ ${chrome(templates.header)}
   <div class="guide-heading"><nav class="guide-back guide-breadcrumb" aria-label="${escape(c.breadcrumbLabel)}"><a href="${c.homePath}">${escape(c.breadcrumbHome)}</a><span aria-hidden="true">›</span><span aria-current="page">${escape(page.fields.H1)}</span></nav><span class="kicker">${escape(guide.label)}</span><h1>${escape(page.fields.H1)}</h1><p class="guide-intro">${escape(page.paragraphs[0])}</p><div class="guide-actions">${badge}<a class="section-link" href="#sample">${escape(guide.startLabel)} ↓</a></div></div>
   <nav class="guide-contents" aria-label="${escape(guide.contentsLabel)}"><span>${escape(guide.contentsLabel)}</span><ul><li><a href="#sample">${escape(samples[lang].title)}</a></li>${guide.sections.map(section => `<li><a href="#${escape(section.id)}">${escape(section.title)}</a></li>`).join('')}</ul></nav>
   ${guideSample(lang)}
-  <article class="guide-article">${guide.sections.map(guideSection).join('\n')}</article>
+  <article class="guide-article">${guide.sections.map(section => guideSection(section, lang)).join('\n')}</article>
   <section id="faq" class="guide-faq"><h2>${escape(c.guideFaqTitle)}</h2><div class="faq-list">${page.faqs.map(([q,a])=>`<details><summary>${escape(q)}</summary><p>${escape(a)}</p></details>`).join('\n')}</div></section>
   <section class="guide-cta"><span class="kicker">${escape(c.guideRelated)}</span><h2>${escape(c.guideCtaTitle)}</h2>${badge}<p>${escape(c.guideCtaNote)}</p>${desktopDownload(lang)}<a class="section-link" href="${otherPath}">${escape(otherLabel)} ↗</a></section>
 </main>

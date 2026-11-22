@@ -1,0 +1,106 @@
+{
+  "capturedAt": "2026-11-22",
+  "appVersion": "1.0 (14)",
+  "script": "Project update",
+  "screenshots": {
+    "library": {
+      "widths": [
+        320,
+        640
+      ],
+      "width": 1206,
+      "height": 2622,
+      "device": "iPhone 17 simulator",
+      "os": "iOS 27.0",
+      "input": "Manual UI interaction"
+    },
+    "prepare": {
+      "widths": [
+        320,
+        640
+      ],
+      "width": 1206,
+      "height": 2622,
+      "device": "iPhone 17 simulator",
+      "os": "iOS 27.0",
+      "input": "Manual UI interaction"
+    },
+    "review": {
+      "widths": [
+        320,
+        640
+      ],
+      "width": 1206,
+      "height": 2622,
+      "device": "iPhone 17 simulator",
+      "os": "iOS 27.0",
+      "input": "Manual UI interaction"
+    },
+    "reader": {
+      "widths": [
+        320,
+        640
+      ],
+      "width": 1206,
+      "height": 2622,
+      "device": "iPhone 17 simulator",
+      "os": "iOS 27.0",
+      "input": "Manual UI interaction"
+    },
+    "pronunciation": {
+      "widths": [
+        320,
+        640
+      ],
+      "width": 1206,
+      "height": 2622,
+      "device": "iPhone 17 simulator",
+      "os": "iOS 27.0",
+      "input": "Manual UI interaction"
+    },
+    "readiness": {
+      "widths": [
+        320,
+        640
+      ],
+      "width": 1206,
+      "height": 2622,
+      "device": "iPhone 17 simulator",
+      "os": "iOS 27.0",
+      "input": "Manual UI interaction"
+    },
+    "floating-controls": {
+      "widths": [
+        320,
+        640
+      ],
+      "width": 1206,
+      "height": 2622,
+      "device": "iPhone 17 simulator",
+      "os": "iOS 27.0",
+      "input": "Replayed speech events"
+    },
+    "ipad": {
+      "widths": [
+        640,
+        1280
+      ],
+      "width": 2420,
+      "height": 1668,
+      "device": "iPad Pro 11-inch (M5) simulator",
+      "os": "iPadOS 27.0",
+      "input": "Manual UI interaction"
+    },
+    "floating": {
+      "widths": [
+        480,
+        960
+      ],
+      "width": 2420,
+      "height": 1668,
+      "device": "iPad Pro 11-inch (M5) simulator",
+      "os": "iPadOS 27.0",
+      "input": "Manual UI interaction"
+    }
+  }
+}

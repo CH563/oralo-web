@@ -72,3 +72,24 @@ test('sitemap, robots and root redirects agree with the published language route
   ]);
   assert.doesNotMatch(read('public/index.html'), /<h1\b|waitlist-form/);
 });
+
+test('English native screenshots and video use separate English assets on every page', () => {
+  const manifest=JSON.parse(read('src/content/english-screenshots.json'));
+  const english=routes.filter(route=>route.startsWith('/en/')).map(route=>read(`public${route}index.html`)).join('\n');
+  const chinese=routes.filter(route=>route.startsWith('/zh/')).map(route=>read(`public${route}index.html`)).join('\n');
+  const imageRefs=html=>[...html.matchAll(/\/assets\/app-(?:library|prepare|review|reader|pronunciation|readiness|floating-controls|ipad|floating)(?:-en)?-\d+\.webp/g)].map(match=>match[0]);
+  assert.ok(imageRefs(english).length>0);
+  assert.ok(imageRefs(english).every(ref=>/-en-\d+\.webp$/.test(ref)));
+  assert.ok(imageRefs(chinese).every(ref=>!/-en-\d+\.webp$/.test(ref)));
+  for(const [name,{widths}] of Object.entries(manifest.screenshots)){
+    for(const width of widths){
+      const asset=`/assets/app-${name}-en-${width}.webp`;
+      assert.ok(english.includes(asset),`unused English capture: ${asset}`);
+      assert.ok(existsSync(new URL(`../public${asset}`,import.meta.url)),asset);
+    }
+  }
+  assert.ok(english.includes('poster="/assets/mirror-poster-en.webp"'));
+  assert.ok(english.includes('data-source="/assets/oralo-mirror-demo-en.mp4"'));
+  assert.ok(chinese.includes('data-source="/assets/oralo-mirror-demo.mp4"'));
+  assert.doesNotMatch(english,/134 words|checks in Chinese/);
+});
