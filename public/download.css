@@ -1,0 +1,21 @@
+.desktop-download,.desktop-download-jump{display:none}
+@media(min-width:761px){
+  .desktop-download-jump{display:block;width:fit-content;margin:12px auto 0;font-size:13px;text-decoration:underline;text-underline-offset:4px;color:var(--muted)}
+  .desktop-download{display:block;width:100%;max-width:440px;box-sizing:border-box;padding:22px;margin:28px auto 0;border:1px solid var(--line);border-radius:20px;background:#fffefa;text-align:left;scroll-margin-top:32px}
+  .download-scan{display:flex;align-items:center;gap:18px;flex-wrap:wrap}
+  .download-scan>a{flex:none;display:block}
+  .download-scan img{display:block;width:164px;height:164px;border-radius:0}
+  .download-scan>div{flex:1;min-width:130px}
+  .desktop-download h3{font-family:inherit;font-size:17px;line-height:1.45;letter-spacing:-.015em;margin:0 0 8px;color:var(--ink)}
+  .desktop-download p{font-size:13px;line-height:1.65;color:var(--muted);margin:0}
+  .desktop-download label{display:block;font-size:11px;line-height:1.5;color:var(--muted);margin:16px 0 6px}
+  .download-copy-row{display:flex;gap:8px;align-items:stretch;flex-wrap:wrap}
+  .download-copy-row input{flex:1 1 150px;min-width:0;width:100%;height:42px;padding:0 10px;border:1px solid var(--line);border-radius:8px;background:white;font-family:inherit;font-size:12px;line-height:1.5;color:var(--ink)}
+  .download-copy-row button{flex:none;min-height:42px;padding:8px 12px;border:1px solid var(--blue);border-radius:8px;background:var(--blue);color:white;font:inherit;font-size:13px;font-weight:600;cursor:pointer}
+  .download-copy-row button[hidden]{display:none}
+  .download-copy-row button:disabled{opacity:.6;cursor:wait}
+  .desktop-download :is(a,button,input):focus-visible,.desktop-download-jump:focus-visible{outline:3px solid var(--blue);outline-offset:4px}
+  .desktop-download .download-copy-status:not(:empty){margin-top:10px;color:var(--ink)}
+  .desktop-download .download-transfer-note{font-size:11px;margin-top:10px}
+  .tool-result .desktop-download{padding:16px;margin-top:20px}
+}

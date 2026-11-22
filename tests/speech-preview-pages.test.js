@@ -21,11 +21,11 @@ test('preview has complete static bilingual content, reciprocal metadata and ord
   }
   for(const page of [`public/${lang}/index.html`,`public/${lang}/tools/speech-length/index.html`])assert.ok(read(page).includes(`href="${route}"`));
   assert.ok(html.includes(`href="/${lang}/tools/speech-length/"`));
-  assert.deepEqual([...html.matchAll(/<script\b[^>]*src="([^"]+)"/g)].map(m=>m[1]),['/tools/speech-preview.js']);
+  assert.deepEqual([...html.matchAll(/<script\b[^>]*src="([^"]+)"/g)].map(m=>m[1]),['/download.js','/tools/speech-preview.js']);
   assert.doesNotMatch(html,/<script(?![^>]*(?:src=|type="application\/(?:ld\+)?json"))[^>]*>/);
  }
 });
-test('preview security blocks connections and forms and exposes no storage, microphone, clipboard or analytics path',()=>{
+test('preview engine blocks connections and forms and exposes no storage, microphone, clipboard or analytics path',()=>{
  const config=JSON.parse(read('vercel.json')),route=config.headers.find(h=>h.source==='/(zh|en)/tools/speech-preview(.*)');
  assert.ok(route);const policy=route.headers.find(h=>h.key==='Content-Security-Policy').value;
  for(const rule of ["connect-src 'none'","form-action 'none'","object-src 'none'","base-uri 'none'"])assert.ok(policy.includes(rule));

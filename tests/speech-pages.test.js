@@ -28,10 +28,10 @@ test('both tool pages expose complete localized text and working links without J
   }
 });
 
-test('tool routes load only their own script and prohibit outbound connections and form submission', () => {
+test('tool routes load only the tool and download scripts and prohibit outbound connections and form submission', () => {
   for(const lang of ['zh','en']) {
     const html=read(`public/${lang}/tools/speech-length/index.html`);
-    assert.deepEqual([...html.matchAll(/<script\b[^>]*src="([^"]+)"/g)].map(x=>x[1]),['/tools/speech-tool.js']);
+    assert.deepEqual([...html.matchAll(/<script\b[^>]*src="([^"]+)"/g)].map(x=>x[1]),['/download.js','/tools/speech-tool.js']);
     assert.doesNotMatch(html,/<script(?![^>]*(?:src=|type="application\/(?:ld\+)?json"))[^>]*>/);
     assert.ok(html.includes('autocomplete="off"'));
     assert.doesNotMatch(html,/maxlength=/);

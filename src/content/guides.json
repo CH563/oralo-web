@@ -26,7 +26,7 @@
       "guide": {
         "label": "上手指南",
         "contentsLabel": "本页步骤",
-        "startLabel": "从准备讲稿开始",
+        "startLabel": "从示例讲稿开始",
         "sections": [
           {
             "id": "prepare",
@@ -34,7 +34,7 @@
             "steps": [
               {
                 "title": "新建或打开讲稿",
-                "text": "在讲稿库点「新建讲稿」→「粘贴正文」，或打开已经保存的讲稿。第一次先用几句能直接读出来的短句。"
+                "text": "在讲稿库点「新建讲稿」→「粘贴正文」，放入上面的三句示例。也可以先在本机下载示例，再点「新建讲稿」→「导入文件」选择 TXT 文件。"
               },
               {
                 "title": "选对识别语言",
@@ -44,7 +44,8 @@
             "image": {
               "asset": "library",
               "alt": "Oralo 讲稿库，含已保存讲稿和底部 New script 按钮",
-              "caption": "讲稿库截图：点已保存的讲稿，或使用底部 New script（新建讲稿）。"
+              "caption": "讲稿库截图：点已保存的讲稿，或使用底部 New script（新建讲稿）。",
+              "source": "原生界面截图 · Oralo 1.0（13）· iPhone 17 模拟器 · iOS 27.0 · 2026 年 11 月 20 日。"
             }
           },
           {
@@ -61,13 +62,14 @@
               },
               {
                 "title": "先读第一句",
-                "text": "看到「设备端已就绪」后，点「开始演讲」。在安静环境里读出开头一句，观察高亮位置是否跟着原稿中的字词前进。"
+                "text": "看到「设备端已就绪」后，点「开始演讲」。在安静环境里读出「今天，我来汇报一下项目进展。」，观察高亮位置是否跟着这句话前进。"
               }
             ],
             "image": {
-              "asset": "prepare",
-              "alt": "Oralo 备稿页截图，底部为 Start speaking 按钮",
-              "caption": "备稿页底部的 Start speaking（开讲）会进入开始前检查。"
+              "asset": "readiness",
+              "alt": "Oralo「开始前」页面，显示检查收音与检查语音跟随入口",
+              "caption": "「开始前」的收音和语音跟随检查。图中从排练入口进入，底部开始按钮与演讲入口不同。",
+              "source": "原生界面截图 · Oralo 1.0（10）· iPhone 模拟器 · iOS 27.0 · 2026 年 11 月 19 日。截图记录未注明具体 iPhone 型号。"
             }
           },
           {
@@ -76,21 +78,22 @@
             "steps": [
               {
                 "title": "自然停顿一次",
-                "text": "读完一句，停一停，再接着读下一句。语音跟随设计上会在停顿时等待。想主动停止监听，点「暂停」；准备好后点「继续」。"
+                "text": "读完第一句后停顿一下，再读「本周，我们完成了第一版草稿，并整理了反馈。」跟随设计上会在停顿时等待。想主动停止监听，点「暂停」；准备好后点「继续」。"
               },
               {
                 "title": "用原稿内容接回",
-                "text": "临时补充几句话后，清楚地读出原句或附近后文。Oralo 会尝试识别原稿内容并接回，但不保证能跳到任意较远段落。"
+                "text": "临时用自己的话补充一句，再读回原稿：「接下来，我们会测试修改，并在周五确认计划。」观察 Oralo 是否接回原句；不保证能跳到任意较远段落。"
               },
               {
                 "title": "位置不对，自己选一句",
-                "text": "点「接稿」，选中想继续的句子。选句后仍是暂停状态，再点「继续」启动监听。「上一句」和「下一句」可以逐句调整位置。"
+                "text": "如果位置不对，点「接稿」，选中以「接下来，我们会测试修改」开头的第三句。选句后仍为暂停状态，点「继续」再读一次。「上一句」和「下一句」可逐句调整。"
               }
             ],
             "image": {
               "asset": "reader",
               "alt": "Oralo 实际阅读界面，高亮当前字词并显示音标提示",
-              "caption": "阅读界面会标出当前位置；这张截图展示的是隐藏操作栏后的文字视图。"
+              "caption": "阅读界面会标出当前位置；这张截图展示的是隐藏操作栏后的文字视图。",
+              "source": "原生界面截图 · Oralo 1.0（9）· iPhone 17 模拟器 · iOS 27.0 · 2026 年 11 月 18 日。"
             },
             "note": "如果之前隐藏了操作栏，点一下阅读区域即可重新显示。"
           },
@@ -142,7 +145,7 @@
       "guide": {
         "label": "STEP-BY-STEP GUIDE",
         "contentsLabel": "In this guide",
-        "startLabel": "Start with your script",
+        "startLabel": "Start with the sample",
         "sections": [
           {
             "id": "prepare",
@@ -150,7 +153,7 @@
             "steps": [
               {
                 "title": "Create or open a script",
-                "text": "In your library, tap New script → Paste text to add a script, or open one you already saved. Start with a few short sentences you can read aloud."
+                "text": "In your library, tap New script → Paste text and add the three sentences above. Or download the sample on this device, then choose New script → Import file and select the TXT file."
               },
               {
                 "title": "Match the speech language",
@@ -160,7 +163,8 @@
             "image": {
               "asset": "library",
               "alt": "Oralo script library with a saved Quarterly report and the New script button",
-              "caption": "The script library. Open a saved script or use New script at the bottom."
+              "caption": "The script library. Open a saved script or use New script at the bottom.",
+              "source": "Native UI capture · Oralo 1.0 (13) · iPhone 17 simulator · iOS 27.0 · 20 Nov 2026."
             }
           },
           {
@@ -177,13 +181,14 @@
               },
               {
                 "title": "Read the first sentence",
-                "text": "When you see Ready on this device, tap Start speaking. Read the opening sentence in a quiet place and check that the highlighted position follows your words."
+                "text": "When you see Ready on this device, tap Start speaking. In a quiet place, read “Today I’ll share a short update on our project.” Check that the highlighted position follows those words."
               }
             ],
             "image": {
-              "asset": "prepare",
-              "alt": "Oralo Prepare screen showing a script and the Start speaking button",
-              "caption": "Prepare → Start speaking opens the readiness check."
+              "asset": "readiness",
+              "alt": "Oralo Before you start screen showing microphone and voice-following checks in Chinese",
+              "caption": "Before you start: check the microphone and voice following. This capture is from the rehearsal entry; its start button differs from Start speaking.",
+              "source": "Native UI capture · Oralo 1.0 (10) · iPhone simulator · iOS 27.0 · 19 Nov 2026. The capture record does not specify the iPhone model."
             }
           },
           {
@@ -192,21 +197,22 @@
             "steps": [
               {
                 "title": "Try a natural pause",
-                "text": "Read a sentence, pause, then continue with the next line. Following is designed to wait when you stop speaking. Tap Pause if you want to stop listening; tap Resume when you are ready."
+                "text": "After the first sentence, pause briefly, then read “This week, we completed the first draft and reviewed the feedback.” Following is designed to wait during the pause. To stop listening explicitly, tap Pause; tap Resume when ready."
               },
               {
                 "title": "Return with the original wording",
-                "text": "After a brief ad-lib, say the original sentence or a nearby later line clearly. Oralo may pick up that wording; it does not guarantee a jump to any distant paragraph."
+                "text": "Add a short comment in your own words. Then return with “Next, we will test the changes and confirm the plan on Friday.” Watch whether Oralo picks up the original wording; a jump to a distant paragraph is not guaranteed."
               },
               {
                 "title": "Choose a line yourself",
-                "text": "If the position is wrong, tap Pick up, then choose the sentence you want. This leaves following paused. Tap Resume to start listening from your selection. Back and Next let you move one sentence at a time."
+                "text": "If the position is wrong, tap Pick up and select the third sentence, beginning “Next, we will test…”. This leaves following paused. Tap Resume and read that sentence again. Back and Next adjust the position one sentence at a time."
               }
             ],
             "image": {
               "asset": "reader",
               "alt": "Actual Oralo reading screen with the current word highlighted and an IPA pronunciation hint",
-              "caption": "The reading view shows your place in the script. This capture shows the text view with controls hidden."
+              "caption": "The reading view shows your place in the script. This capture shows the text view with controls hidden.",
+              "source": "Native UI capture · Oralo 1.0 (9) · iPhone 17 simulator · iOS 27.0 · 18 Nov 2026."
             },
             "note": "If you hid the controls, tap the reading area to show them again."
           },
@@ -260,7 +266,7 @@
       "guide": {
         "label": "上手指南",
         "contentsLabel": "本页步骤",
-        "startLabel": "从准备讲稿开始",
+        "startLabel": "从示例讲稿开始",
         "sections": [
           {
             "id": "prepare",
@@ -268,7 +274,7 @@
             "steps": [
               {
                 "title": "准备讲稿",
-                "text": "打开已保存讲稿，或在讲稿库点「新建讲稿」→「粘贴正文」。准备使用语音模式时，先在「备稿」页的「…」→「识别语言」中选对语言。"
+                "text": "在讲稿库点「新建讲稿」→「粘贴正文」，放入上面的三句示例。也可以先在本机下载示例，再点「新建讲稿」→「导入文件」选择 TXT 文件。在「备稿」页点「…」→「识别语言」→「普通话」。"
               },
               {
                 "title": "进入小窗提词",
@@ -278,7 +284,8 @@
             "image": {
               "asset": "prepare",
               "alt": "Oralo 备稿页截图，右上角有省略号菜单",
-              "caption": "在备稿页打开右上角「…」，然后选择「小窗提词」。"
+              "caption": "在备稿页打开右上角「…」，然后选择「小窗提词」。",
+              "source": "原生界面截图 · Oralo 1.0（13）· iPhone 17 模拟器 · iOS 27.0 · 2026 年 11 月 20 日。"
             }
           },
           {
@@ -288,11 +295,11 @@
             "steps": [
               {
                 "title": "选起点，调速度和字号",
-                "text": "选「定速滚动」，点「选择起点」后选中一句，再调整「滚动速度」和「文字大小」。可以先点「预览滚动」在 Oralo 内试读，用「暂停预览」停下。"
+                "text": "选「定速滚动」，点「选择起点」并选中第一句「今天，我来汇报一下项目进展。」调整「滚动速度」和「文字大小」，点「预览滚动」，试读完整三句并调到舒服的速度。「暂停预览」可停下。"
               },
               {
                 "title": "开启小窗，再切换 App",
-                "text": "点「开启小窗」。经过 3 秒倒计时后，文字开始滚动。切换到要使用的 App，同时保留小窗。"
+                "text": "点「开启小窗」。经过 3 秒倒计时后，文字开始滚动。切换到要使用的 App，同时保留小窗。在另一款 App 里读完前两句，确认小窗始终可见。"
               },
               {
                 "title": "调整位置",
@@ -302,7 +309,8 @@
             "image": {
               "asset": "floating",
               "alt": "iPad 主屏幕的实际截图，右上角显示 Oralo 小窗讲稿",
-              "caption": "iPad 实际截图：离开 Oralo 后，讲稿显示在独立画中画窗口中。这张图展示小窗布局，不代表相机录像兼容性验证。"
+              "caption": "iPad 实际截图：离开 Oralo 后，讲稿显示在独立画中画窗口中。这张图展示小窗布局，不代表相机录像兼容性验证。",
+              "source": "原生界面测试截图 · Oralo 1.0（13）· iPad Pro 11 英寸（M5）模拟器 · iPadOS 27.0 · 2026 年 11 月 20 日。"
             }
           },
           {
@@ -312,11 +320,11 @@
             "steps": [
               {
                 "title": "选择语音跟随",
-                "text": "在小窗关闭的状态下选择「语音跟随」。用「选择起点」选一句，再调整「文字大小」。"
+                "text": "在小窗关闭的状态下选「语音跟随」。用「选择起点」选中示例的第一句，再调整「文字大小」。"
               },
               {
                 "title": "先在 Oralo 内试读",
-                "text": "点「试试语音跟随」，允许请求的权限。若出现「下载语音模型并重试」或「使用兼容识别重试」，按提示处理。先读一句，确认位置会跟随，再离开 Oralo。"
+                "text": "点「试试语音跟随」，允许请求的权限。若出现「下载语音模型并重试」或「使用兼容识别重试」，按提示处理。先读一句，确认位置会跟随，再离开 Oralo。按示例读第一句，停顿后再读第二句。"
               },
               {
                 "title": "开启小窗",
@@ -331,7 +339,7 @@
             "items": [
               {
                 "title": "小窗不再跟着声音走",
-                "text": "回到 Oralo，必要时先关闭小窗，重新「选择起点」，再点「试试语音跟随」。试读正常后重新开启小窗。如果另一款 App 持续中断收音，可以关闭小窗后改为「定速滚动」。"
+                "text": "回到 Oralo，必要时关闭小窗。点「选择起点」，选中以「接下来，我们会测试修改」开头的第三句；点「试试语音跟随」并读出这一句，正常后再开启小窗。如果另一款 App 反复中断收音，关闭小窗后可改用「定速滚动」。"
               },
               {
                 "title": "回到了 Oralo",
@@ -341,12 +349,18 @@
                 "title": "小窗消失或打不开",
                 "text": "画中画能否使用、如何摆放由系统与另一款 App 共同决定。回到 Oralo 后可重试「开启小窗」；暂不可用时，可用 App 内预览或全屏提词。"
               }
-            ]
+            ],
+            "image": {
+              "asset": "floating-controls",
+              "alt": "Oralo 小窗提词模式选择器，选中语音跟随并显示麦克风中断、位置保留状态",
+              "caption": "收音中断后的语音模式：保留原位置，并提供「试试语音跟随」和「选择起点」。此界面测试使用回放输入，不能证明跨 App 收音兼容性。",
+              "source": "原生界面测试截图 · Oralo 1.0（13）· iPhone 17 模拟器 · iOS 27.0 · 2026 年 11 月 20 日。"
+            }
           },
           {
             "id": "compatibility",
             "title": "4. 哪些场景有实际验证",
-            "intro": "请依据下面的范围，在自己的设备上先做一次短测试。小窗可见、能持续收音、成片中有正常人声，是三件需要分别确认的事。",
+            "intro": "请依据下面的范围，在自己的设备上先做一次短测试。小窗可见、能持续收音、成片中有正常人声，是三件需要分别确认的事。以下为所列版本的历史记录，不代表对后续每个版本重新完成了测试。",
             "evidence": {
               "headers": [
                 "环境 / 依据",
@@ -355,12 +369,12 @@
               ],
               "rows": [
                 [
-                  "iPhone 15 Pro · iOS 18.1 · 系统相机拍照预览\n2026 年 11 月 20 日",
+                  "真机验证 · Oralo 1.0（13）\niPhone 15 Pro · iOS 18.1 · 系统相机拍照预览\n2026 年 11 月 20 日",
                   "定速和语音模式下小窗文字保持可见，语音模式持续收到麦克风输入。",
                   "本次测试没有开始录像，也没有测量真实讲话的识别准确率。"
                 ],
                 [
-                  "设备使用反馈\n2026 年 11 月 21 日",
+                  "用户反馈 · Oralo 1.0（14）\n2026 年 11 月 21 日",
                   "用户确认小窗可用、录像时语音跟随正常、录制人声正常，以及离稿后能接回。",
                   "反馈没有附设备、系统、目标 App 和录制时长，不能据此确认某个具体 App 与设备组合的兼容性。"
                 ]
@@ -397,7 +411,7 @@
       "guide": {
         "label": "STEP-BY-STEP GUIDE",
         "contentsLabel": "In this guide",
-        "startLabel": "Start with your script",
+        "startLabel": "Start with the sample",
         "sections": [
           {
             "id": "prepare",
@@ -405,7 +419,7 @@
             "steps": [
               {
                 "title": "Prepare your script",
-                "text": "Open a saved script, or tap New script → Paste text in the library. On Prepare, use (…) → Speech language to match the language if you plan to use voice following."
+                "text": "In your library, tap New script → Paste text and add the three sentences above. Or download the sample on this device, then choose New script → Import file and select the TXT file. On Prepare, use (…) → Speech language → English (US)."
               },
               {
                 "title": "Enter Floating prompt",
@@ -415,7 +429,8 @@
             "image": {
               "asset": "prepare",
               "alt": "Oralo Prepare screen with the top-right three-dot menu",
-              "caption": "Open (…) on Prepare, then choose Floating prompt."
+              "caption": "Open (…) on Prepare, then choose Floating prompt.",
+              "source": "Native UI capture · Oralo 1.0 (13) · iPhone 17 simulator · iOS 27.0 · 20 Nov 2026."
             }
           },
           {
@@ -425,11 +440,11 @@
             "steps": [
               {
                 "title": "Choose your starting point",
-                "text": "Select Fixed pace. Tap Choose passage, then a sentence. Adjust Scrolling speed and Text size. Preview scrolling lets you check the pace inside Oralo; Pause preview stops the preview."
+                "text": "Select Fixed pace. Use Choose passage to select the first sentence, “Today I’ll share a short update on our project.” Adjust Scrolling speed and Text size, then tap Preview scrolling. Read all three sentences and adjust the speed until comfortable. Pause preview stops it."
               },
               {
                 "title": "Open the window, then switch apps",
-                "text": "Tap Open floating window. A three-second countdown starts before the text scrolls. Switch to the app you want to use while keeping the window visible."
+                "text": "Tap Open floating window. A three-second countdown starts before the text scrolls. Switch to the app you want to use while keeping the window visible. Read the first two sentences in that app and check that the window stays visible."
               },
               {
                 "title": "Check the framing",
@@ -439,7 +454,8 @@
             "image": {
               "asset": "floating",
               "alt": "Actual iPad home-screen capture with an Oralo floating script window in the top-right corner",
-              "caption": "Actual iPad screen capture: the script stays in a separate Picture-in-Picture window after leaving Oralo. This image shows the window layout, not Camera recording compatibility."
+              "caption": "Actual iPad screen capture: the script stays in a separate Picture-in-Picture window after leaving Oralo. This image shows the window layout, not Camera recording compatibility.",
+              "source": "Native UI test capture · Oralo 1.0 (13) · iPad Pro 11-inch (M5) simulator · iPadOS 27.0 · 20 Nov 2026."
             }
           },
           {
@@ -449,11 +465,11 @@
             "steps": [
               {
                 "title": "Select Voice follow",
-                "text": "With the window closed, select Voice follow. Use Choose passage to set your starting sentence and Text size to make it readable."
+                "text": "With the floating window closed, select Voice follow. Use Choose passage to select the first sentence of the sample and adjust Text size."
               },
               {
                 "title": "Test a sentence in Oralo",
-                "text": "Tap Try voice following. Allow requested permissions and use Download speech model and retry or Retry with compatibility recognition if offered. Read a sentence and check the position before you leave Oralo."
+                "text": "Tap Try voice following. Allow requested permissions and use Download speech model and retry or Retry with compatibility recognition if offered. Read a sentence and check the position before you leave Oralo. Read the first sentence of the sample, pause, then read the second."
               },
               {
                 "title": "Open the window",
@@ -468,7 +484,7 @@
             "items": [
               {
                 "title": "The script stops following",
-                "text": "Return to Oralo. If needed, close the floating window, choose the passage again and tap Try voice following. Check a sentence, then open the window again. If the other app keeps interrupting input, close the window and switch to Fixed pace."
+                "text": "Return to Oralo and close the window if needed. In Choose passage, select the third sentence, beginning “Next, we will test…”. Tap Try voice following and read that sentence. Once it follows again, reopen the window. If the other app repeatedly interrupts input, close the window and try Fixed pace."
               },
               {
                 "title": "You return to Oralo",
@@ -478,12 +494,18 @@
                 "title": "The window closes or cannot open",
                 "text": "Picture-in-Picture availability and placement are controlled by the system and the other app. Return to Oralo and try Open floating window again. If unavailable, use the in-app preview or full-screen prompting."
               }
-            ]
+            ],
+            "image": {
+              "asset": "floating-controls",
+              "alt": "Oralo floating-prompt mode selector with Voice follow selected and Microphone interrupted, Position held status",
+              "caption": "Voice follow after an input interruption: the place is held, with Try voice following and Choose passage available. This UI test replays input; it does not establish cross-app microphone compatibility.",
+              "source": "Native UI test capture · Oralo 1.0 (13) · iPhone 17 simulator · iOS 27.0 · 20 Nov 2026."
+            }
           },
           {
             "id": "compatibility",
             "title": "4. What has actually been checked",
-            "intro": "Use these observations to plan a short check on your own setup. A visible window, live microphone input and audio in the saved recording are separate things to verify.",
+            "intro": "Use these observations to plan a short check on your own setup. A visible window, live microphone input and audio in the saved recording are separate things to verify. These are historical observations for the versions shown, not a new test of every subsequent release.",
             "evidence": {
               "headers": [
                 "Setup / evidence",
@@ -492,12 +514,12 @@
               ],
               "rows": [
                 [
-                  "iPhone 15 Pro · iOS 18.1 · system Camera photo preview\n20 Nov 2026",
+                  "Physical-device check · Oralo 1.0 (13)\niPhone 15 Pro · iOS 18.1 · system Camera photo preview\n20 Nov 2026",
                   "Floating text stayed visible in fixed-pace and voice modes; microphone input continued in voice mode.",
                   "This test did not start video recording or measure spoken-word accuracy."
                 ],
                 [
-                  "Device-use feedback\n21 Nov 2026",
+                  "User feedback · Oralo 1.0 (14)\n21 Nov 2026",
                   "A user confirmed floating prompts, voice following during recording, normal recorded speech and pickup after ad-libs.",
                   "The feedback did not include the device, OS, target app or recording duration. It cannot establish compatibility for a specific app/device combination."
                 ]

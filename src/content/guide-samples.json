@@ -1,0 +1,24 @@
+{
+  "en": {
+    "title": "Try this three-sentence script",
+    "intro": "Use this same script through the steps below. Download the TXT file to your iPhone or iPad, then import it in Oralo, or paste the text into a new script.",
+    "download": "Download the sample (.txt)",
+    "note": "The screenshots retain their original sample text, so it differs from this practice script. Screenshot labels identify the recorded version and environment; a simulator image is not a physical microphone test.",
+    "paragraphs": [
+      "Today I’ll share a short update on our project.",
+      "This week, we completed the first draft and reviewed the feedback.",
+      "Next, we will test the changes and confirm the plan on Friday."
+    ]
+  },
+  "zh": {
+    "title": "先用这份三句示例练习",
+    "intro": "下面的步骤都使用这份讲稿。在 iPhone 或 iPad 上下载 TXT 文件后导入 Oralo，也可以将正文粘贴到新讲稿中。",
+    "download": "下载示例讲稿（.txt）",
+    "note": "截图保留了拍摄时的原始讲稿，与这份练习稿不同。每张图均标明记录版本和环境；模拟器界面截图不代表真机收音测试。",
+    "paragraphs": [
+      "今天，我来汇报一下项目进展。",
+      "本周，我们完成了第一版草稿，并整理了反馈。",
+      "接下来，我们会测试修改，并在周五确认计划。"
+    ]
+  }
+}

@@ -1,0 +1,22 @@
+{
+  "en": {
+    "title": "Take Oralo to your iPhone or iPad",
+    "scan": "Scan with your camera to open the App Store.",
+    "alt": "QR code for Oralo on the App Store",
+    "linkLabel": "App Store download link",
+    "copy": "Copy link",
+    "copied": "Link copied. Open it on your iPhone or iPad.",
+    "fallback": "Select this link and press Ctrl+C or ⌘C to copy it.",
+    "note": "This shares only the download link, not your script."
+  },
+  "zh": {
+    "title": "在 iPhone 或 iPad 上打开 Oralo",
+    "scan": "用相机扫码，前往 App Store 下载。",
+    "alt": "Oralo 的 App Store 下载二维码",
+    "linkLabel": "App Store 下载链接",
+    "copy": "复制链接",
+    "copied": "链接已复制，可在 iPhone 或 iPad 上打开。",
+    "fallback": "请选中此链接，按 Ctrl+C 或 ⌘C 复制。",
+    "note": "仅分享下载链接，不包含你的讲稿。"
+  }
+}
