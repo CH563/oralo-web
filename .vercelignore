@@ -13,4 +13,5 @@ prd/
 tests/
 scripts/*
 !scripts/build-site.mjs
+!scripts/structured-data.mjs
 README.md

@@ -12,7 +12,7 @@ test('preview has complete static bilingual content, reciprocal metadata and ord
   for(const [code,target] of [['en','en'],['zh-Hans','zh'],['x-default','en']])assert.ok(html.includes(`hreflang="${code}" href="https://oralo.fun/${target}/tools/speech-preview/"`));
   assert.ok(html.includes(`<html lang="${lang==='zh'?'zh-Hans':'en'}">`));
   assert.ok(html.includes('<fieldset id="preview-controls" disabled>'));assert.ok(html.includes('<noscript>'));
-  assert.doesNotMatch(html,/\{\{|noindex|waitlist-form|type="email"|application\/ld\+json|maxlength=/);
+  assert.doesNotMatch(html,/\{\{|noindex|waitlist-form|type="email"|maxlength=/);
   for(const [q,a] of copy.faqs){assert.ok(html.includes(escape(q)));assert.ok(html.includes(escape(a)));}
   for(const [,reference] of html.matchAll(/(?:href|src)="([^"]+)"/g)){
    const url=new URL(reference,'https://oralo.fun'+route);if(url.origin!=='https://oralo.fun')continue;
@@ -22,7 +22,7 @@ test('preview has complete static bilingual content, reciprocal metadata and ord
   for(const page of [`public/${lang}/index.html`,`public/${lang}/tools/speech-length/index.html`])assert.ok(read(page).includes(`href="${route}"`));
   assert.ok(html.includes(`href="/${lang}/tools/speech-length/"`));
   assert.deepEqual([...html.matchAll(/<script\b[^>]*src="([^"]+)"/g)].map(m=>m[1]),['/tools/speech-preview.js']);
-  assert.doesNotMatch(html,/<script(?![^>]*(?:src=|type="application\/json"))[^>]*>/);
+  assert.doesNotMatch(html,/<script(?![^>]*(?:src=|type="application\/(?:ld\+)?json"))[^>]*>/);
  }
 });
 test('preview security blocks connections and forms and exposes no storage, microphone, clipboard or analytics path',()=>{

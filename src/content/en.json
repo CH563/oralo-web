@@ -184,5 +184,15 @@
   "downloadShort": "Get Oralo",
   "downloadNote": "For iPhone and iPad · iOS 18 or later · No subscriptions",
   "sourceLabel": "Open source",
-  "sourceAria": "View Oralo source on GitHub"
+  "sourceAria": "View Oralo source on GitHub",
+  "productFactsTitle": "About Oralo",
+  "productSummary": "Oralo is a native iPhone and iPad teleprompter for presentations, work updates and spoken videos.",
+  "productRequirements": "Voice following uses on-device speech recognition and needs a supported system language model. The first model download may require internet access.",
+  "productSystemLabel": "System requirements",
+  "productSystemText": "iOS 18.0 or later · iPadOS 18.0 or later",
+  "productCategoryLabel": "Category",
+  "productCategoryText": "Productivity",
+  "productDeveloperLabel": "Developer",
+  "breadcrumbLabel": "Breadcrumb",
+  "breadcrumbHome": "Oralo home"
 }

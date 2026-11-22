@@ -16,7 +16,7 @@ test('both tool pages expose complete localized text and working links without J
     assert.ok(html.includes('<fieldset id="calculator-controls" disabled>'));
     assert.ok(html.includes('<noscript>'));
     assert.equal((html.match(/<details>/g)||[]).length,6);
-    assert.doesNotMatch(html,/\{\{|noindex|waitlist-form|type="email"|application\/ld\+json/);
+    assert.doesNotMatch(html,/\{\{|noindex|waitlist-form|type="email"/);
     for(const [question,answer] of copy.faqs) {assert.ok(html.includes(escape(question)));assert.ok(html.includes(escape(answer)));}
     for(const [,reference] of html.matchAll(/(?:href|src)="([^"]+)"/g)) {
       const url=new URL(reference,'https://oralo.fun'+route);if(url.origin!=='https://oralo.fun')continue;
@@ -32,7 +32,7 @@ test('tool routes load only their own script and prohibit outbound connections a
   for(const lang of ['zh','en']) {
     const html=read(`public/${lang}/tools/speech-length/index.html`);
     assert.deepEqual([...html.matchAll(/<script\b[^>]*src="([^"]+)"/g)].map(x=>x[1]),['/tools/speech-tool.js']);
-    assert.doesNotMatch(html,/<script(?![^>]*(?:src=|type="application\/json"))[^>]*>/);
+    assert.doesNotMatch(html,/<script(?![^>]*(?:src=|type="application\/(?:ld\+)?json"))[^>]*>/);
     assert.ok(html.includes('autocomplete="off"'));
     assert.doesNotMatch(html,/maxlength=/);
   }

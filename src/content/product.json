@@ -1,0 +1,19 @@
+{
+  "name": "Oralo: AI Teleprompter",
+  "appStoreId": "6835449605",
+  "applicationCategory": "Productivity",
+  "operatingSystem": [
+    "iOS 18.0 or later",
+    "iPadOS 18.0 or later"
+  ],
+  "devices": [
+    "iPhone",
+    "iPad"
+  ],
+  "appStoreUrl": "https://apps.apple.com/app/oralo-ai-teleprompter/id6835449605",
+  "sourceUrl": "https://github.com/CH563/oralo",
+  "developer": {
+    "name": "立文 陈",
+    "url": "https://apps.apple.com/us/developer/%E7%AB%8B%E6%96%87-%E9%99%88/id1511484715"
+  }
+}

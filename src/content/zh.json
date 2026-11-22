@@ -178,5 +178,15 @@
   "downloadShort": "下载 Oralo",
   "downloadNote": "适用于 iPhone 与 iPad · iOS 18 及以上 · 无订阅",
   "sourceLabel": "开源代码",
-  "sourceAria": "在 GitHub 查看 Oralo 开源代码"
+  "sourceAria": "在 GitHub 查看 Oralo 开源代码",
+  "productFactsTitle": "关于 Oralo",
+  "productSummary": "Oralo 是原生 iPhone 与 iPad 提词器，帮助你准备现场演讲、工作汇报和视频口播。",
+  "productRequirements": "语音跟随使用设备端识别，需要受支持的系统语言模型；首次下载模型可能需要联网。",
+  "productSystemLabel": "系统要求",
+  "productSystemText": "iOS 18.0 及以上 · iPadOS 18.0 及以上",
+  "productCategoryLabel": "类别",
+  "productCategoryText": "效率工具",
+  "productDeveloperLabel": "开发者",
+  "breadcrumbLabel": "当前位置",
+  "breadcrumbHome": "Oralo 首页"
 }

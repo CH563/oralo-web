@@ -25,7 +25,7 @@ test('all six pages contain localized content and reciprocal SEO metadata withou
     assert.ok(html.includes(guide ? escape(guide.fields.H1) : copy.heroTitle));
     assert.ok(html.includes(escape(guide ? guide.paragraphs[0] : copy.heroDesc)));
     assert.equal((html.match(/<details>/g) || []).length, guide ? 3 : 7);
-    assert.doesNotMatch(html, /\{\{|application\/ld\+json|googletagmanager|google-analytics|来源：|不要写成|You have confirmed/);
+    assert.doesNotMatch(html, /\{\{|googletagmanager|google-analytics|来源：|不要写成|You have confirmed/);
     for (const [, reference] of html.matchAll(/(?:href|src|poster)="([^"]+)"/g)) {
       const url = new URL(reference.replaceAll('&amp;', '&'), origin + route);
       if (url.origin !== origin) continue;
