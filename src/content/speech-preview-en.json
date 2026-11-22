@@ -91,7 +91,7 @@
     ],
     [
       "Is this Oralo voice following?",
-      "No. The preview reads text with a synthetic voice and does not listen to you. See the product pages for Oralo's iPhone prompting experience and features."
+      "No. The preview reads text with a synthetic voice and does not listen to you. See the product pages for Oralo's iPhone and iPad prompting experience and features."
     ]
   ],
   "methodTitle": "How do I use it?",
@@ -117,5 +117,16 @@
   "previewFooter": "Script preview",
   "toPreviewTitle": "Want to hear how your wording flows?",
   "toPreviewBody": "Try the speech script preview with a browser-reported local voice. Your script does not transfer between tools. Keep your own copy and paste it manually.",
-  "toPreviewButton": "Open speech script preview"
+  "toPreviewButton": "Open speech script preview",
+  "nextStepTitle": "Ready to speak it yourself?",
+  "nextStepBody": "Rehearse and present with Oralo on iPhone and iPad, with voice following and a floating script.",
+  "nextStepDownload": "Download on the App Store",
+  "nextStepGuide": "See how voice following works",
+  "nextStepNote": "Keep a copy before leaving. Your script is not transferred to the app.",
+  "sampleTitle": "Try a sample work update",
+  "sampleText": "Good morning, everyone. This week, we completed 3 preparation tasks. On Friday, we will review the Q4 plan and confirm the next steps. Today, I would like to highlight one risk and the decision we need to make.",
+  "sampleHint": "Check how the selected voice reads numbers and abbreviations such as 3 and Q4. Rewrite them if you want a different reading.",
+  "sampleButton": "Use English sample",
+  "sampleNote": "Fills an empty script field only. Choose the language and a local voice, then press Play to listen.",
+  "sampleLoaded": "Sample added. Choose the language and a local voice, then press Play when ready."
 }

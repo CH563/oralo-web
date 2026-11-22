@@ -7,6 +7,7 @@ const script=get('preview-script');
 const language=get('preview-language');
 const voice=get('preview-voice');
 const rate=get('preview-rate');
+const sampleButton=get('preview-use-sample');
 const pageLanguage=document.documentElement.lang.startsWith('zh')?'zh':'en';
 const dialog=get('preview-language-dialog');
 const format=(key,values)=>copy[key].replace(/\{(\w+)\}/g,(_,name)=>String(values[name]));
@@ -50,9 +51,12 @@ function clearErrors() {
 function updateMixedHelp() {
   get('preview-mixed-help').hidden=!(language.value==='zh' ? /\p{Script=Latin}/u.test(script.value) : /\p{Script=Han}/u.test(script.value));
 }
+function updateSampleButton() {
+  sampleButton.disabled=script.value.length>0;
+}
 function clearPage() {
   form.reset(); clearErrors(); get('preview-mixed-help').hidden=true;
-  controller.reset(pageLanguage);
+  controller.reset(pageLanguage); updateSampleButton();
 }
 form.addEventListener('submit',event=>{
   event.preventDefault(); clearErrors();
@@ -68,7 +72,13 @@ form.addEventListener('submit',event=>{
   }
   (first&&!first.disabled?first:get('preview-play')).focus();
 });
-script.addEventListener('input',()=>{clearErrors(); controller.edited(); updateMixedHelp();});
+script.addEventListener('input',()=>{clearErrors(); controller.edited(); updateMixedHelp(); updateSampleButton();});
+sampleButton.addEventListener('click',()=>{
+  if (script.value.length>0) return;
+  script.value=copy.sampleText;
+  clearErrors(); controller.edited(); updateMixedHelp(); updateSampleButton();
+  script.focus(); get('preview-announcement').textContent=copy.sampleLoaded;
+});
 language.addEventListener('change',()=>{clearErrors(); controller.setLanguage(language.value); updateMixedHelp();});
 voice.addEventListener('change',()=>{clearErrors(); controller.selectVoice(voice.value);});
 rate.addEventListener('change',()=>{clearErrors(); controller.edited();});

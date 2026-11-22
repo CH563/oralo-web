@@ -117,5 +117,16 @@
   "previewFooter": "讲稿试听",
   "toPreviewTitle": "想先听听句子是否顺口？",
   "toPreviewBody": "使用浏览器报告为本地的声音试听讲稿。工具之间不会传递稿件，请自行保留副本并手工粘贴。",
-  "toPreviewButton": "打开演讲稿试听"
+  "toPreviewButton": "打开演讲稿试听",
+  "nextStepTitle": "听过一遍，接着自己讲。",
+  "nextStepBody": "在 iPhone 或 iPad 上，用 Oralo 排练与提词，让语音跟随和小窗讲稿陪你开讲。",
+  "nextStepDownload": "在 App Store 下载",
+  "nextStepGuide": "了解语音跟随",
+  "nextStepNote": "离开前请保留讲稿副本，网页内容不会自动传入 App。",
+  "sampleTitle": "试一段工作汇报示例",
+  "sampleText": "大家好，今天汇报一下本周进展。我们完成了 3 项准备工作，计划周五讨论 Q4 方案并确认下一步安排。接下来，我想重点说明一个风险，以及需要大家共同决定的事项。",
+  "sampleHint": "留意所选声音怎样读出 3、Q4 等数字与缩写，必要时改写成你希望读出的说法。",
+  "sampleButton": "填入中文示例",
+  "sampleNote": "仅填入空输入框。选择语言和本机声音后，点「播放」才会开始试听。",
+  "sampleLoaded": "已填入示例。选择语言和本机声音，准备好后再点「播放」。"
 }

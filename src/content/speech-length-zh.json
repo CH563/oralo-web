@@ -58,7 +58,7 @@
   "faqs": [
     [
       "五分钟演讲应该写多少字？",
-      "没有适合所有人的固定字数。选择“按时长备稿”，输入五分钟，再按你的语速和额外预留时间计算。默认值不能代替排练。"
+      "假设中文每分钟 200 个汉字，并预留 30 秒，5 分钟预算为 900 个汉字：floor((5 × 60 − 30) × 200 ÷ 60)。若是英文，按每分钟 130 词和相同预留时间计算，则为 585 词。请按实际语速调整，并完整计时排练。"
     ],
     [
       "中文和英文怎么统计？",
@@ -108,5 +108,21 @@
   "footerLink": "免费估时工具",
   "toPreviewTitle": "想先听听句子是否顺口？",
   "toPreviewBody": "使用浏览器报告为本地的声音试听讲稿。工具之间不会传递稿件，请自行保留副本并手工粘贴。",
-  "toPreviewButton": "打开演讲稿试听"
+  "toPreviewButton": "打开演讲稿试听",
+  "nextStepTitle": "估好时长，接着排练。",
+  "nextStepBody": "在 iPhone 或 iPad 上，用 Oralo 排练与提词，让语音跟随和小窗讲稿陪你开讲。",
+  "nextStepDownload": "在 App Store 下载",
+  "nextStepGuide": "了解语音跟随",
+  "nextStepNote": "离开前请保留讲稿副本，网页内容不会自动传入 App。",
+  "examplesTitle": "3、5、10 分钟演讲，可以准备多少字？",
+  "examplesIntro": "以下算例假设中文每分钟 200 个汉字，或英文每分钟 130 个词，并预留 30 秒用于切换幻灯片或互动。这些是可调整的假设，不是标准语速，也不保证现场不超时。",
+  "examplesCaption": "预留 30 秒后的讲稿预算示例",
+  "examplesDuration": "演讲时限",
+  "examplesChinese": "中文汉字",
+  "examplesEnglish": "英文词数",
+  "examplesMinutes": "分钟",
+  "examplesFormulaTitle": "以 5 分钟为例",
+  "examplesFormulaZh": "中文：floor((5 × 60 − 30) × 200 ÷ 60) = 900 个汉字。",
+  "examplesFormulaEn": "英文：floor((5 × 60 − 30) × 130 ÷ 60) = 585 个词。",
+  "examplesTry": "复现表中结果：选择「按时长备稿」，设置语言和时限，将语速改为上面的对应数值，额外预留时间设为 30 秒。中英混合讲稿请用「讲稿估时」，最后仍应完整计时排练。"
 }

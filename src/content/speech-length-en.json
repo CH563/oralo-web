@@ -58,7 +58,7 @@
   "faqs": [
     [
       "How many words fit a five-minute speech?",
-      "There is no single count for everyone. Choose Time to word budget, enter five minutes, and adjust the pace and extra allowance. Defaults are not a substitute for rehearsal."
+      "At 130 English words per minute with 30 seconds reserved, a five-minute speech has a budget of 585 words: floor((5 × 60 − 30) × 130 ÷ 60). At 200 Chinese characters per minute with the same allowance, the budget is 900 characters. Change these assumptions to match your delivery and time a full rehearsal."
     ],
     [
       "How are Chinese and English counted?",
@@ -78,7 +78,7 @@
     ],
     [
       "Is this Oralo voice following?",
-      "No. This page uses no microphone. It estimates timing from text counts. See the product pages for the iPhone app's prompting experience, and features."
+      "No. This page uses no microphone. It estimates timing from text counts. See the product pages for the iPhone and iPad app's prompting experience, and features."
     ]
   ],
   "kicker": "FREE ONLINE TOOL",
@@ -114,5 +114,21 @@
   "budgetEnOne": "Up to about {budget} English word",
   "toPreviewTitle": "Want to hear how your wording flows?",
   "toPreviewBody": "Try the speech script preview with a browser-reported local voice. Your script does not transfer between tools. Keep your own copy and paste it manually.",
-  "toPreviewButton": "Open speech script preview"
+  "toPreviewButton": "Open speech script preview",
+  "nextStepTitle": "Ready to rehearse?",
+  "nextStepBody": "Rehearse and present with Oralo on iPhone and iPad, with voice following and a floating script.",
+  "nextStepDownload": "Download on the App Store",
+  "nextStepGuide": "See how voice following works",
+  "nextStepNote": "Keep a copy before leaving. Your script is not transferred to the app.",
+  "examplesTitle": "Word budgets for 3, 5, and 10 minutes",
+  "examplesIntro": "These examples assume 200 Chinese characters per minute or 130 English words per minute, plus 30 seconds reserved for slide changes or interaction. These are chosen settings, not standard speaking rates or a guarantee that you will finish on time.",
+  "examplesCaption": "Example budgets with a 30-second allowance",
+  "examplesDuration": "Time limit",
+  "examplesChinese": "Chinese characters",
+  "examplesEnglish": "English words",
+  "examplesMinutes": "min",
+  "examplesFormulaTitle": "The five-minute example",
+  "examplesFormulaZh": "Chinese: floor((5 × 60 − 30) × 200 ÷ 60) = 900 characters.",
+  "examplesFormulaEn": "English: floor((5 × 60 − 30) × 130 ÷ 60) = 585 words.",
+  "examplesTry": "To reproduce a row, choose Time to word budget, set the language and time limit, enter the matching pace above, and set the extra allowance to 30 seconds. For mixed-language scripts, use Script to time, then time a full rehearsal."
 }
