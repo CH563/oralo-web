@@ -43,10 +43,10 @@ function document(context, body, home, tool = false) {
   <meta property="og:type" content="website"><meta property="og:site_name" content="Oralo">
   <meta property="og:url" content="${c.canonical}"><meta property="og:locale" content="${c.ogLocale}"><meta property="og:locale:alternate" content="${c.alternateLocale}">
   <meta property="og:title" content="${c.pageTitle}"><meta property="og:description" content="${c.pageDescription}">
-  <meta property="og:image" content="${origin}/assets/oralo-social-v1.jpg?v=20261122"><meta property="og:image:secure_url" content="${origin}/assets/oralo-social-v1.jpg?v=20261122">
+  <meta property="og:image" content="${origin}/assets/oralo-social-v1.jpg?v=20261122-github"><meta property="og:image:secure_url" content="${origin}/assets/oralo-social-v1.jpg?v=20261122-github">
   <meta property="og:image:type" content="image/jpeg"><meta property="og:image:width" content="1200"><meta property="og:image:height" content="630"><meta property="og:image:alt" content="${c.socialAlt}">
   <meta name="twitter:card" content="summary_large_image"><meta name="twitter:title" content="${c.pageTitle}"><meta name="twitter:description" content="${c.pageDescription}">
-  <meta name="twitter:image" content="${origin}/assets/oralo-social-v1.jpg?v=20261122"><meta name="twitter:image:alt" content="${c.socialAlt}">
+  <meta name="twitter:image" content="${origin}/assets/oralo-social-v1.jpg?v=20261122-github"><meta name="twitter:image:alt" content="${c.socialAlt}">
   <link rel="icon" type="image/png" sizes="48x48" href="/assets/favicon-48.png"><link rel="apple-touch-icon" sizes="180x180" href="/assets/apple-touch-icon.png">
   <link rel="stylesheet" href="/styles.css">${tool ? '<link rel="stylesheet" href="/tools/speech-length.css">' : home ? '' : '<link rel="stylesheet" href="/guides.css">'}
   ${tool === 'preview' ? '<link rel="stylesheet" href="/tools/speech-preview.css"><script type="module" src="/tools/speech-preview.js"></script>' : tool ? '<script type="module" src="/tools/speech-tool.js"></script>' : '<script src="/navigation.js" defer></script>'}
