@@ -1,6 +1,29 @@
-import test from 'node:test';import assert from 'node:assert/strict';import {makeHandler,validate} from '../api/waitlist.js';
-test('normalizes email and rejects malformed input',()=>{assert.equal(validate({email:' Alice@Example.com '}).email,'alice@example.com');for(const value of [null,{}, {email:'x'}, {email:'a@b\n.com'}, {email:'a'.repeat(255)+'@x.com'}])assert.equal(validate(value),null)});
-function harness(storage){let index=0;return async(method,body,extra={})=>{let code=200;let result;const headers={};const res={setHeader:(k,v)=>headers[k]=v,status:n=>(code=n,res),json:x=>{result=x;return res}};await makeHandler(storage)({method,body,headers:{'content-type':'application/json',host:'oralo.fun',origin:'https://oralo.fun','x-forwarded-for':`192.0.2.${++index}`,...extra}},res);return {code,result,headers}}}
-test('saves privately, handles duplicates and authorizes withdrawal',async()=>{const map=new Map();const send=harness({read:async key=>map.get(key),put:async(key,value,options)=>{assert.equal(options.access,'private');assert.equal(options.allowOverwrite,false);map.set(key,JSON.parse(value))},del:async key=>map.delete(key)});const first=await send('POST',{email:'a@example.com',consent:true});assert.equal(first.code,201);assert.equal(map.size,1);assert.equal(typeof first.result.withdrawalToken,'string');assert.equal((await send('POST',{email:'a@example.com',consent:true})).code,200);assert.equal(map.size,1);assert.equal((await send('DELETE',{email:'a@example.com',token:'a'.repeat(48)})).code,403);assert.equal(map.size,1);assert.equal((await send('DELETE',{email:'a@example.com',token:first.result.withdrawalToken})).code,200);assert.equal(map.size,0)});
-test('does not report success when persistence fails',async()=>{const send=harness({read:async()=>{throw new Error('offline')}});const out=await send('POST',{email:'a@example.com',consent:true});assert.equal(out.code,503);assert.equal(out.result.ok,undefined)});
-test('rejects wrong-origin, honeypot and missing consent',async()=>{const send=harness({read:async()=>null});assert.equal((await send('POST',{email:'a@example.com',consent:true},{origin:'https://unrelated.example'})).code,403);assert.equal((await send('POST',{email:'a@example.com',company:'bot',consent:true})).code,400);assert.equal((await send('POST',{email:'a@example.com'})).code,400);assert.equal((await send('GET',{})).code,405)});
+import test from 'node:test';
+import assert from 'node:assert/strict';
+import {createHash} from 'node:crypto';
+import {makeHandler,validate} from '../api/waitlist.js';
+const hash=value=>createHash('sha256').update(value).digest('hex');
+function harness(storage){let index=0;const handler=makeHandler(storage);return async(method,body,extra={})=>{let code=200,result;const headers={};const res={setHeader:(k,v)=>headers[k]=v,status:n=>(code=n,res),json:x=>{result=x;return res}};await handler({method,body,headers:{'content-type':'application/json',host:'oralo.fun',origin:'https://oralo.fun','x-forwarded-for':`192.0.2.${++index}`,...extra}},res);return {code,result,headers};};}
+test('retired registration returns 410 without reading or writing subscriber data',async()=>{
+ const unexpected=async()=>assert.fail('Registration must not access storage');const send=harness({read:unexpected,put:unexpected,del:unexpected});
+ for(const body of [undefined,{}, {email:'test@example.com',consent:true}]){
+  const result=await send('POST',body);assert.equal(result.code,410);assert.equal(result.result.error,'registration_closed');assert.equal(result.headers['Cache-Control'],'no-store');
+  assert.equal(result.result.downloadUrl,'https://apps.apple.com/app/oralo-ai-teleprompter/id6835449605');
+ }
+ assert.equal((await send('GET',{})).code,405);assert.equal((await send('GET',{})).headers.Allow,'DELETE');
+});
+test('existing records can still be deleted with their original credential only',async()=>{
+ const token='a'.repeat(48),email='test@example.com',path=`waitlist/${hash(email)}.json`,map=new Map([[path,{email,withdrawalTokenHash:hash(token)}]]);
+ const send=harness({read:async key=>map.get(key),del:async key=>map.delete(key)});
+ assert.equal((await send('DELETE',{email,token:'b'.repeat(48)})).code,403);assert.equal(map.size,1);
+ assert.equal((await send('DELETE',{email,token})).code,200);assert.equal(map.size,0);
+ assert.equal((await send('DELETE',{email,token})).code,200);
+});
+test('legacy deletion validates email, origin and credentials and does not report storage failure as success',async()=>{
+ assert.equal(validate({email:' Alice@Example.com '}).email,'alice@example.com');for(const body of [null,{}, {email:'bad'}, {email:'a@b\n.com'}])assert.equal(validate(body),null);
+ const send=harness({read:async()=>{throw Error('unavailable');},del:async()=>assert.fail('Must not delete')});
+ assert.equal((await send('DELETE',{email:'test@example.com',token:'a'.repeat(48)},{origin:'https://unrelated.example'})).code,403);
+ assert.equal((await send('DELETE',{email:'test@example.com'})).code,403);
+ assert.equal((await send('DELETE',{email:'test@example.com',token:'a'.repeat(48),company:'bot'})).code,400);
+ const result=await send('DELETE',{email:'test@example.com',token:'a'.repeat(48)});assert.equal(result.code,503);assert.equal(result.result.ok,undefined);
+});

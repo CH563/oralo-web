@@ -61,8 +61,8 @@
   "otherToolBody": "Use the speech length estimator with Chinese character or English word counts and your own pace. Scripts do not transfer between tools. Keep your own copy and paste it manually.",
   "otherToolButton": "Open speech length estimator",
   "ctaTitle": "Hear the preview. Then speak in your own voice.",
-  "ctaBody": "Preparing and presenting on iPhone? Explore Oralo voice following and floating prompts. Oralo is still in development and testing. Visit the home page to learn more and join the existing waitlist.",
-  "ctaButton": "Explore Oralo and the waitlist",
+  "ctaBody": "Prepare and present with Oralo on iPhone and iPad. Follow your voice, keep your script close in a floating window, and carry your pronunciation hints into every talk.",
+  "ctaButton": "Download on the App Store",
   "relatedLinks": "How voice following works; How the floating prompt works",
   "faqs": [
     [
@@ -91,7 +91,7 @@
     ],
     [
       "Is this Oralo voice following?",
-      "No. The preview reads text with a synthetic voice and does not listen to you. See the product pages for Oralo's iPhone prompting experience and development status."
+      "No. The preview reads text with a synthetic voice and does not listen to you. See the product pages for Oralo's iPhone prompting experience and features."
     ]
   ],
   "methodTitle": "How do I use it?",

@@ -38,17 +38,25 @@ test('all six pages contain localized content and reciprocal SEO metadata withou
   }
 });
 
-test('localized homes retain both waitlist forms, all use cases and session withdrawal', () => {
-  for (const lang of ['zh', 'en']) {
-    const html = read(`public/${lang}/index.html`);
-    assert.equal((html.match(/<form\b/g) || []).length, 2);
-    for (const id of ['hero-email','footer-email','scenario','leave-waitlist','leave-status','mirror-video','privacy-dialog']) assert.ok(html.includes(`id="${id}"`));
-    const select = html.match(/<select\b[^>]*>([\s\S]*?)<\/select>/)[1];
-    assert.deepEqual([...select.matchAll(/<option value="([^"]*)"/g)].map(match => match[1]), ['', 'report', 'talk', 'meeting', 'other']);
-    assert.equal((select.match(/<option\b/g) || []).length, (select.match(/<\/option>/g) || []).length);
-    assert.ok(html.includes(`/privacy/?lang=${lang}`));
-    assert.ok(html.includes(`/support/?lang=${lang}`));
+test('published pages link to the App Store and contain no registration forms or prerelease copy', () => {
+  const store='https://apps.apple.com/app/oralo-ai-teleprompter/id6835449605';
+  const allRoutes=[...routes,...['zh','en'].flatMap(lang=>[`/${lang}/tools/speech-length/`,`/${lang}/tools/speech-preview/`]),'/privacy/','/support/'];
+  for(const route of allRoutes){
+    const html=read(`public${route}index.html`);
+    assert.doesNotMatch(html,/waitlist|候补|开发版|开发测试|尚未公开|in development|development app|testing opens|not publicly released|type="email"/i);
+    if(route!=='/privacy/')assert.ok(html.includes(`href="${store}"`),route);
+    if(route==='/en/'||route==='/zh/'){
+      assert.equal((html.match(/<form\b/g)||[]).length,0);
+      assert.ok(html.includes('id="download"'));assert.ok(html.includes('id="mirror-video"'));
+      assert.equal((html.match(/class="button download-link"/g)||[]).length,1);
+      assert.ok(html.includes('class="app-store-badge download-link"'));
+      assert.ok(html.includes('class="source-link" href="https://github.com/CH563/oralo"'));
+      assert.ok(html.includes('src="/assets/github-mark.svg"'));
+      assert.equal((html.match(/src="\/assets\/app-store-badge.svg"/g)||[]).length,1);
+    }
   }
+  const runtime=read('public/app.js');
+  assert.doesNotMatch(runtime,/fetch\(|XMLHttpRequest|sendBeacon|sessionStorage\.setItem/);
 });
 
 test('sitemap, robots and root redirects agree with the published language routes', () => {

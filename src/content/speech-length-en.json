@@ -49,8 +49,8 @@
   "allowanceTooLarge": "The extra allowance must be shorter than the target duration.",
   "zeroBudget": "These settings leave room for less than one character or word. Increase the duration or reduce the allowance.",
   "ctaTitle": "Estimate the timing. Then speak at your pace.",
-  "ctaBody": "Preparing and presenting on iPhone? Explore Oralo voice following and floating prompts. Oralo is still in development and testing. You can join the existing waitlist on the home page.",
-  "ctaButton": "Explore Oralo and the waitlist",
+  "ctaBody": "Prepare and present with Oralo on iPhone and iPad. Follow your voice, keep your script close in a floating window, and carry your pronunciation hints into every talk.",
+  "ctaButton": "Download on the App Store",
   "voiceLink": "How voice following works",
   "floatingLink": "How the floating prompt works",
   "methodTitle": "How is it calculated?",
@@ -78,7 +78,7 @@
     ],
     [
       "Is this Oralo voice following?",
-      "No. This page uses no microphone. It estimates timing from text counts. See the product pages for the iPhone app's prompting experience, features, and testing status."
+      "No. This page uses no microphone. It estimates timing from text counts. See the product pages for the iPhone app's prompting experience, and features."
     ]
   ],
   "kicker": "FREE ONLINE TOOL",

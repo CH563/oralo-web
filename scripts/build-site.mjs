@@ -10,6 +10,7 @@ const tools = Object.fromEntries(await Promise.all(['zh', 'en'].map(async lang =
 const previews = Object.fromEntries(await Promise.all(['zh', 'en'].map(async lang => [lang, JSON.parse(await read(`src/content/speech-preview-${lang}.json`))])));
 const templates = Object.fromEntries(await Promise.all(['home', 'header', 'footer', 'floating', 'speech-length', 'speech-preview'].map(async name => [name, await read(`src/templates/${name}.html`)])));
 const origin = 'https://oralo.fun';
+const appStoreUrl = 'https://apps.apple.com/app/oralo-ai-teleprompter/id6835449605';
 const escape = value => String(value).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 function render(template, context) {
   const value = key => {
@@ -20,7 +21,7 @@ function render(template, context) {
 }
 function contextFor(lang, slug = '') {
   const suffix = slug ? `${slug}/` : '';
-  return {...locales[lang], language:lang, htmlLang:lang === 'zh' ? 'zh-Hans' : 'en',
+  return {...locales[lang], appStoreUrl, language:lang, htmlLang:lang === 'zh' ? 'zh-Hans' : 'en',
     homePath:`/${lang}/`, voicePath:`/${lang}/voice-following/`, floatingPath:`/${lang}/floating-prompt/`, toolPath:`/${lang}/tools/speech-length/`, previewPath:`/${lang}/tools/speech-preview/`,
     enPath:`/en/${suffix}`, zhPath:`/zh/${suffix}`, enCurrent:lang === 'en' ? 'page' : 'false', zhCurrent:lang === 'zh' ? 'page' : 'false',
     canonical:`${origin}/${lang}/${suffix}`, ogLocale:lang === 'zh' ? 'zh_CN' : 'en_US', alternateLocale:lang === 'zh' ? 'en_US' : 'zh_CN'};
@@ -32,6 +33,7 @@ function document(context, body, home, tool = false) {
 <head>
   <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="theme-color" content="#faf9f5">
+  <meta name="apple-itunes-app" content="app-id=6835449605">
   <title>${c.pageTitle}</title>
   <meta name="description" content="${c.pageDescription}">
   <link rel="canonical" href="${c.canonical}">
@@ -41,10 +43,10 @@ function document(context, body, home, tool = false) {
   <meta property="og:type" content="website"><meta property="og:site_name" content="Oralo">
   <meta property="og:url" content="${c.canonical}"><meta property="og:locale" content="${c.ogLocale}"><meta property="og:locale:alternate" content="${c.alternateLocale}">
   <meta property="og:title" content="${c.pageTitle}"><meta property="og:description" content="${c.pageDescription}">
-  <meta property="og:image" content="${origin}/assets/oralo-social-v1.jpg"><meta property="og:image:secure_url" content="${origin}/assets/oralo-social-v1.jpg">
+  <meta property="og:image" content="${origin}/assets/oralo-social-v1.jpg?v=20261122"><meta property="og:image:secure_url" content="${origin}/assets/oralo-social-v1.jpg?v=20261122">
   <meta property="og:image:type" content="image/jpeg"><meta property="og:image:width" content="1200"><meta property="og:image:height" content="630"><meta property="og:image:alt" content="${c.socialAlt}">
   <meta name="twitter:card" content="summary_large_image"><meta name="twitter:title" content="${c.pageTitle}"><meta name="twitter:description" content="${c.pageDescription}">
-  <meta name="twitter:image" content="${origin}/assets/oralo-social-v1.jpg"><meta name="twitter:image:alt" content="${c.socialAlt}">
+  <meta name="twitter:image" content="${origin}/assets/oralo-social-v1.jpg?v=20261122"><meta name="twitter:image:alt" content="${c.socialAlt}">
   <link rel="icon" type="image/png" sizes="48x48" href="/assets/favicon-48.png"><link rel="apple-touch-icon" sizes="180x180" href="/assets/apple-touch-icon.png">
   <link rel="stylesheet" href="/styles.css">${tool ? '<link rel="stylesheet" href="/tools/speech-length.css">' : home ? '' : '<link rel="stylesheet" href="/guides.css">'}
   ${tool === 'preview' ? '<link rel="stylesheet" href="/tools/speech-preview.css"><script type="module" src="/tools/speech-preview.js"></script>' : tool ? '<script type="module" src="/tools/speech-tool.js"></script>' : '<script src="/navigation.js" defer></script>'}
@@ -74,7 +76,7 @@ ${chrome(templates.header)}
   <div class="guide-heading"><a class="guide-back" href="${c.homePath}">← ${escape(c.backHome)}</a><span class="kicker">${escape(floating?c.guideFloatingKicker:c.guideVoiceKicker)}</span><h1>${escape(page.fields.H1)}</h1><p class="guide-intro">${escape(page.paragraphs[0])}</p></div>
   <div class="guide-layout"><article class="guide-article">${articles}${floating?'':`<p class="guide-note">${escape(page.fields[lang==='zh'?'演示说明（若首页示意仍保留）':'Demo note (if the existing preview remains)'])}</p>`}</article><aside class="guide-visual">${visual}<a class="section-link" href="${otherPath}">${escape(otherLabel)} ↗</a></aside></div>
   <section id="faq" class="guide-faq"><h2>${escape(c.guideFaqTitle)}</h2><div class="faq-list">${page.faqs.map(([q,a])=>`<details><summary>${escape(q)}</summary><p>${escape(a)}</p></details>`).join('\n')}</div></section>
-  <section class="guide-cta"><span class="kicker">${escape(c.guideRelated)}</span><h2>${escape(c.guideCtaTitle)}</h2><a class="button" href="${c.homePath}#waitlist">${escape(c.join)} <span aria-hidden="true">↗</span></a><p>${escape(c.guideCtaNote)}</p><a class="section-link" href="${otherPath}">${escape(otherLabel)}</a></section>
+  <section class="guide-cta"><span class="kicker">${escape(c.guideRelated)}</span><h2>${escape(c.guideCtaTitle)}</h2><a class="app-store-badge" href="${c.appStoreUrl}"><img src="/assets/app-store-badge.svg" alt="${escape(c.downloadLabel)}" width="120" height="40" loading="lazy"></a><p>${escape(c.guideCtaNote)}</p><a class="section-link" href="${otherPath}">${escape(otherLabel)}</a></section>
 </main>
 ${chrome(templates.footer)}
 `;
