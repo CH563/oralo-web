@@ -77,7 +77,7 @@ test('English native screenshots and video use separate English assets on every 
   const manifest=JSON.parse(read('src/content/english-screenshots.json'));
   const english=routes.filter(route=>route.startsWith('/en/')).map(route=>read(`public${route}index.html`)).join('\n');
   const chinese=routes.filter(route=>route.startsWith('/zh/')).map(route=>read(`public${route}index.html`)).join('\n');
-  const imageRefs=html=>[...html.matchAll(/\/assets\/app-(?:library|prepare|review|reader|pronunciation|readiness|floating-controls|ipad|floating)(?:-en)?-\d+\.webp/g)].map(match=>match[0]);
+  const imageRefs=html=>[...html.matchAll(/\/assets\/app-(?:library|prepare|review|reader|pronunciation|readiness|floating-controls|ipad|floating)(?:-(?:en|zh))?-\d+\.webp/g)].map(match=>match[0]);
   assert.ok(imageRefs(english).length>0);
   assert.ok(imageRefs(english).every(ref=>/-en-\d+\.webp$/.test(ref)));
   assert.ok(imageRefs(chinese).every(ref=>!/-en-\d+\.webp$/.test(ref)));
@@ -92,4 +92,31 @@ test('English native screenshots and video use separate English assets on every 
   assert.ok(english.includes('data-source="/assets/oralo-mirror-demo-en.mp4"'));
   assert.ok(chinese.includes('data-source="/assets/oralo-mirror-demo.mp4"'));
   assert.doesNotMatch(english,/134 words|checks in Chinese/);
+});
+
+test('Chinese guides use current native captures of the shared sample and show recovery controls', () => {
+  const manifest=JSON.parse(read('src/content/chinese-screenshots.json'));
+  const guides=JSON.parse(read('src/content/guides.json'));
+  const samples=JSON.parse(read('src/content/guide-samples.json'));
+  const html=['voice-following','floating-prompt'].map(slug=>read(`public/zh/${slug}/index.html`)).join('\n');
+  assert.equal(read(`public${manifest.sample}`),samples.zh.paragraphs.join('\n\n')+'\n');
+  const imageRefs=[...html.matchAll(/\/assets\/app-[\w-]+-\d+\.webp/g)].map(m=>m[0]);
+  assert.ok(imageRefs.length>0&&imageRefs.every(ref=>/-zh-\d+\.webp$/.test(ref)));
+  for(const [asset,{widths}] of Object.entries(manifest.screenshots)){
+    for(const width of widths){
+      const reference=`/assets/app-${asset}-zh-${width}.webp`;
+      assert.ok(html.includes(reference),reference);
+      assert.ok(existsSync(new URL(`../public${reference}`,import.meta.url)),reference);
+    }
+  }
+  for(const slug of ['voice-following','floating-prompt']){
+    for(const section of guides[slug].zh.guide.sections.filter(s=>s.image)){
+      assert.ok(section.image.source.includes(manifest.appVersion.replace(' (','（').replace(')','）')));
+      assert.ok(manifest.screenshots[section.image.asset]);
+    }
+  }
+  assert.ok(html.includes('app-reader-controls-zh-640.webp'));
+  assert.ok(html.includes('app-pick-up-zh-640.webp'));
+  assert.ok(html.includes('id="pick-up"'));
+  assert.doesNotMatch(html,/与这份练习稿不同|New script（新建讲稿）|图中从排练入口进入/);
 });

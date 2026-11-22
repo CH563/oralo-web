@@ -8,6 +8,7 @@ const read = name => readFile(path.join(root, name), 'utf8');
 const locales = Object.fromEntries(await Promise.all(['zh', 'en'].map(async lang => [lang, JSON.parse(await read(`src/content/${lang}.json`))])));
 const guides = JSON.parse(await read('src/content/guides.json'));
 const englishScreenshots = JSON.parse(await read('src/content/english-screenshots.json'));
+const chineseScreenshots = JSON.parse(await read('src/content/chinese-screenshots.json'));
 const samples = JSON.parse(await read('src/content/guide-samples.json'));
 const downloads = JSON.parse(await read('src/content/download.json'));
 const tools = Object.fromEntries(await Promise.all(['zh', 'en'].map(async lang => [lang, JSON.parse(await read(`src/content/speech-length-${lang}.json`))])));
@@ -69,17 +70,10 @@ function document(context, body, home, tool = false) {
 </html>
 `.replace(/[ \t]+$/gm, '');
 }
-const guideImages = {
-  library: { widths: [320, 640], width: 1206, height: 2622 },
-  prepare: { widths: [320, 640], width: 1206, height: 2622 },
-  readiness: { widths: [320, 640], width: 1206, height: 2622 },
-  'floating-controls': { widths: [320, 640], width: 1206, height: 2622 },
-  reader: { widths: [320, 640], width: 1206, height: 2622 },
-  floating: { widths: [480, 960], width: 960, height: 1393 }
-};
+const guideScreenshots = { en: englishScreenshots, zh: chineseScreenshots };
 function guideImage({asset, alt, caption, source: provenance}, lang) {
-  const {widths, width, height} = lang === 'en' ? englishScreenshots.screenshots[asset] : guideImages[asset];
-  const source = size => `/assets/app-${asset}${lang === 'en' ? '-en' : ''}-${size}.webp`;
+  const {widths, width, height} = guideScreenshots[lang].screenshots[asset];
+  const source = size => `/assets/app-${asset}-${lang}-${size}.webp`;
   const wide = asset === 'floating';
   return `<figure class="guide-capture${wide ? ' guide-capture-wide' : ''}"><a href="${source(widths[1])}" target="_blank" rel="noopener"><img src="${source(widths[0])}" srcset="${widths.map(size => `${source(size)} ${size}w`).join(', ')}" sizes="${wide ? '(max-width: 700px) calc(100vw - 48px), 380px' : '(max-width: 700px) 220px, 250px'}" width="${width}" height="${height}" loading="lazy" decoding="async" alt="${escape(alt)}"></a><figcaption>${escape(caption)}${provenance ? `<span class="guide-capture-source">${escape(provenance)}</span>` : ''}</figcaption></figure>`;
 }
