@@ -19,7 +19,7 @@ test('supplied article stays an unpublished draft with the recorded editorial fi
   }
 });
 
-test('draft blog previews are reachable, noindexed, and absent from the public sitemap and site chrome', () => {
+test('draft blog previews are reachable and noindexed, linked in the shared menu, and absent from the public sitemap', () => {
   const sitemap = read('public/sitemap.xml');
   assert.doesNotMatch(sitemap, /\/blog\//);
   const config = JSON.parse(read('vercel.json'));
@@ -34,7 +34,11 @@ test('draft blog previews are reachable, noindexed, and absent from the public s
     'public/zh/tools/microphone-test/index.html', 'public/en/tools/microphone-test/index.html',
     'public/zh/tools/camera-test/index.html', 'public/en/tools/camera-test/index.html'
   ];
-  for (const page of publicPages) assert.doesNotMatch(read(page), /\/blog\//, page);
+  for (const page of publicPages) {
+    const lang = page.includes('/en/') ? 'en' : 'zh';
+    assert.match(read(page), new RegExp(`href="/${lang}/blog/"`), page);
+    assert.doesNotMatch(read(page), /BlogPosting|datePublished/, page);
+  }
   for (const lang of ['zh', 'en']) {
     for (const route of [`/${lang}/blog/`, `/${lang}/blog/five-minute-work-update/`]) {
       const html = read(`public${route}index.html`);

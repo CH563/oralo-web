@@ -132,10 +132,18 @@ for (const lang of ['en', 'zh']) {
 }
 const urls=[];
 const lastmod = new Map();
+function chromeFor(lang, paths = {}) {
+  const context = {...contextFor(lang), ...paths};
+  return {
+    header: render(templates.header, context).replace(/href="#(.*?)"/g, `href="${context.homePath}#$1"`),
+    footer: render(templates.footer, context)
+  };
+}
 for (const lang of ['zh','en']) {
   const c=contextFor(lang);
+  const homeChrome = {header: render(templates.header, c), footer: render(templates.footer, c)};
   await mkdir(path.join(root,`public/${lang}`),{recursive:true});
-  await writeFile(path.join(root,`public/${lang}/index.html`),document(c,render(templates.home,c),true));
+  await writeFile(path.join(root,`public/${lang}/index.html`),document(c,render(templates.home,{...c, siteHeader:homeChrome.header, siteFooter:homeChrome.footer}),true));
   urls.push(c.canonical);
   for (const slug of ['voice-following','floating-prompt']) {
     const context={...contextFor(lang,slug),pageTitle:guides[slug][lang].fields.title,pageDescription:guides[slug][lang].fields.description};
@@ -179,7 +187,20 @@ await writeFile(path.join(root,'public/index.html'),'<!doctype html>\n<html lang
 // the managed data block, so repeated builds cannot duplicate schema or page copy.
 for (const slug of ['privacy', 'support']) {
   const file = `public/${slug}/index.html`;
-  const html = (await read(file)).replace(/\n?<script id="site-structured-data" type="application\/ld\+json">[\s\S]*?<\/script>/g, '');
+  const shared = ['zh', 'en'].map(lang => {
+    const chrome = chromeFor(lang, {zhPath: `/${slug}/?lang=zh`, enPath: `/${slug}/?lang=en`});
+    const hidden = lang === 'zh' ? ' hidden' : '';
+    return {
+      header: chrome.header.replace('<header class="header wrap">', `<header class="header wrap" data-content-language="${lang}"${hidden}>`),
+      footer: chrome.footer.replace('<footer class="footer wrap">', `<footer class="footer wrap" data-content-language="${lang}"${hidden}>`)
+    };
+  });
+  const headerMarkup = `<!-- shared-header -->${shared.map(item => item.header).join('')}<!-- /shared-header -->`;
+  const footerMarkup = `<!-- shared-footer -->${shared.map(item => item.footer).join('')}<!-- /shared-footer -->`;
+  const html = (await read(file))
+    .replace(/\n?<script id="site-structured-data" type="application\/ld\+json">[\s\S]*?<\/script>/g, '')
+    .replace(/<!-- shared-header -->[\s\S]*?<!-- \/shared-header -->|<header class="header info-header[\s\S]*?<\/header>/, headerMarkup)
+    .replace(/<!-- shared-footer -->[\s\S]*?<!-- \/shared-footer -->|<footer class="info-footer[\s\S]*?<\/footer>/, footerMarkup);
   const title = html.match(/<title>(.*?)<\/title>/)[1];
   const description = html.match(/<meta name="description" content="([^"]+)"/)[1];
   const alternateName = html.match(/data-zh-title="([^"]+)"/)[1];
