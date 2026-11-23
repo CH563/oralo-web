@@ -178,6 +178,8 @@
   "toolLink": "Online tool: Estimate speech length",
   "toolFooter": "Speech length tool",
   "previewLink": "Online tool: Listen to your script",
+  "micLink": "Online tool: Microphone test",
+  "cameraLink": "Online tool: Webcam test",
   "previewFooter": "Script preview",
   "announcementLink": "Download now ↗",
   "downloadLabel": "Download on the App Store",

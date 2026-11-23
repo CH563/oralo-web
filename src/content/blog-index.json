@@ -1,0 +1,30 @@
+{
+  "zh": {
+    "pageTitle": "备稿与排练指南：工作汇报与现场演讲 · Oralo",
+    "description": "从工作汇报和现场演讲出发，学习整理结论、估算时长和出声排练。结合 Oralo 在线工具与 iPhone、iPad 提词说明。",
+    "heading": "备稿与排练指南",
+    "intro": "把要说的事整理清楚，估好时长，再用自己的声音练一遍。这里记录可照着做的备稿与排练方法。",
+    "read": "阅读指南",
+    "publishedLabel": "发布于",
+    "updatedLabel": "更新于",
+    "draftBanner": "编辑预览，尚未发布。日期和内容可能调整。",
+    "contentsLabel": "目录",
+    "relatedTitle": "接着用现有工具",
+    "estimator": "演讲时长估算器",
+    "preview": "演讲稿试听"
+  },
+  "en": {
+    "pageTitle": "Work Update and Presentation Guides · Oralo",
+    "description": "Practical guides to planning work updates, estimating speaking time, and rehearsing aloud, with Oralo tools and iPhone and iPad prompting guides.",
+    "heading": "Prepare and rehearse",
+    "intro": "Decide what matters, check the timing, and rehearse in your own voice. These guides turn preparation into steps you can follow.",
+    "read": "Read the guide",
+    "publishedLabel": "Published",
+    "updatedLabel": "Updated",
+    "draftBanner": "Editorial preview. Not published. Dates and content may change.",
+    "contentsLabel": "Contents",
+    "relatedTitle": "Use the current tools",
+    "estimator": "Speech length estimator",
+    "preview": "Speech script preview"
+  }
+}

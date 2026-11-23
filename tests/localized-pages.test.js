@@ -61,7 +61,7 @@ test('published pages link to the App Store and contain no registration forms or
 
 test('sitemap, robots and root redirects agree with the published language routes', () => {
   const sitemap = read('public/sitemap.xml');
-  assert.deepEqual([...sitemap.matchAll(/<loc>(.*?)<\/loc>/g)].map(m => m[1]).sort(), [...routes, '/zh/tools/speech-length/', '/en/tools/speech-length/', '/zh/tools/speech-preview/', '/en/tools/speech-preview/', '/privacy/', '/support/'].map(p => origin + p).sort());
+  assert.deepEqual([...sitemap.matchAll(/<loc>(.*?)<\/loc>/g)].map(m => m[1]).sort(), [...routes, '/zh/tools/speech-length/', '/en/tools/speech-length/', '/zh/tools/speech-preview/', '/en/tools/speech-preview/', '/zh/tools/microphone-test/', '/en/tools/microphone-test/', '/zh/tools/camera-test/', '/en/tools/camera-test/', '/privacy/', '/support/'].map(p => origin + p).sort());
   const robots = read('public/robots.txt');
   assert.match(robots, /Allow: \/\s/);
   assert.ok(robots.includes(`Sitemap: ${origin}/sitemap.xml`));
