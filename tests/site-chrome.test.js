@@ -37,6 +37,14 @@ test('shared navigation and footer use the current language, include Blog, and l
   assert.doesNotMatch(read('src/templates/home.html'), /<nav |<footer /);
   const css = read('public/styles.css');
   assert.match(css, /@media\(max-width:700px\)\{[\s\S]*\.header\.wrap nav\{display:flex/);
+  assert.match(css, /\.footer>div\{[^}]*align-items:center/);
+  assert.match(css, /\.footer>div>\*\{[^}]*align-items:center[^}]*line-height:1/);
+  assert.match(css, /\.footer-icon\{[^}]*width:24px[^}]*height:24px/);
+  assert.match(css, /\.footer-icons\{[^}]*display:inline-flex[^}]*align-items:center[^}]*gap:20px/);
+  assert.match(css, /@media\(max-width:1000px\)\{[^}]*\.footer-icons\{gap:14px\}/);
+  assert.doesNotMatch(css, /\.footer>div a\{padding:8px 0\}/);
+  assert.match(css, /@media\(max-width:700px\)\{[^}]*\.footer>div\{[^}]*justify-content:flex-start/);
+  assert.match(css, /a:focus-visible[^{]*\{outline:3px solid var\(--blue\)/);
 
   for (const [kind, route] of localized) {
     const lang = route.split('/')[1];
@@ -57,9 +65,16 @@ test('shared navigation and footer use the current language, include Blog, and l
     assert.match(footer, new RegExp(`href="/${lang}/tools/speech-preview/"`));
     assert.match(footer, new RegExp(`href="/support/\\?lang=${lang}"`));
     assert.match(footer, new RegExp(`href="/privacy/\\?lang=${lang}"`));
-    assert.match(footer, /href="https:\/\/github\.com\/CH563\/oralo" target="_blank" rel="noopener"/);
-    const x = footer.match(/<a class="footer-x"[^>]*>[\s\S]*?<\/a>/);
+    assert.match(footer, /<span class="footer-icons"><a class="footer-icon" href="https:\/\/github\.com\/CH563\/oralo"[\s\S]*?<\/a><a class="footer-icon" href="https:\/\/x\.com\/LiWen563"[\s\S]*?<\/a><\/span>/);
+    const github = footer.match(/<a class="footer-icon" href="https:\/\/github\.com\/CH563\/oralo" target="_blank" rel="noopener" aria-label="GitHub ↗">[\s\S]*?<\/a>/);
+    assert.ok(github, route);
+    assert.match(github[0], /<svg[^>]*width="14" height="14"[^>]*aria-hidden="true"/);
+    assert.match(github[0], /fill="currentColor"/);
+    assert.match(github[0], /M41\.4395 69\.3848/);
+    assert.doesNotMatch(github[0], />GitHub/);
+    const x = footer.match(/<a class="footer-icon" href="https:\/\/x\.com\/LiWen563"[^>]*>[\s\S]*?<\/a>/);
     assert.ok(x, route);
+    assert.match(x[0], /<svg[^>]*width="14" height="14"/);
     assert.match(x[0], /href="https:\/\/x\.com\/LiWen563"/);
     assert.match(x[0], /target="_blank"/);
     assert.match(x[0], /rel="noopener noreferrer"/);
