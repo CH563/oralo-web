@@ -15,5 +15,11 @@
   "developer": {
     "name": "立文 陈",
     "url": "https://apps.apple.com/us/developer/%E7%AB%8B%E6%96%87-%E9%99%88/id1511484715"
+  },
+  "macPreview": {
+    "releaseUrl": "https://github.com/CH563/oralo/releases/tag/macos-v0.1.0-beta.12",
+    "version": "0.1.0 (12)",
+    "minimumOS": "macOS 15+",
+    "architectures": "Apple silicon + Intel"
   }
 }

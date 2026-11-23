@@ -1,0 +1,59 @@
+/* The Mac preview has its own download path; iOS keeps the App Store badge. */
+.mac-download{display:inline-flex;align-items:center;justify-content:center;gap:12px;min-height:52px;padding:8px 16px;border:1px solid #c7c5df;border-radius:9px;background:#eeedff;text-align:left;line-height:1.2;color:#333568;transition:background .18s,border-color .18s}
+.mac-download:hover{background:#e1e0fb;border-color:#9490ce}
+.mac-download>svg{flex-shrink:0}
+.mac-download strong{display:block;font-size:15px;font-weight:650;letter-spacing:0}
+.mac-download small{display:block;font-size:11px;margin-top:3px;color:#615e88}
+.mac-link-arrow{font-size:20px;margin-left:8px}
+.mac-section-jump{display:inline-block;color:var(--blue);font-size:12px;margin-top:10px;line-height:1.6}
+@media(min-width:761px){.hero .desktop-download-jump{display:inline-block;margin:10px 0 0 20px;font-size:12px}}
+.final-section .download-actions{align-items:center;flex-wrap:wrap;gap:16px}
+.final-section .mac-download{min-height:56px}
+.final-section>.mac-final-note{font-size:12px;color:var(--muted);margin:5px auto 0;line-height:1.6}
+.mac-section{border-top:1px solid var(--line);border-bottom:1px solid var(--line);padding-block:44px 36px;margin-top:10px}
+.mac-section-top{display:flex;justify-content:space-between;align-items:center;gap:16px;flex-wrap:wrap}
+.mac-section-top .kicker{margin:0}
+.mac-preview-badge{display:inline-flex;align-items:center;gap:7px;padding:7px 12px;background:#eae7ff;border-radius:7px;color:#535080;font-size:12px;line-height:1.4}
+.mac-intro{display:grid;grid-template-columns:minmax(0,.95fr) minmax(0,1.05fr);gap:64px;align-items:center;margin-top:38px}
+.mac-copy h2{font-size:clamp(32px,3.8vw,46px);line-height:1.28}
+.mac-copy>p{color:#777670;font-size:16px;line-height:1.85;margin-top:23px;max-width:440px}
+.mac-release-link{display:inline-flex;align-items:center;gap:22px;margin-top:27px;font-size:15px;font-weight:650;border-bottom:1px solid #7774bd;padding-bottom:7px;color:var(--blue)}
+.mac-release-link:hover{color:var(--blue-dark);border-color:var(--blue-dark)}
+.mac-copy>.mac-requirements{font-size:12px;line-height:1.6;margin-top:12px}
+.mac-requirements>span{margin-inline:5px}
+.mac-figure{min-width:0;margin:0;padding-top:18px}
+.mac-scene{position:relative;padding:27px 0 35px}
+.mac-display{position:relative;height:335px;isolation:isolate;border:6px solid #2a2932;border-bottom-width:12px;border-radius:19px;background:#e6e2f4;box-shadow:0 9px 28px #24203315;overflow:hidden}
+.mac-camera{position:absolute;z-index:3;top:0;left:50%;transform:translateX(-50%);width:74px;height:13px;background:#2a2932;border-radius:0 0 7px 7px}
+.mac-camera::after{content:"";position:absolute;top:3px;left:35px;width:4px;height:4px;background:#5b5a62;border-radius:50%}
+.mac-slide{position:absolute;top:28px;left:17px;right:17px;bottom:-28px;background:#fffdf8;border:1px solid #d5d1d0;border-radius:9px;box-shadow:0 7px 12px #2820300a;overflow:hidden}
+.mac-window-bar{display:flex;align-items:center;justify-content:space-between;gap:8px;height:29px;padding:0 12px;background:#f4f2ed;border-bottom:1px solid #e6e2dc;color:#77736e;font-size:9px}
+.mac-window-dots{display:flex;gap:4px}.mac-window-dots i{width:5px;height:5px;border-radius:50%;background:#cbc7c0}
+.mac-slide-content{position:relative;padding:125px 24px 24px}
+.mac-slide-content>span:first-child{display:block;font-size:9px;color:#77736e;letter-spacing:1.4px}
+.mac-slide-content>p{font-size:30px;font-weight:650;line-height:1.05;margin-top:10px;letter-spacing:-1px}
+.mac-slide-content>small{display:block;font-size:10px;color:#878278;margin-top:13px}
+.mac-slide-star{position:absolute;right:24px;bottom:12px;font-size:95px;color:#cdc7ee;line-height:1;transform:rotate(12deg);z-index:-1}
+.mac-prompt{position:absolute;top:20px;left:50%;transform:translateX(-50%);width:78%;padding:12px 19px 15px;background:#fcfbf5e8;border:1px solid #ffffffeb;border-radius:13px;box-shadow:0 6px 20px #352e542b;backdrop-filter:blur(12px)}
+.mac-prompt-status{display:flex;align-items:center;justify-content:center;gap:7px;font-size:9px;color:#807b8d;line-height:1.5}
+.mac-prompt-status .tiny-wave{margin:0;gap:2px;height:14px}
+.mac-prompt-status .tiny-wave i{width:2px;height:5px}.mac-prompt-status .tiny-wave i:nth-child(2),.mac-prompt-status .tiny-wave i:nth-child(4){height:9px}.mac-prompt-status .tiny-wave i:nth-child(3){height:13px}
+.mac-prompt-faded{color:#908996;font-size:12px;line-height:1.5;margin-top:8px}
+.mac-prompt-current{background:#dcd6fb;color:#423c78;padding:5px 8px;border-radius:5px;font-size:22px;font-weight:650;line-height:1.2;margin:7px -8px 0;letter-spacing:-.3px}
+.mac-resize{position:absolute;bottom:2px;right:7px;color:#a49bab;font-size:17px}
+.mac-camera-note,.mac-window-note{position:absolute;z-index:4;padding:7px 12px;font-size:12px;line-height:1.3;box-shadow:0 2px 5px #29232f0c}
+.mac-camera-note{left:2%;top:2px;background:#f9eec0;transform:rotate(-4deg)}
+.mac-window-note{right:5%;bottom:18px;background:#dfdaf8;transform:rotate(4deg)}
+.mac-figure figcaption{font-size:11px;line-height:1.6;text-align:center;color:#8c877f}
+.mac-features{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:34px;margin-top:45px;padding-top:30px;border-top:1px solid var(--line)}
+.mac-feature-number{color:#9590ad;font-size:12px;letter-spacing:1px}
+.mac-features h3{font-size:19px;line-height:1.4;margin-top:10px}
+.mac-features p{font-size:14px;line-height:1.8;color:#777670;margin-top:10px}
+.mac-sharing-note{display:flex;align-items:flex-start;gap:16px;margin-top:30px;padding:19px 23px;background:#f0eee5;border-radius:13px}
+.mac-sharing-note>span{color:#736a94;font-size:22px;line-height:1.4}
+.mac-sharing-note h3{font-size:15px;letter-spacing:0;line-height:1.6}
+.mac-sharing-note p{color:#777670;font-size:13px;line-height:1.75;margin-top:4px;max-width:900px}
+.mac-release-note{font-size:12px;line-height:1.8;color:#827c75;margin-top:20px;max-width:900px}
+@media(max-width:1000px){.mac-intro{gap:32px}.mac-prompt{width:85%}.mac-prompt-current{font-size:20px}.mac-slide-content{padding-inline:17px}.mac-slide-content>p{font-size:25px}.mac-features{gap:22px}.mac-display{height:325px}}
+@media(max-width:760px){.mac-intro{grid-template-columns:1fr;gap:25px;margin-top:28px}.mac-copy>p{max-width:560px}.mac-copy h2{font-size:36px}.mac-figure{max-width:510px;width:100%;margin-inline:auto;padding-top:0}.mac-display{height:335px}.mac-prompt{width:78%}.mac-prompt-current{font-size:22px}.mac-slide-content>p{font-size:30px}.mac-features{grid-template-columns:1fr;gap:23px;margin-top:25px}.mac-features>div{position:relative;padding-left:31px}.mac-feature-number{position:absolute;left:0;top:3px}.mac-features h3{margin-top:0}.mac-features p{margin-top:5px}.mac-section{padding-block:30px}.mac-sharing-note{padding:17px;gap:11px}.mac-release-note{font-size:11px}.mac-section-top{gap:12px}.mac-section-top .kicker{font-size:10px}.mac-preview-badge{font-size:11px}.mac-download{min-height:44px;padding:6px 12px;gap:8px}.mac-download strong{font-size:14px}.mac-download small{font-size:10px}.mac-download>svg{width:22px;height:22px}.mac-link-arrow{margin-left:2px;font-size:18px}.hero-download-actions{column-gap:12px;row-gap:15px}.hero-download-actions .source-link{flex-basis:100%;min-height:0;min-width:0;border:0;background:transparent;padding:0;gap:6px}.hero-download-actions .source-link>img{width:16px}.hero-download-actions .source-link>span{display:flex;align-items:center;gap:5px}.hero-download-actions .source-link strong{font-size:12px;font-weight:500}.hero-download-actions .source-link small{margin:0;font-size:11px}.hero-download-actions .source-link small::before{content:"· ";}.hero .desktop-download-jump{margin-left:0}.hero .download-note{max-width:none}.final-section .mac-download{min-height:56px}.mac-copy>.mac-requirements{font-size:11px}.final-section>.mac-final-note{font-size:11px;max-width:290px}}
+@media(max-width:380px){.mac-copy h2{font-size:30px}.mac-prompt{width:88%;padding:10px 14px 12px}.mac-prompt-current{font-size:20px}.mac-prompt-faded{font-size:11px}.mac-display{height:315px}.mac-slide-content{padding-top:130px}.mac-slide-content>p{font-size:25px}.mac-window-note,.mac-camera-note{font-size:11px}.mac-download{padding-inline:10px}.mac-link-arrow{display:none}}
