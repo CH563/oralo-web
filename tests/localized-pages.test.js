@@ -77,7 +77,7 @@ test('English native screenshots and video use separate English assets on every 
   const manifest=JSON.parse(read('src/content/english-screenshots.json'));
   const english=routes.filter(route=>route.startsWith('/en/')).map(route=>read(`public${route}index.html`)).join('\n');
   const chinese=routes.filter(route=>route.startsWith('/zh/')).map(route=>read(`public${route}index.html`)).join('\n');
-  const imageRefs=html=>[...html.matchAll(/\/assets\/app-(?:library|prepare|review|reader|pronunciation|readiness|floating-controls|ipad|floating)(?:-(?:en|zh))?-\d+\.webp/g)].map(match=>match[0]);
+  const imageRefs=html=>[...html.matchAll(/\/assets\/app-(?:library|prepare|review|reader-controls|reader|pick-up|pronunciation|readiness|floating-controls|ipad|floating)(?:-(?:en|zh))?-\d+\.webp/g)].map(match=>match[0]);
   assert.ok(imageRefs(english).length>0);
   assert.ok(imageRefs(english).every(ref=>/-en-\d+\.webp$/.test(ref)));
   assert.ok(imageRefs(chinese).every(ref=>!/-en-\d+\.webp$/.test(ref)));

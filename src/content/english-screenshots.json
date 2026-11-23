@@ -101,6 +101,31 @@
       "device": "iPad Pro 11-inch (M5) simulator",
       "os": "iPadOS 27.0",
       "input": "Manual UI interaction"
+    },
+    "reader-controls": {
+      "widths": [
+        320,
+        640
+      ],
+      "width": 1206,
+      "height": 2622,
+      "device": "iPhone 17 simulator",
+      "os": "iOS 27.0",
+      "input": "Manual UI interaction",
+      "capturedAt": "2026-11-23"
+    },
+    "pick-up": {
+      "widths": [
+        320,
+        640
+      ],
+      "width": 1206,
+      "height": 2622,
+      "device": "iPhone 17 simulator",
+      "os": "iOS 27.0",
+      "input": "Manual UI interaction",
+      "capturedAt": "2026-11-23"
     }
-  }
+  },
+  "sample": "/samples/work-update-en.txt"
 }
