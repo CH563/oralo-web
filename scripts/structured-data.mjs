@@ -4,7 +4,7 @@ export const websiteId = `${origin}/#website`;
 export const applicationId = `${origin}/#app`;
 export const developerId = `${origin}/#developer`;
 
-export function structuredData({canonical, title, description, language, kind, product, copy, breadcrumb, alternateName}) {
+export function structuredData({canonical, title, description, language, kind, product, copy, breadcrumb, alternateName, article}) {
   const page = {
     '@type': kind === 'support' ? 'ContactPage' : 'WebPage',
     '@id': `${canonical}#webpage`, url: canonical,
@@ -33,6 +33,19 @@ export function structuredData({canonical, title, description, language, kind, p
       image: `${origin}/assets/oralo-icon-288.webp`,
       author: {'@id': developerId}
     }, {'@type': 'Person', '@id': developerId, name: product.developer.name, url: product.developer.url});
+  }
+  if (article) {
+    const posting = {
+      '@type': 'BlogPosting', '@id': `${canonical}#article`,
+      headline: article.headline, description, inLanguage: language,
+      datePublished: article.datePublished,
+      url: canonical, mainEntityOfPage: {'@id': `${canonical}#webpage`},
+      isPartOf: {'@id': websiteId},
+      publisher: {'@type': 'Organization', name: 'Oralo', url: origin}
+    };
+    if (article.dateModified) posting.dateModified = article.dateModified;
+    page.mainEntity = {'@id': posting['@id']};
+    graph.push(posting);
   }
   if (breadcrumb) {
     const id = `${canonical}#breadcrumb`;

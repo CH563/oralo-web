@@ -1,0 +1,30 @@
+<a class="skip" href="#main">{{skip}}</a>
+{{{siteHeader}}}
+<main id="main" class="wrap speech-page device-page" data-device-kind="{{deviceKind}}">
+  <nav class="tool-breadcrumb" aria-label="{{breadcrumbLabel}}"><a href="{{homePath}}">{{breadcrumbHome}}</a><span aria-hidden="true">›</span><a href="{{homePath}}#tools">{{toolsLabel}}</a><span aria-hidden="true">›</span><span aria-current="page">{{heading}}</span></nav>
+  <div class="tool-heading"><span class="kicker">{{freeLabel}}</span><h1>{{heading}}</h1><p class="tool-intro">{{intro}}</p><p class="tool-intro device-assist">{{assist}}</p><p class="tool-privacy"><span aria-hidden="true">↳</span> {{privacy}} <a href="/privacy/?lang={{language}}">{{privacyLink}}</a></p><p class="tool-privacy">{{browserLimit}}</p><p class="tool-privacy">{{permissionNote}}</p></div>
+  <noscript><p class="tool-nojs">{{noJs}}</p></noscript>
+  <div class="calculator-layout device-layout">
+    <section class="device-panel" aria-labelledby="device-controls-title">
+      <h2 id="device-controls-title" class="sr-only">{{heading}}</h2>
+      <p id="device-status" class="device-status" data-state="idle">{{idle}}</p>
+      <div class="device-actions"><button type="button" class="button" id="device-start">{{start}}</button><button type="button" class="button device-stop" id="device-stop" hidden>{{stop}}</button><button type="button" class="tool-clear" id="device-cancel" hidden>{{cancel}}</button><button type="button" class="button" id="device-retry" hidden>{{retry}}</button></div>
+      <p id="device-waiting" class="tool-help" hidden></p>
+      <div class="tool-field"><label for="device-select">{{device_label}}</label><select id="device-select" disabled><option value="default">{{default_device}}</option></select><p id="device-list-note" class="tool-help">{{device_list_before}}</p><button type="button" class="tool-clear" id="device-refresh" disabled>{{refresh}}</button></div>
+      <p id="device-current" class="tool-help">{{current_unknown}}</p>
+      {{{deviceVisual}}}
+      <p class="tool-help">{{limit}}</p>
+      <p class="tool-help">{{indicator}}</p>
+      <p class="tool-help">{{reset_permission_note}}</p>
+    </section>
+    <aside class="tool-result" aria-labelledby="device-read-title"><span class="kicker">{{stepsTitle}}</span><h2 id="device-read-title">{{stepsTitle}}</h2><ol class="device-steps"><li>{{step1}}</li><li>{{step2}}</li><li>{{step3}}</li></ol><p class="tool-counting-note">{{resultBody}}</p></aside>
+  </div>
+  <p id="device-live" class="sr-only" role="status" aria-live="polite" aria-atomic="true"></p>
+  <section class="tool-limit" id="troubleshooting" aria-labelledby="device-trouble-title"><h2 id="device-trouble-title">{{troubleTitle}}</h2><p>{{troubleBody}}</p></section>
+  <section class="tool-method" aria-labelledby="device-before-title"><div><h2 id="device-before-title">{{beforeTitle}}</h2><p>{{beforeBody}}</p></div><div class="tool-formulas"><h2>{{relatedTitle}}</h2><p>{{switchNote}}</p></div></section>
+  <section class="tool-faq" id="faq" aria-labelledby="device-faq-title"><h2 id="device-faq-title">{{faqTitle}}</h2><div class="faq-list">{{{faqHtml}}}</div></section>
+  <section class="tool-crosslink"><div><h2>{{otherTitle}}</h2><p>{{switchNote}}</p></div><a class="section-link" href="{{otherPath}}">{{otherLabel}} ↗</a></section>
+  <section class="tool-cta"><span class="kicker">Oralo · iPhone / iPad</span><h2>{{ctaTitle}}</h2><p>{{ctaBody}}</p><a class="app-store-badge" href="{{appStoreUrl}}"><img src="/assets/app-store-badge.svg" alt="{{download}}" width="120" height="40" loading="lazy"></a><p class="download-note">{{downloadNote}}</p><div class="tool-related"><a href="{{toolPath}}">{{estimator}} ↗</a><a href="{{previewPath}}">{{previewLabel}} ↗</a><a href="{{voicePath}}">{{voiceLabel}} ↗</a><a href="{{floatingPath}}">{{floatingLabel}} ↗</a></div></section>
+</main>
+{{{siteFooter}}}
+<script type="application/json" id="device-copy">{{{runtimeCopy}}}</script>

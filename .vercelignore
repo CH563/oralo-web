@@ -10,8 +10,10 @@ docs/
 prd/
 
 # Development files are not part of the deployment upload.
+# npm run build loads scripts by import, so only scripts outside that build are ignored.
 tests/
-scripts/*
-!scripts/build-site.mjs
-!scripts/structured-data.mjs
+scripts/build-unicode-data.mjs
+scripts/generate-app-store-qr.swift
+scripts/optimize-images.mjs
+scripts/optimize-videos.mjs
 README.md
