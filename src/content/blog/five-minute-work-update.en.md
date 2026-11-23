@@ -2,8 +2,8 @@
 contentId: five-minute-work-update
 locale: en
 slug: five-minute-work-update
-status: draft
-reviewStatus: pending-editorial-review
+status: published
+reviewStatus: approved
 title: "How to prepare and rehearse a five-minute work update"
 seoTitle: "Five-Minute Work Update: Structure and Rehearsal · Oralo"
 description: "Plan a five-minute work update around the outcome, progress, risk, and decision you need. Use a time budget, rewrite examples, and a practical rehearsal routine."
@@ -11,7 +11,7 @@ excerpt: "Make the next decision clear before you write the opening. Build a sho
 canonical: https://oralo.fun/en/blog/five-minute-work-update/
 translationUrl: https://oralo.fun/zh/blog/five-minute-work-update/
 draftedAt: 2026-11-23
-datePublished: null
+datePublished: 2026-11-23T18:06:07+08:00
 dateModified: null
 author: null
 publisher: Oralo

@@ -88,7 +88,25 @@
       ]
     },
     {
-      "source": "/(zh|en)/blog(.*)",
+      "source": "/:lang(zh|en)/blog/:slug((?!five-minute-work-update(?:/|$))[a-z0-9-]+)",
+      "headers": [
+        {
+          "key": "X-Robots-Tag",
+          "value": "noindex, nofollow"
+        }
+      ]
+    },
+    {
+      "source": "/:lang(zh|en)/blog/index.html",
+      "headers": [
+        {
+          "key": "X-Robots-Tag",
+          "value": "noindex, nofollow"
+        }
+      ]
+    },
+    {
+      "source": "/:lang(zh|en)/blog/:slug/:rest+",
       "headers": [
         {
           "key": "X-Robots-Tag",

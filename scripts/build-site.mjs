@@ -38,7 +38,7 @@ function document(context, body, home, tool = false, extras = {}) {
   const schema = structuredData({
     canonical: context.canonical, title: context.pageTitle, description: context.pageDescription,
     language: context.htmlLang, kind: extras.kind || (home ? 'home' : tool ? 'tool' : 'guide'), product, copy: context,
-    breadcrumb: extras.breadcrumb || (home ? undefined : [
+    article: extras.article, breadcrumb: extras.breadcrumb || (home ? undefined : [
       {name: context.breadcrumbHome, url: `${origin}${context.homePath}`},
       {name: tool ? context.pageName : guides[context.slug][context.language].fields.H1, url: context.canonical}
     ])
@@ -236,6 +236,10 @@ for (const name of (await readdir(path.join(root, 'src/content/blog'))).filter(n
   if (!/^[a-z0-9-]+$/.test(article.meta.slug || '')) throw new Error(`${name} has an unsafe slug`);
   const canonical = `${origin}/${lang}/blog/${article.meta.slug}/`;
   if (article.meta.canonical !== canonical) throw new Error(`${name} canonical must be ${canonical}`);
+  if (publishedArticle(article.meta)) {
+    if (!article.meta.datePublished || article.meta.datePublished === article.meta.draftedAt) throw new Error(`${name} needs a publication time distinct from draftedAt`);
+    if (article.meta.author) throw new Error(`${name} must not name an author`);
+  }
   blogArticles.push({lang, file: name, ...article});
 }
 function blogChrome(base) {
@@ -306,11 +310,19 @@ ${articleChrome(templates.footer)}`;
         {name: articleBase.breadcrumbHome, url: `${origin}${articleBase.homePath}`},
         {name: indexCopy.heading, url: `${origin}${articleBase.blogPath}`},
         {name: article.meta.title, url: articleBase.canonical}
-      ]
+      ],
+      article: draft ? undefined : {headline: article.meta.title, datePublished: article.meta.datePublished, dateModified: article.meta.dateModified}
     }));
-    if (!draft) urls.push(articleBase.canonical);
+    if (!draft) {
+      urls.push(articleBase.canonical);
+      lastmod.set(articleBase.canonical, article.meta.datePublished);
+    }
   }
-  if (indexable) urls.push(base.canonical);
+  if (indexable) {
+    urls.push(base.canonical);
+    const publishedAt = published.map(item => item.meta.datePublished).filter(Boolean).sort().at(-1);
+    if (publishedAt) lastmod.set(base.canonical, publishedAt);
+  }
 }
 function microphoneVisual(copy) {
   return `<p class="device-prompt">${escape(copy.say)}</p><div class="device-meter" id="device-meter" hidden><p class="device-meter-name" id="device-meter-name">${escape(copy.meter_label)}</p><div class="device-meter-track" aria-hidden="true"><span id="device-meter-bar"></span></div></div><p class="tool-help">${escape(copy.meter_note)}</p><p class="tool-help">${escape(copy.no_playback)}</p>`;

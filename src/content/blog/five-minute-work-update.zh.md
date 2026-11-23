@@ -2,8 +2,8 @@
 contentId: five-minute-work-update
 locale: zh-Hans
 slug: five-minute-work-update
-status: draft
-reviewStatus: pending-editorial-review
+status: published
+reviewStatus: approved
 title: "5 分钟工作汇报，怎样备稿和排练"
 seoTitle: "5 分钟工作汇报：备稿、时间分配与排练 · Oralo"
 description: "五分钟工作汇报如何讲清结论、进展、风险和所需支持？用时间分配、口语改写和短稿示例，完成估时、试听与自己出声计时排练。"
@@ -11,7 +11,7 @@ excerpt: "先明确这次汇报需要听众记住什么、决定什么，再分�
 canonical: https://oralo.fun/zh/blog/five-minute-work-update/
 translationUrl: https://oralo.fun/en/blog/five-minute-work-update/
 draftedAt: 2026-11-23
-datePublished: null
+datePublished: 2026-11-23T18:06:07+08:00
 dateModified: null
 author: null
 publisher: Oralo

@@ -79,8 +79,11 @@ test('the Vercel upload keeps every file npm run build imports and still builds'
       'public/en/tools/camera-test/index.html'
     ]) assert.ok(existsSync(path.join(directory, page)), page);
     const article = readFileSync(path.join(directory, 'public/zh/blog/five-minute-work-update/index.html'), 'utf8');
-    assert.match(article, /noindex, nofollow/);
+    assert.doesNotMatch(article, /noindex, nofollow/);
+    assert.match(article, /2026-11-23T18:06:07\+08:00/);
     assert.match(article, /900/);
+    const uploadedConfig = JSON.parse(readFileSync(path.join(directory, 'vercel.json'), 'utf8'));
+    assert.ok(uploadedConfig.headers.some(entry => entry.source === '/:lang(zh|en)/blog/:slug((?!five-minute-work-update(?:/|$))[a-z0-9-]+)'));
   } finally {
     rmSync(directory, {recursive: true, force: true});
   }
