@@ -7,7 +7,11 @@ const read = path => readFileSync(new URL(`../${path}`, import.meta.url), 'utf8'
 const origin = 'https://oralo.fun';
 
 const publishedAt = '2026-11-23T18:06:07+08:00';
+const secondPublishedAt = '2026-11-24T12:43:08+08:00';
 const publishedPattern = publishedAt.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+const secondPublishedPattern = secondPublishedAt.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+const publishedSlugs = ['five-minute-work-update', 'get-back-on-script'];
+const draftSlugHeader = '/:lang(zh|en)/blog/:slug((?!(?:five-minute-work-update|get-back-on-script)(?:/|$))[a-z0-9-]+)';
 
 test('the reviewed first article is published at the Shanghai release time without an author', () => {
   for (const file of ['src/content/blog/five-minute-work-update.zh.md', 'src/content/blog/five-minute-work-update.en.md']) {
@@ -28,7 +32,7 @@ test('the reviewed blog indexes and first article are public, and other blog URL
   const config = JSON.parse(read('vercel.json'));
   const robotHeaders = config.headers.filter(entry => entry.headers.some(item => item.key === 'X-Robots-Tag'));
   assert.deepEqual(robotHeaders.map(entry => entry.source), [
-    '/:lang(zh|en)/blog/:slug((?!five-minute-work-update(?:/|$))[a-z0-9-]+)',
+    draftSlugHeader,
     '/:lang(zh|en)/blog/index.html',
     '/:lang(zh|en)/blog/:slug/:rest+'
   ]);
@@ -37,10 +41,10 @@ test('the reviewed blog indexes and first article are public, and other blog URL
     if (/^\/(?:zh|en)\/blog\/index\.html$/.test(pathname)) return true;
     if (/^\/(?:zh|en)\/blog\/[^/]+\/.+/.test(pathname)) return true;
     const slug = pathname.match(/^\/(?:zh|en)\/blog\/([a-z0-9-]+)\/?$/);
-    return Boolean(slug && slug[1] !== 'five-minute-work-update');
+    return Boolean(slug && !publishedSlugs.includes(slug[1]));
   };
-  for (const pathname of ['/zh/blog/', '/en/blog/', '/zh/blog/five-minute-work-update/', '/en/blog/five-minute-work-update/']) assert.equal(noindex(pathname), false, pathname);
-  for (const pathname of ['/zh/blog/future-draft/', '/en/blog/another-update/', '/zh/blog/index.html', '/en/blog/five-minute-work-update/index.html', '/zh/blog/five-minute-work-update/extra']) assert.equal(noindex(pathname), true, pathname);
+  for (const pathname of ['/zh/blog/', '/en/blog/', ...publishedSlugs.flatMap(slug => [`/zh/blog/${slug}/`, `/en/blog/${slug}/`])]) assert.equal(noindex(pathname), false, pathname);
+  for (const pathname of ['/zh/blog/future-draft/', '/en/blog/another-update/', '/zh/blog/index.html', '/en/blog/five-minute-work-update/index.html', '/zh/blog/get-back-on-script/index.html', '/zh/blog/five-minute-work-update/extra', '/en/blog/get-back-on-script/notes']) assert.equal(noindex(pathname), true, pathname);
   const publicPages = [
     'public/zh/index.html', 'public/en/index.html',
     'public/zh/voice-following/index.html', 'public/en/voice-following/index.html',
@@ -56,10 +60,22 @@ test('the reviewed blog indexes and first article are public, and other blog URL
     assert.doesNotMatch(read(page), /BlogPosting|datePublished/, page);
   }
   for (const lang of ['zh', 'en']) {
-    for (const route of [`/${lang}/blog/`, `/${lang}/blog/five-minute-work-update/`]) {
+    for (const route of [`/${lang}/blog/five-minute-work-update/`]) {
       const html = read(`public${route}index.html`);
       assert.doesNotMatch(html, /<meta name="robots" content="noindex, nofollow">/);
       assert.match(sitemap, new RegExp(`<loc>${origin}${route}</loc><lastmod>${publishedPattern}</lastmod>`));
+      assert.equal((html.match(/<h1\b/g) || []).length, 1);
+      assert.match(html, new RegExp(`<link rel="canonical" href="${origin}${route}">`));
+      assert.match(html, new RegExp(`hreflang="zh-Hans" href="${origin}/zh${route.slice(3)}"`));
+      assert.match(html, new RegExp(`hreflang="en" href="${origin}/en${route.slice(3)}"`));
+      assert.match(html, new RegExp(`hreflang="x-default" href="${origin}/en${route.slice(3)}"`));
+      assert.doesNotMatch(html, /编辑预览，尚未发布|Editorial preview\. Not published/);
+      assert.doesNotMatch(html, /"author"|Person/);
+    }
+    for (const route of [`/${lang}/blog/`, `/${lang}/blog/get-back-on-script/`]) {
+      const html = read(`public${route}index.html`);
+      assert.doesNotMatch(html, /<meta name="robots" content="noindex, nofollow">/);
+      assert.match(sitemap, new RegExp(`<loc>${origin}${route}</loc><lastmod>${secondPublishedPattern}</lastmod>`));
       assert.equal((html.match(/<h1\b/g) || []).length, 1);
       assert.match(html, new RegExp(`<link rel="canonical" href="${origin}${route}">`));
       assert.match(html, new RegExp(`hreflang="zh-Hans" href="${origin}/zh${route.slice(3)}"`));
@@ -95,5 +111,129 @@ test('the reviewed blog indexes and first article are public, and other blog URL
     assert.ok(indexGraph['@graph'].every(node => node['@type'] !== 'BlogPosting'));
   }
   const names = readdirSync(new URL('../src/content/blog', import.meta.url));
-  assert.deepEqual(names.filter(name => name.endsWith('.md')).sort(), ['five-minute-work-update.en.md', 'five-minute-work-update.zh.md']);
+  assert.deepEqual(names.filter(name => name.endsWith('.md')).sort(), [
+    'five-minute-work-update.en.md', 'five-minute-work-update.zh.md',
+    'get-back-on-script.en.md', 'get-back-on-script.zh.md'
+  ]);
+  for (const file of ['src/content/blog/five-minute-work-update.zh.md', 'src/content/blog/five-minute-work-update.en.md']) {
+    assert.doesNotMatch(read(file), /get-back-on-script/);
+  }
+});
+
+test('the reviewed second article is published in both languages without draft metadata or internal notes', () => {
+  const sitemap = read('public/sitemap.xml');
+  const blogLocs = [...sitemap.matchAll(/<loc>(.*?)<\/loc>/g)].map(match => match[1]).filter(url => url.includes('/blog/'));
+  assert.deepEqual(blogLocs.sort(), [
+    `${origin}/en/blog/`,
+    `${origin}/en/blog/five-minute-work-update/`,
+    `${origin}/en/blog/get-back-on-script/`,
+    `${origin}/zh/blog/`,
+    `${origin}/zh/blog/five-minute-work-update/`,
+    `${origin}/zh/blog/get-back-on-script/`
+  ]);
+  assert.doesNotMatch(sitemap, /future-draft|another-update|get-back-on-script\/[^<]/);
+  const articles = {
+    zh: {
+      title: '离稿发挥之后，怎样接回下一句',
+      seoTitle: '离稿发挥或忘词后，怎样接回下一句 · Oralo',
+      excerpt: '离稿不一定是失误。先分清是有意补充还是位置丢失，再用入口句从下一件要说的事继续，而不是从头再念一遍。',
+      opening: '现场汇报里，离开讲稿不一定是失误。',
+      closing: '正式使用前，仍要在实际 App 里做一次短的排练。',
+      fictional: '虚构的内部分享教学示例',
+      limit: '它不保证能跳到任意较远的段落。',
+      otherTitle: 'How to find your next line after you go off script',
+      links: [
+        'https://oralo.fun/zh/tools/speech-length/',
+        'https://oralo.fun/zh/blog/five-minute-work-update/',
+        'https://oralo.fun/zh/tools/speech-preview/',
+        'https://oralo.fun/zh/voice-following/',
+        'https://oralo.fun/zh/tools/microphone-test/',
+        'https://apps.apple.com/app/oralo-ai-teleprompter/id6835449605'
+      ]
+    },
+    en: {
+      title: 'How to find your next line after you go off script',
+      seoTitle: 'How to Get Back on Script After You Go Off Track · Oralo',
+      excerpt: 'Going off script is often useful. The skill is returning to the next point without restarting from the beginning.',
+      opening: 'Leaving your script mid-update is often the useful part.',
+      closing: 'Rehearse once in the app you will actually use.',
+      fictional: 'fictional teaching example',
+      limit: 'A jump to a distant paragraph is not guaranteed.',
+      otherTitle: '离稿发挥之后，怎样接回下一句',
+      links: [
+        'https://oralo.fun/en/tools/speech-length/',
+        'https://oralo.fun/en/blog/five-minute-work-update/',
+        'https://oralo.fun/en/tools/speech-preview/',
+        'https://oralo.fun/en/voice-following/',
+        'https://oralo.fun/en/tools/microphone-test/',
+        'https://apps.apple.com/app/oralo-ai-teleprompter/id6835449605'
+      ]
+    }
+  };
+  for (const file of ['src/content/blog/get-back-on-script.zh.md', 'src/content/blog/get-back-on-script.en.md']) {
+    const source = read(file);
+    assert.match(source, /^status: published$/m);
+    assert.match(source, /^reviewStatus: approved$/m);
+    assert.match(source, new RegExp(`^datePublished: ${secondPublishedPattern}$`, 'm'));
+    assert.match(source, /^dateModified: null$/m);
+    assert.match(source, /^author: null$/m);
+    assert.match(source, /^draftedAt: 2026-11-24$/m);
+    assert.doesNotMatch(source, /^author: (?!null$)/m);
+    assert.doesNotMatch(source, /内部交付说明|内部编辑说明|Toastmasters|pending-editorial-review|已测试成功/);
+  }
+  for (const lang of ['zh', 'en']) {
+    const copy = articles[lang];
+    const route = `/${lang}/blog/get-back-on-script/`;
+    const html = read(`public${route}index.html`);
+    const visible = html.replace(/<script\b[^>]*>[\s\S]*?<\/script>/g, '');
+    const article = visible.match(/<article class="blog-article">([\s\S]*?)<\/article>/)[1];
+    assert.equal((visible.match(/<h1\b/g) || []).length, 1);
+    assert.match(visible, new RegExp(`<title>${copy.seoTitle}</title>`));
+    assert.match(visible, new RegExp(`<h1>${copy.title}</h1>`));
+    assert.match(article, new RegExp(copy.excerpt.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')));
+    assert.ok(article.includes(copy.opening));
+    assert.ok(article.includes(copy.closing));
+    assert.ok(article.includes(copy.fictional));
+    assert.ok(article.includes(copy.limit));
+    assert.doesNotMatch(article, new RegExp(copy.otherTitle));
+    assert.doesNotMatch(article, /macOS|Mac 测试|Not verified|guaranteed device/);
+    assert.match(article, lang === 'zh' ? /iPhone 与 iPad/ : /iPhone and iPad/);
+    for (const link of copy.links) assert.match(article, new RegExp(`href="${link.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')}"`));
+    assert.doesNotMatch(visible, /内部交付说明|内部编辑说明|Toastmasters|contentId|reviewStatus|datePublished:|dateModified|heroImage|pending-editorial|已测试成功|status: draft|author:|seoTitle:|excerpt:|```|:\s*null\b|\bnull\b/);
+    assert.doesNotMatch(html, /<meta name="robots" content="noindex, nofollow">/);
+    assert.match(html, /data-content-status="published"/);
+    assert.match(html, /data-review-status="approved"/);
+    assert.match(html, /data-drafted-at="2026-11-24"/);
+    assert.match(html, new RegExp(`<time datetime="${secondPublishedPattern}">${secondPublishedPattern}</time>`));
+    assert.doesNotMatch(html, /<time datetime="2026-11-24">/);
+    assert.match(html, new RegExp(`<link rel="canonical" href="${origin}${route}">`));
+    assert.match(html, new RegExp(`hreflang="zh-Hans" href="${origin}/zh/blog/get-back-on-script/"`));
+    assert.match(html, new RegExp(`hreflang="en" href="${origin}/en/blog/get-back-on-script/"`));
+    assert.match(html, new RegExp(`hreflang="x-default" href="${origin}/en/blog/get-back-on-script/"`));
+    assert.match(html, new RegExp(`href="/zh/blog/get-back-on-script/"[^>]*data-language-link="zh"`));
+    assert.match(html, new RegExp(`href="/en/blog/get-back-on-script/"[^>]*data-language-link="en"`));
+    const graph = JSON.parse(html.match(/<script id="site-structured-data" type="application\/ld\+json">([\s\S]*?)<\/script>/)[1]);
+    const posting = graph['@graph'].find(node => node['@type'] === 'BlogPosting');
+    assert.equal(posting.headline, copy.title);
+    assert.equal(posting.datePublished, secondPublishedAt);
+    assert.equal(posting.dateModified, undefined);
+    assert.equal(posting.author, undefined);
+    assert.equal(posting.url, `${origin}${route}`);
+    assert.ok(graph['@graph'].every(node => node['@type'] !== 'Person' && node.author == null));
+    const index = read(`public/${lang}/blog/index.html`);
+    const cards = [...index.matchAll(/<article class="blog-card">([\s\S]*?)<\/article>/g)].map(match => match[1]);
+    assert.equal(cards.length, 2);
+    assert.match(cards[0], new RegExp(`href="/${lang}/blog/five-minute-work-update/"`));
+    assert.match(cards[0], new RegExp(`<time datetime="${publishedPattern}">`));
+    assert.match(cards[1], new RegExp(`href="/${lang}/blog/get-back-on-script/"`));
+    assert.ok(cards[1].includes(copy.title));
+    assert.match(cards[1], new RegExp(copy.excerpt.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')));
+    assert.match(cards[1], new RegExp(`<time datetime="${secondPublishedPattern}">${secondPublishedPattern}</time>`));
+    assert.doesNotMatch(index, new RegExp(copy.otherTitle));
+    assert.doesNotMatch(index, /blog-draft-banner|noindex, nofollow|内部交付|:\s*null\b/);
+    assert.match(index, new RegExp(`<link rel="canonical" href="${origin}/${lang}/blog/">`));
+    assert.match(index, new RegExp(`hreflang="zh-Hans" href="${origin}/zh/blog/"`));
+    assert.match(index, new RegExp(`hreflang="en" href="${origin}/en/blog/"`));
+    assert.match(index, new RegExp(`hreflang="x-default" href="${origin}/en/blog/"`));
+  }
 });
