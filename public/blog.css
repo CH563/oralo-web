@@ -15,6 +15,7 @@
 .blog-article th,.blog-article td{padding:12px 10px;border-bottom:1px solid var(--line);text-align:left;vertical-align:top}
 .blog-article code{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:.92em}
 .blog-list{display:grid;gap:18px;max-width:42rem}
+.blog-page:not(:has(>.blog-article))>.guide-breadcrumb,.blog-page:not(:has(>.blog-article))>.guide-heading,.blog-page:not(:has(>.blog-article))>.blog-list,.blog-page:not(:has(>.blog-article))>.blog-draft-banner{max-width:46rem;margin-inline:auto}
 .blog-card{padding:22px;border:1px solid var(--line);border-radius:var(--round);background:#fffefb}
 .blog-card h2{margin-top:0}
 .blog-card p{font-size:16px;line-height:1.7;color:var(--muted);margin-top:10px}
@@ -22,5 +23,19 @@
 .blog-dates{margin-top:16px;color:var(--muted);font-size:14px}
 .blog-figure{margin:1.25em 0}
 .blog-figure img{display:block;width:100%;max-width:100%;height:auto;border:1px solid var(--line);border-radius:16px;background:#fffefb}
+.blog-article h2,.blog-article h3{scroll-margin-top:32px}
+.blog-toc{display:none}
+@media(min-width:1240px){
+  .blog-toc{display:flex;flex-direction:column;align-items:flex-start;gap:10px;position:fixed;z-index:30;left:16px;top:112px;width:max-content;max-width:240px;max-height:calc(100vh - 128px)}
+  .blog-toc:has(button[aria-expanded=true]){width:240px}
+  .blog-toc button{appearance:none;display:block;width:max-content;min-height:40px;padding:8px 14px;border:1px solid var(--line);border-radius:999px;background:#fffefb;font-size:14px;font-weight:650;line-height:1.4}
+  .blog-toc button:focus-visible{outline:3px solid var(--blue);outline-offset:3px}
+  .blog-toc .guide-contents{display:none}
+  .blog-toc button[aria-expanded=true]+.guide-contents{display:block;align-self:stretch;width:100%;min-width:0;margin:0;padding:14px 14px 16px;border:1px solid var(--line);border-radius:16px;background:#fffefb;box-shadow:0 12px 32px #35304d14;overflow:auto;grid-template-columns:none;animation:blog-toc-in .18s ease}
+  .blog-toc .guide-contents ul{display:grid;gap:10px;margin:0;padding:0;list-style:none}
+  .blog-toc .guide-contents a{display:block}
+}
+@keyframes blog-toc-in{from{transform:translateX(-16px);opacity:0}to{transform:none;opacity:1}}
+@media(prefers-reduced-motion:reduce){.blog-toc button[aria-expanded=true]+.guide-contents{animation:none}}
 @media(max-width:700px){.blog-article p,.blog-article li{font-size:16px}.blog-card{padding:18px;border-radius:18px}.blog-article th,.blog-article td{padding:10px 8px}}
 @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}}

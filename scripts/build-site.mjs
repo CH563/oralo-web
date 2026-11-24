@@ -331,19 +331,20 @@ ${chrome(templates.footer)}`;
       }
     });
     const articleChrome = blogChrome(articleBase);
-    const toc = rendered.toc.length ? `<nav class="guide-contents" aria-label="${escape(indexCopy.contentsLabel)}"><span>${escape(indexCopy.contentsLabel)}</span><ul>${rendered.toc.map(item => `<li><a href="#${item.id}">${item.text}</a></li>`).join('')}</ul></nav>` : '';
+    const toc = rendered.toc.length ? `<div class="blog-toc"><button type="button" aria-expanded="false" aria-controls="blog-toc-panel">${escape(indexCopy.contentsLabel)}</button><nav id="blog-toc-panel" class="guide-contents" aria-label="${escape(indexCopy.contentsLabel)}"><ul>${rendered.toc.map(item => `<li><a href="#${item.id}">${item.text}</a></li>`).join('')}</ul></nav></div>` : '';
     const dates = !draft && article.meta.datePublished ? `<p class="blog-dates">${escape(indexCopy.publishedLabel)} <time datetime="${escape(article.meta.datePublished)}">${escape(article.meta.datePublished)}</time>${article.meta.dateModified ? ` · ${escape(indexCopy.updatedLabel)} <time datetime="${escape(article.meta.dateModified)}">${escape(article.meta.dateModified)}</time>` : ''}</p>` : '';
     const articleBody = `<a class="skip" href="#main">${escape(articleBase.skip)}</a>
 ${articleChrome(templates.header)}
 <main id="main" class="wrap guide-page blog-page" data-content-status="${escape(article.meta.status)}" data-review-status="${escape(article.meta.reviewStatus || '')}" data-drafted-at="${escape(article.meta.draftedAt || '')}">
   ${draft ? `<p class="blog-draft-banner" role="note">${escape(indexCopy.draftBanner)}</p>` : ''}
   <nav class="guide-breadcrumb" aria-label="${escape(articleBase.breadcrumbLabel)}"><a href="${articleBase.homePath}">${escape(articleBase.breadcrumbHome)}</a><span aria-hidden="true">›</span><a href="${articleBase.blogPath}">${escape(indexCopy.heading)}</a><span aria-hidden="true">›</span><span aria-current="page">${escape(article.meta.title)}</span></nav>
+  ${toc}
   <article class="blog-article">
     <header class="guide-heading"><h1>${escape(article.meta.title)}</h1><p class="guide-intro">${escape(article.meta.excerpt)}</p>${dates}</header>
-    ${toc}
     ${rendered.html}
   </article>
 </main>
+${toc ? '<script src="/blog-toc.js" defer></script>' : ''}
 ${articleChrome(templates.footer)}`;
     const directory = path.join(root, `public/${lang}/blog/${article.meta.slug}`);
     await mkdir(directory, {recursive: true});
