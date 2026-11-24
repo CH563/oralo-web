@@ -32,12 +32,16 @@ test('every published article keeps one centered column and a side contents cont
   assert.match(css, /\.blog-toc button:focus-visible\{[^}]*outline:3px solid/);
   assert.match(css, /\.blog-toc \.guide-contents\{display:none\}/);
   assert.match(css, /\.blog-toc button\[aria-expanded=true\]\+\.guide-contents\{display:block/);
+  assert.match(css, /\.blog-toc \.guide-contents a\[aria-current=location\]\{[^}]*color:var\(--blue\)/);
   assert.match(css, /@media\(prefers-reduced-motion:reduce\)\{\.blog-toc button\[aria-expanded=true\]\+\.guide-contents\{animation:none\}/);
   assert.doesNotMatch(css, /blog-toc-drawer|blog-toc-backdrop|@media\(max-width:1239px\)\{[^}]*blog-toc[^}]*position:\s*fixed/);
   const script = read('public/blog-toc.js');
   assert.match(script, /aria-expanded/);
+  assert.match(script, /aria-current/);
   assert.match(script, /event\.key !== 'Escape'/);
   assert.match(script, /button\.focus\(\)/);
+  assert.match(script, /panel\.scrollTop/);
+  assert.doesNotMatch(script, /scrollIntoView/);
   for (const file of articles) {
     const html = read(file);
     const visible = html.replace(/<script\b[^>]*>[\s\S]*?<\/script>/g, '');
@@ -46,7 +50,7 @@ test('every published article keeps one centered column and a side contents cont
     assert.doesNotMatch(visible, /guide-block-illustrated|blog-sidebar|article-grid/, file);
     const label = file.includes('/zh/') ? '目录' : 'Contents';
     assert.match(visible, new RegExp(`<div class="blog-toc"><button type="button" aria-expanded="false" aria-controls="blog-toc-panel">${label}</button><nav id="blog-toc-panel" class="guide-contents" aria-label="${label}"><ul><li><a href="#[^"]+">`), file);
-    assert.match(html, /<script src="\/blog-toc\.js" defer><\/script>/, file);
+    assert.match(html, /<script type="module" src="\/blog-toc\.js"><\/script>/, file);
     const article = visible.match(/<article class="blog-article">([\s\S]*?)<\/article>/)[1];
     assert.match(article, /<header class="guide-heading"><h1>/, file);
     assert.equal(article.includes('<nav class="guide-contents"'), false, file);

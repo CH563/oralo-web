@@ -26,14 +26,15 @@
 .blog-article h2,.blog-article h3{scroll-margin-top:32px}
 .blog-toc{display:none}
 @media(min-width:1240px){
-  .blog-toc{display:flex;flex-direction:column;align-items:flex-start;gap:10px;position:fixed;z-index:30;left:16px;top:112px;width:max-content;max-width:240px;max-height:calc(100vh - 128px)}
+  .blog-toc{display:flex;flex-direction:column;align-items:flex-start;gap:10px;position:fixed;z-index:30;left:16px;top:112px;width:max-content;max-width:240px;max-height:calc(100vh - 128px);overflow:hidden}
   .blog-toc:has(button[aria-expanded=true]){width:240px}
-  .blog-toc button{appearance:none;display:block;width:max-content;min-height:40px;padding:8px 14px;border:1px solid var(--line);border-radius:999px;background:#fffefb;font-size:14px;font-weight:650;line-height:1.4}
+  .blog-toc button{appearance:none;display:block;flex:none;width:max-content;min-height:40px;padding:8px 14px;border:1px solid var(--line);border-radius:999px;background:#fffefb;font-size:14px;font-weight:650;line-height:1.4}
   .blog-toc button:focus-visible{outline:3px solid var(--blue);outline-offset:3px}
   .blog-toc .guide-contents{display:none}
-  .blog-toc button[aria-expanded=true]+.guide-contents{display:block;align-self:stretch;width:100%;min-width:0;margin:0;padding:14px 14px 16px;border:1px solid var(--line);border-radius:16px;background:#fffefb;box-shadow:0 12px 32px #35304d14;overflow:auto;grid-template-columns:none;animation:blog-toc-in .18s ease}
+  .blog-toc button[aria-expanded=true]+.guide-contents{display:block;align-self:stretch;width:100%;min-width:0;max-height:calc(100vh - 190px);margin:0;padding:14px 14px 16px;border:1px solid var(--line);border-radius:16px;background:#fffefb;box-shadow:0 12px 32px #35304d14;overflow:auto;overscroll-behavior:contain;grid-template-columns:none;animation:blog-toc-in .18s ease}
   .blog-toc .guide-contents ul{display:grid;gap:10px;margin:0;padding:0;list-style:none}
   .blog-toc .guide-contents a{display:block}
+  .blog-toc .guide-contents a[aria-current=location]{color:var(--blue);font-weight:700;text-decoration-color:var(--blue)}
 }
 @keyframes blog-toc-in{from{transform:translateX(-16px);opacity:0}to{transform:none;opacity:1}}
 @media(prefers-reduced-motion:reduce){.blog-toc button[aria-expanded=true]+.guide-contents{animation:none}}

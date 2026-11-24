@@ -344,7 +344,7 @@ ${articleChrome(templates.header)}
     ${rendered.html}
   </article>
 </main>
-${toc ? '<script src="/blog-toc.js" defer></script>' : ''}
+${toc ? '<script type="module" src="/blog-toc.js"></script>' : ''}
 ${articleChrome(templates.footer)}`;
     const directory = path.join(root, `public/${lang}/blog/${article.meta.slug}`);
     await mkdir(directory, {recursive: true});
