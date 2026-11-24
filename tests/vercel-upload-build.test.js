@@ -57,6 +57,8 @@ test('the Vercel upload keeps every file npm run build imports and still builds'
       'src/content/blog-index.json',
       'src/content/blog/five-minute-work-update.zh.md',
       'src/content/blog/five-minute-work-update.en.md',
+      'src/content/blog/get-back-on-script.zh.md',
+      'src/content/blog/get-back-on-script.en.md',
       'src/templates/device-tool.html',
       'public/privacy/index.html',
       'public/support/index.html'
@@ -75,6 +77,8 @@ test('the Vercel upload keeps every file npm run build imports and still builds'
     for (const page of [
       'public/zh/blog/index.html',
       'public/en/blog/five-minute-work-update/index.html',
+      'public/zh/blog/get-back-on-script/index.html',
+      'public/en/blog/get-back-on-script/index.html',
       'public/zh/tools/microphone-test/index.html',
       'public/en/tools/camera-test/index.html'
     ]) assert.ok(existsSync(path.join(directory, page)), page);
@@ -82,8 +86,13 @@ test('the Vercel upload keeps every file npm run build imports and still builds'
     assert.doesNotMatch(article, /noindex, nofollow/);
     assert.match(article, /2026-11-23T18:06:07\+08:00/);
     assert.match(article, /900/);
+    const second = readFileSync(path.join(directory, 'public/zh/blog/get-back-on-script/index.html'), 'utf8');
+    assert.doesNotMatch(second, /noindex, nofollow|内部交付说明|内部编辑说明|\bnull\b|已测试成功/);
+    assert.match(second, /2026-11-24T12:43:08\+08:00/);
+    assert.match(second, /离稿发挥之后，怎样接回下一句/);
+    assert.match(second, /虚构的内部分享教学示例/);
     const uploadedConfig = JSON.parse(readFileSync(path.join(directory, 'vercel.json'), 'utf8'));
-    assert.ok(uploadedConfig.headers.some(entry => entry.source === '/:lang(zh|en)/blog/:slug((?!five-minute-work-update(?:/|$))[a-z0-9-]+)'));
+    assert.ok(uploadedConfig.headers.some(entry => entry.source === '/:lang(zh|en)/blog/:slug((?!(?:five-minute-work-update|get-back-on-script)(?:/|$))[a-z0-9-]+)'));
   } finally {
     rmSync(directory, {recursive: true, force: true});
   }

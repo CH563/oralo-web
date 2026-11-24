@@ -14,7 +14,8 @@ const localized = ['zh', 'en'].flatMap(lang => [
   ['tool', `/${lang}/tools/microphone-test/`],
   ['tool', `/${lang}/tools/camera-test/`],
   ['blog', `/${lang}/blog/`],
-  ['blog', `/${lang}/blog/five-minute-work-update/`]
+  ['blog', `/${lang}/blog/five-minute-work-update/`],
+  ['blog', `/${lang}/blog/get-back-on-script/`]
 ]);
 
 function chrome(html, lang) {
@@ -87,8 +88,8 @@ test('shared navigation and footer use the current language, include Blog, and l
   for (const slug of ['privacy', 'support']) {
     const html = read(`public/${slug}/index.html`);
     assert.equal(createHash('sha256').update(html.match(/<main[\s\S]*<\/main>/)[0]).digest('hex'), slug === 'privacy'
-      ? '9d8b95990836694b0df440683028eb7d31e7eccf8225c53032516d99c3be8542'
-      : 'cba4d07cd4a963611988761a4a253d2dfccd999cbf6ec04bc68bd7f8c2177c94');
+      ? '8c24202ee7ec09e33b25d436f735d04edc63ec0711142092fda4acf82235c1a5'
+      : '30e734a929eedde859cf81a7497e992d4e31573d389ede97fe4a2eb2fe577cf0');
     assert.doesNotMatch(html, /info-header|info-footer|data-page-language/);
     assert.doesNotMatch(html, /navigation\.js/);
     for (const lang of ['zh', 'en']) {
