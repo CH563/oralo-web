@@ -18,14 +18,32 @@ function slug(value, used) {
   return id;
 }
 
-export function renderMarkdown(markdown) {
+const imageLine = /^!\[([^\]]*)\]\(([^)\s]+)\)$/;
+const safeImageName = /^[a-z0-9][a-z0-9.-]*\.(?:jpg|jpeg|png|webp)$/;
+
+function renderImage(alt, src, options) {
+  if (!safeImageName.test(src)) return `<p>${escape(`![${alt}](${src})`)}</p>`;
+  const resolved = options.resolveImage ? options.resolveImage(src) : {src};
+  const address = resolved && resolved.src;
+  if (!address || /^(?:https?:|javascript:|data:)/i.test(address) || address.includes('..') || address.includes('\\')) {
+    return `<p>${escape(`![${alt}](${src})`)}</p>`;
+  }
+  const width = Number(resolved.width);
+  const height = Number(resolved.height);
+  const dimensions = Number.isInteger(width) && Number.isInteger(height) && width > 0 && height > 0 ? ` width="${width}" height="${height}"` : '';
+  return `<figure class="blog-figure"><img src="${escape(address)}" alt="${escape(alt)}"${dimensions} loading="lazy" decoding="async"></figure>`;
+}
+
+export function renderMarkdown(markdown, options = {}) {
   const lines = String(markdown).replace(/\r\n/g, '\n').replace(/^\uFEFF/, '').split('\n');
   const used = new Set();
   const toc = [];
   const blocks = [];
+  const images = [];
   let index = 0;
   let skippedH1 = false;
   const at = pattern => index < lines.length && pattern.test(lines[index]);
+  const structural = line => /^(?:#{1,3}\s+|\||>\s?|[-*]\s+|\d+\.\s+)/.test(line) || imageLine.test(line);
   while (index < lines.length) {
     const line = lines[index];
     if (!line.trim()) { index += 1; continue; }
@@ -63,6 +81,13 @@ export function renderMarkdown(markdown) {
       blocks.push(`<blockquote>${paragraphs.map(part => `<p>${inline(part.replace(/\n/g, ' ').trim())}</p>`).join('')}</blockquote>`);
       continue;
     }
+    const image = line.match(imageLine);
+    if (image) {
+      if (safeImageName.test(image[2])) images.push(image[2]);
+      blocks.push(renderImage(image[1], image[2], options));
+      index += 1;
+      continue;
+    }
     if (/^[-*]\s+/.test(line)) {
       const items = [];
       while (at(/^[-*]\s+/)) { items.push(inline(lines[index].replace(/^[-*]\s+/, ''))); index += 1; }
@@ -77,11 +102,11 @@ export function renderMarkdown(markdown) {
     }
     const paragraph = [line];
     index += 1;
-    while (index < lines.length && lines[index].trim() && !/^(#{1,3}\s+|\||>\s?|[-*]\s+|\d+\.\s+)/.test(lines[index])) {
+    while (index < lines.length && lines[index].trim() && !structural(lines[index])) {
       paragraph.push(lines[index]);
       index += 1;
     }
     blocks.push(`<p>${inline(paragraph.join(' '))}</p>`);
   }
-  return {html: blocks.join('\n'), toc};
+  return {html: blocks.join('\n'), toc, images};
 }

@@ -59,6 +59,9 @@ test('the Vercel upload keeps every file npm run build imports and still builds'
       'src/content/blog/five-minute-work-update.en.md',
       'src/content/blog/get-back-on-script.zh.md',
       'src/content/blog/get-back-on-script.en.md',
+      'src/content/blog/dingtalk-window-casting-teleprompter.zh.md',
+      'public/zh/blog/dingtalk-window-casting-teleprompter/dingtalk-window-casting-redacted.jpg',
+      'public/zh/blog/dingtalk-window-casting-teleprompter/dingtalk-window-guide.png',
       'src/templates/device-tool.html',
       'public/privacy/index.html',
       'public/support/index.html'
@@ -92,7 +95,11 @@ test('the Vercel upload keeps every file npm run build imports and still builds'
     assert.match(second, /离稿发挥之后，怎样接回下一句/);
     assert.match(second, /虚构的内部分享教学示例/);
     const uploadedConfig = JSON.parse(readFileSync(path.join(directory, 'vercel.json'), 'utf8'));
-    assert.ok(uploadedConfig.headers.some(entry => entry.source === '/:lang(zh|en)/blog/:slug((?!(?:five-minute-work-update|get-back-on-script)(?:/|$))[a-z0-9-]+)'));
+    assert.ok(uploadedConfig.headers.some(entry => entry.source === '/:lang(zh|en)/blog/:slug((?!(?:five-minute-work-update|get-back-on-script|dingtalk-window-casting-teleprompter)(?:/|$))[a-z0-9-]+)'));
+    const dingtalk = readFileSync(path.join(directory, 'public/zh/blog/dingtalk-window-casting-teleprompter/index.html'), 'utf8');
+    assert.doesNotMatch(dingtalk, /noindex, nofollow/);
+    assert.match(dingtalk, /2026-11-24T19:22:47\+08:00/);
+    assert.equal(existsSync(path.join(directory, 'public/en/blog/dingtalk-window-casting-teleprompter/index.html')), false);
   } finally {
     rmSync(directory, {recursive: true, force: true});
   }

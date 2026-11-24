@@ -1,3 +1,4 @@
+import { readFileSync } from 'node:fs';
 import { readFile, writeFile, mkdir, readdir } from 'node:fs/promises';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
@@ -31,7 +32,7 @@ function contextFor(lang, slug = '') {
   const suffix = slug ? `${slug}/` : '';
   return {...locales[lang], macReleaseUrl: product.macPreview.releaseUrl, macVersion: product.macPreview.version, macMinimumOS: product.macPreview.minimumOS, macArchitectures: product.macPreview.architectures, imageSuffix: lang === 'en' ? '-en' : '', ipadWidth: lang === 'en' ? englishScreenshots.screenshots.ipad.width : 2420, ipadHeight: lang === 'en' ? englishScreenshots.screenshots.ipad.height : 1668, mirrorHeight: lang === 'en' ? 1566 : 960, desktopDownload: desktopDownload(lang), desktopDownloadJump: lang === 'en' ? 'Scan QR code or copy link' : '扫码或复制下载链接', appStoreUrl, developerName:product.developer.name, developerUrl:product.developer.url, slug, language:lang, htmlLang:lang === 'zh' ? 'zh-Hans' : 'en',
     homePath:`/${lang}/`, voicePath:`/${lang}/voice-following/`, floatingPath:`/${lang}/floating-prompt/`, toolPath:`/${lang}/tools/speech-length/`, previewPath:`/${lang}/tools/speech-preview/`, micPath:`/${lang}/tools/microphone-test/`, cameraPath:`/${lang}/tools/camera-test/`, blogPath:`/${lang}/blog/`,
-    enPath:`/en/${suffix}`, zhPath:`/zh/${suffix}`, enCurrent:lang === 'en' ? 'page' : 'false', zhCurrent:lang === 'zh' ? 'page' : 'false',
+    enPath:`/en/${suffix}`, zhPath:`/zh/${suffix}`, enCurrent:lang === 'en' ? 'page' : 'false', zhCurrent:lang === 'zh' ? 'page' : 'false', enLinkAttrs:' hreflang="en"',
     canonical:`${origin}/${lang}/${suffix}`, ogLocale:lang === 'zh' ? 'zh_CN' : 'en_US', alternateLocale:lang === 'zh' ? 'en_US' : 'zh_CN'};
 }
 function document(context, body, home, tool = false, extras = {}) {
@@ -45,6 +46,10 @@ function document(context, body, home, tool = false, extras = {}) {
   });
   const ogTitle = escape(extras.ogTitle || context.pageTitle);
   const c = Object.fromEntries(Object.entries(context).map(([k,v])=>[k,escape(v)]));
+  const hreflang = context.monolingual === 'zh'
+    ? `  <link rel="alternate" hreflang="zh-Hans" href="${origin}${c.zhPath}">\n  <link rel="alternate" hreflang="x-default" href="${origin}${c.zhPath}">`
+    : `  <link rel="alternate" hreflang="zh-Hans" href="${origin}${c.zhPath}">\n  <link rel="alternate" hreflang="en" href="${origin}${c.enPath}">\n  <link rel="alternate" hreflang="x-default" href="${origin}${c.enPath}">`;
+  const ogLocales = `  <meta property="og:url" content="${c.canonical}"><meta property="og:locale" content="${c.ogLocale}">${context.alternateLocale ? `<meta property="og:locale:alternate" content="${c.alternateLocale}">` : ''}`;
   return `<!doctype html>
 <html lang="${c.htmlLang}">
 <head>
@@ -55,11 +60,9 @@ function document(context, body, home, tool = false, extras = {}) {
   <meta name="description" content="${c.pageDescription}">
   ${extras.robots ? `<meta name="robots" content="${escape(extras.robots)}">` : ''}
   <link rel="canonical" href="${c.canonical}">
-  <link rel="alternate" hreflang="zh-Hans" href="${origin}${c.zhPath}">
-  <link rel="alternate" hreflang="en" href="${origin}${c.enPath}">
-  <link rel="alternate" hreflang="x-default" href="${origin}${c.enPath}">
+${hreflang}
   <meta property="og:type" content="website"><meta property="og:site_name" content="Oralo">
-  <meta property="og:url" content="${c.canonical}"><meta property="og:locale" content="${c.ogLocale}"><meta property="og:locale:alternate" content="${c.alternateLocale}">
+${ogLocales}
   <meta property="og:title" content="${ogTitle}"><meta property="og:description" content="${c.pageDescription}">
   <meta property="og:image" content="${origin}/assets/oralo-social-v1.jpg?v=20261122-badges"><meta property="og:image:secure_url" content="${origin}/assets/oralo-social-v1.jpg?v=20261122-badges">
   <meta property="og:image:type" content="image/jpeg"><meta property="og:image:width" content="1200"><meta property="og:image:height" content="630"><meta property="og:image:alt" content="${c.socialAlt}">
@@ -245,11 +248,37 @@ for (const name of (await readdir(path.join(root, 'src/content/blog'))).filter(n
 function blogChrome(base) {
   return html => render(html, base).replace(/href="#(.*?)"/g, `href="${base.homePath}#$1"`);
 }
+function imageDimensions(buffer) {
+  if (buffer[0] === 0xFF && buffer[1] === 0xD8) {
+    let offset = 2;
+    while (offset < buffer.length - 8) {
+      if (buffer[offset] !== 0xFF) { offset += 1; continue; }
+      const marker = buffer[offset + 1];
+      if (marker === 0xC0 || marker === 0xC1 || marker === 0xC2) {
+        return {width: buffer.readUInt16BE(offset + 7), height: buffer.readUInt16BE(offset + 5)};
+      }
+      if (marker === 0xD8 || marker === 0xD9 || marker === 0x01) { offset += 2; continue; }
+      offset += 2 + buffer.readUInt16BE(offset + 2);
+    }
+  }
+  const png = Buffer.from([0x89, 0x50, 0x4E, 0x47, 0x0D, 0x0A, 0x1A, 0x0A]);
+  if (buffer.subarray(0, 8).equals(png)) return {width: buffer.readUInt32BE(16), height: buffer.readUInt32BE(20)};
+  throw new Error('Could not read image dimensions');
+}
+const languagesBySlug = new Map();
+for (const article of blogArticles) {
+  const languages = languagesBySlug.get(article.meta.slug) || new Set();
+  languages.add(article.lang);
+  languagesBySlug.set(article.meta.slug, languages);
+}
+function byPublication(a, b) {
+  return String(a.meta.datePublished || '9999').localeCompare(String(b.meta.datePublished || '9999')) || a.file.localeCompare(b.file);
+}
 for (const lang of ['zh', 'en']) {
   const indexCopy = blogIndexCopy[lang];
   const items = blogArticles.filter(article => article.lang === lang);
   const published = items.filter(article => publishedArticle(article.meta));
-  const visible = published.length ? published : items;
+  const visible = (published.length ? published : items).slice().sort(byPublication);
   const indexable = published.length > 0 && visible.every(article => publishedArticle(article.meta));
   const base = contextFor(lang, 'blog');
   const chrome = blogChrome(base);
@@ -281,8 +310,26 @@ ${chrome(templates.footer)}`;
   }));
   for (const article of items) {
     const draft = !publishedArticle(article.meta);
-    const rendered = renderMarkdown(article.markdown);
     const articleBase = contextFor(lang, `blog/${article.meta.slug}`);
+    const available = languagesBySlug.get(article.meta.slug);
+    if (available.size < 2) {
+      if (!(available.size === 1 && available.has('zh') && lang === 'zh')) {
+        throw new Error(`${article.file} has no translated page, and an invented translation must not be generated`);
+      }
+      articleBase.enPath = '/en/blog/';
+      articleBase.enLinkAttrs = ' data-language-fallback="blog-index" title="这篇只有中文" aria-label="这篇只有中文，前往英文指南列表"';
+      articleBase.alternateLocale = '';
+      articleBase.monolingual = 'zh';
+    }
+    const rendered = renderMarkdown(article.markdown, {
+      resolveImage: filename => {
+        const imageFile = path.join(root, 'public', lang, 'blog', article.meta.slug, filename);
+        let buffer;
+        try { buffer = readFileSync(imageFile); }
+        catch { throw new Error(`${article.file} references missing image ${filename}`); }
+        return {src: `/${lang}/blog/${article.meta.slug}/${filename}`, ...imageDimensions(buffer)};
+      }
+    });
     const articleChrome = blogChrome(articleBase);
     const toc = rendered.toc.length ? `<nav class="guide-contents" aria-label="${escape(indexCopy.contentsLabel)}"><span>${escape(indexCopy.contentsLabel)}</span><ul>${rendered.toc.map(item => `<li><a href="#${item.id}">${item.text}</a></li>`).join('')}</ul></nav>` : '';
     const dates = !draft && article.meta.datePublished ? `<p class="blog-dates">${escape(indexCopy.publishedLabel)} <time datetime="${escape(article.meta.datePublished)}">${escape(article.meta.datePublished)}</time>${article.meta.dateModified ? ` · ${escape(indexCopy.updatedLabel)} <time datetime="${escape(article.meta.dateModified)}">${escape(article.meta.dateModified)}</time>` : ''}</p>` : '';
