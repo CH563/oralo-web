@@ -1,6 +1,7 @@
 .blog-page{padding-bottom:72px;overflow-wrap:anywhere}
 .blog-draft-banner{max-width:42rem;margin:0 0 22px;padding:14px 16px;border:1px solid #dfc178;border-radius:12px;background:#fff1cc;color:var(--ink);font-size:14px;line-height:1.65}
-.blog-article{max-width:42rem}
+.blog-article{max-width:42rem;margin-inline:auto}
+.blog-page:has(>.blog-article)>.guide-breadcrumb,.blog-page:has(>.blog-article)>.blog-draft-banner{max-width:42rem;margin-inline:auto}
 .blog-article h2,.blog-card h2,html[lang=en] .blog-article h2,html[lang=en] .blog-card h2{font-size:clamp(24px,4vw,32px);line-height:1.35;letter-spacing:-.03em;margin:1.5em 0 .55em}
 .blog-article h3{font-size:20px;line-height:1.45;margin:1.3em 0 .4em}
 .blog-article p,.blog-article li{font-size:18px;line-height:1.75}
