@@ -1,17 +1,19 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import {readFileSync} from 'node:fs';
-import {readdirSync} from 'node:fs';
+import {createHash} from 'node:crypto';
+import {existsSync, readFileSync, readdirSync} from 'node:fs';
 
 const read = path => readFileSync(new URL(`../${path}`, import.meta.url), 'utf8');
 const origin = 'https://oralo.fun';
 
 const publishedAt = '2026-11-23T18:06:07+08:00';
 const secondPublishedAt = '2026-11-24T12:43:08+08:00';
+const thirdPublishedAt = '2026-11-24T19:22:47+08:00';
 const publishedPattern = publishedAt.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
 const secondPublishedPattern = secondPublishedAt.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
-const publishedSlugs = ['five-minute-work-update', 'get-back-on-script'];
-const draftSlugHeader = '/:lang(zh|en)/blog/:slug((?!(?:five-minute-work-update|get-back-on-script)(?:/|$))[a-z0-9-]+)';
+const thirdPublishedPattern = thirdPublishedAt.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+const publishedSlugs = ['five-minute-work-update', 'get-back-on-script', 'dingtalk-window-casting-teleprompter'];
+const draftSlugHeader = '/:lang(zh|en)/blog/:slug((?!(?:five-minute-work-update|get-back-on-script|dingtalk-window-casting-teleprompter)(?:/|$))[a-z0-9-]+)';
 
 test('the reviewed first article is published at the Shanghai release time without an author', () => {
   for (const file of ['src/content/blog/five-minute-work-update.zh.md', 'src/content/blog/five-minute-work-update.en.md']) {
@@ -75,7 +77,8 @@ test('the reviewed blog indexes and first article are public, and other blog URL
     for (const route of [`/${lang}/blog/`, `/${lang}/blog/get-back-on-script/`]) {
       const html = read(`public${route}index.html`);
       assert.doesNotMatch(html, /<meta name="robots" content="noindex, nofollow">/);
-      assert.match(sitemap, new RegExp(`<loc>${origin}${route}</loc><lastmod>${secondPublishedPattern}</lastmod>`));
+      const lastmod = route === '/zh/blog/' ? thirdPublishedPattern : secondPublishedPattern;
+      assert.match(sitemap, new RegExp(`<loc>${origin}${route}</loc><lastmod>${lastmod}</lastmod>`));
       assert.equal((html.match(/<h1\b/g) || []).length, 1);
       assert.match(html, new RegExp(`<link rel="canonical" href="${origin}${route}">`));
       assert.match(html, new RegExp(`hreflang="zh-Hans" href="${origin}/zh${route.slice(3)}"`));
@@ -112,6 +115,7 @@ test('the reviewed blog indexes and first article are public, and other blog URL
   }
   const names = readdirSync(new URL('../src/content/blog', import.meta.url));
   assert.deepEqual(names.filter(name => name.endsWith('.md')).sort(), [
+    'dingtalk-window-casting-teleprompter.zh.md',
     'five-minute-work-update.en.md', 'five-minute-work-update.zh.md',
     'get-back-on-script.en.md', 'get-back-on-script.zh.md'
   ]);
@@ -128,6 +132,7 @@ test('the reviewed second article is published in both languages without draft m
     `${origin}/en/blog/five-minute-work-update/`,
     `${origin}/en/blog/get-back-on-script/`,
     `${origin}/zh/blog/`,
+    `${origin}/zh/blog/dingtalk-window-casting-teleprompter/`,
     `${origin}/zh/blog/five-minute-work-update/`,
     `${origin}/zh/blog/get-back-on-script/`
   ]);
@@ -222,7 +227,7 @@ test('the reviewed second article is published in both languages without draft m
     assert.ok(graph['@graph'].every(node => node['@type'] !== 'Person' && node.author == null));
     const index = read(`public/${lang}/blog/index.html`);
     const cards = [...index.matchAll(/<article class="blog-card">([\s\S]*?)<\/article>/g)].map(match => match[1]);
-    assert.equal(cards.length, 2);
+    assert.equal(cards.length, lang === 'zh' ? 3 : 2);
     assert.match(cards[0], new RegExp(`href="/${lang}/blog/five-minute-work-update/"`));
     assert.match(cards[0], new RegExp(`<time datetime="${publishedPattern}">`));
     assert.match(cards[1], new RegExp(`href="/${lang}/blog/get-back-on-script/"`));
@@ -236,4 +241,79 @@ test('the reviewed second article is published in both languages without draft m
     assert.match(index, new RegExp(`hreflang="en" href="${origin}/en/blog/"`));
     assert.match(index, new RegExp(`hreflang="x-default" href="${origin}/en/blog/"`));
   }
+});
+
+test('the approved DingTalk article is Chinese only, published, and keeps both safe images', () => {
+  const slug = 'dingtalk-window-casting-teleprompter';
+  const route = `/zh/blog/${slug}/`;
+  const source = read(`src/content/blog/${slug}.zh.md`);
+  const body = source.replace(/^---\n[\s\S]*?\n---\n/, '');
+  assert.equal(createHash('sha256').update(body).digest('hex'), 'bc8f5df13c757946f1812d321d2259c30305e97f1cd4afcc6fb530bfbe66996d');
+  assert.match(source, /^status: published$/m);
+  assert.match(source, /^reviewStatus: approved$/m);
+  assert.match(source, new RegExp(`^datePublished: ${thirdPublishedPattern}$`, 'm'));
+  assert.match(source, /^dateModified: null$/m);
+  assert.match(source, /^draftedAt: null$/m);
+  assert.match(source, /^author: null$/m);
+  assert.doesNotMatch(source, /^author: (?!null$)/m);
+  assert.doesNotMatch(source, /translationUrl|\/en\/blog\/dingtalk|hreflang: en/);
+  assert.equal(existsSync(new URL(`../src/content/blog/${slug}.en.md`, import.meta.url)), false);
+  assert.equal(existsSync(new URL(`../public/en/blog/${slug}/index.html`, import.meta.url)), false);
+  for (const sentence of [
+    '如果共享的是整个桌面，或做了屏幕镜像，提词窗可能一起出现在对方画面里。',
+    '把背景调透明，只改变自己阅读时的观感，并不会自动把提词从共享画面中藏掉。',
+    '这一点不能推广成「所有投屏、录屏或会议软件都会自动排除提词窗」。',
+    '换了一种投屏方法，或改用系统镜像、整屏录制时，都要重新看预览，不能只靠上次的经验。',
+    '应选「应用窗口」，然后选择要分享的 PPT 或浏览器，再开始投屏。',
+    'https://oralo.fun/zh/#macos'
+  ]) assert.ok(body.includes(sentence), sentence);
+  const images = {
+    'dingtalk-window-casting-redacted.jpg': ['29427a331b750b5a01b23bf057d677706dc35d422f517d56ff52dc3e350a5723', '外接大屏只显示汇报演示，Mac 上保留 Oralo 提词窗口。照片中的投屏连接信息已遮盖。', 1280, 1707],
+    'dingtalk-window-guide.png': ['fbb94101f89b8d197d2f748b82542ab236d21c93c131cf5c70b484a4fcf24901', 'Oralo 使用指南「视频会议与投屏」中的钉钉投屏示例，应选择「应用窗口」。', 685, 1039]
+  };
+  const html = read(`public${route}index.html`);
+  const visible = html.replace(/<script\b[^>]*>[\s\S]*?<\/script>/g, '');
+  assert.equal((visible.match(/<h1\b/g) || []).length, 1);
+  assert.match(visible, /<title>钉钉投屏时，怎样让观众看汇报、自己看提词 · Oralo<\/title>/);
+  assert.match(visible, /<h1>钉钉投屏时，怎样让观众看汇报、自己看提词<\/h1>/);
+  assert.match(html, /data-content-status="published"/);
+  assert.match(html, /data-review-status="approved"/);
+  assert.doesNotMatch(html, /<meta name="robots" content="noindex, nofollow">|blog-draft-banner|编辑预览，尚未发布/);
+  assert.match(html, new RegExp(`<link rel="canonical" href="${origin}${route}">`));
+  assert.deepEqual([...html.matchAll(/<link rel="alternate" hreflang="([^"]+)" href="([^"]+)">/g)].map(match => [match[1], match[2]]), [
+    ['zh-Hans', `${origin}${route}`],
+    ['x-default', `${origin}${route}`]
+  ]);
+  assert.doesNotMatch(html, /hreflang="en"|og:locale:alternate|\/en\/blog\/dingtalk-window-casting-teleprompter/);
+  assert.match(html, /property="og:locale" content="zh_CN"/);
+  assert.match(html, /href="\/en\/blog\/" lang="en" data-language-fallback="blog-index" title="这篇只有中文" aria-label="这篇只有中文，前往英文指南列表" data-language-link="en"/);
+  assert.match(html, new RegExp(`<time datetime="${thirdPublishedPattern}">${thirdPublishedPattern}</time>`));
+  assert.doesNotMatch(html, /<time datetime="2026-11-24">|"author"|Person/);
+  for (const [name, [checksum, alt, width, height]] of Object.entries(images)) {
+    const file = `public${route}${name}`;
+    const bytes = readFileSync(new URL(`../${file}`, import.meta.url));
+    assert.equal(createHash('sha256').update(bytes).digest('hex'), checksum, name);
+    assert.match(html, new RegExp(`<img src="${route}${name}" alt="${alt.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')}" width="${width}" height="${height}" loading="lazy" decoding="async">`));
+  }
+  assert.match(html, /class="blog-figure"/);
+  const graph = JSON.parse(html.match(/<script id="site-structured-data" type="application\/ld\+json">([\s\S]*?)<\/script>/)[1]);
+  const posting = graph['@graph'].find(node => node['@type'] === 'BlogPosting');
+  assert.equal(posting.headline, '钉钉投屏时，怎样让观众看汇报、自己看提词');
+  assert.equal(posting.datePublished, thirdPublishedAt);
+  assert.equal(posting.inLanguage, 'zh-Hans');
+  assert.equal(posting.author, undefined);
+  assert.equal(posting.url, `${origin}${route}`);
+  const zhIndex = read('public/zh/blog/index.html');
+  const enIndex = read('public/en/blog/index.html');
+  const zhCards = [...zhIndex.matchAll(/<article class="blog-card">([\s\S]*?)<\/article>/g)].map(match => match[1]);
+  assert.equal(zhCards.length, 3);
+  assert.match(zhCards[2], new RegExp(`href="${route}"`));
+  assert.match(zhCards[2], /钉钉投屏时，怎样让观众看汇报、自己看提词/);
+  assert.match(zhCards[2], new RegExp(`<time datetime="${thirdPublishedPattern}">`));
+  assert.doesNotMatch(enIndex, /dingtalk-window-casting-teleprompter|钉钉投屏时/);
+  assert.match(read('public/sitemap.xml'), new RegExp(`<loc>${origin}${route}</loc><lastmod>${thirdPublishedPattern}</lastmod>`));
+  assert.doesNotMatch(read('public/sitemap.xml'), /\/en\/blog\/dingtalk-window-casting-teleprompter/);
+  assert.match(read('src/content/product.json'), /https:\/\/github\.com\/CH563\/oralo\/releases\/tag\/macos-v0\.1\.0-beta\.12/);
+  assert.match(read('public/zh/index.html'), /https:\/\/github\.com\/CH563\/oralo\/releases\/tag\/macos-v0\.1\.0-beta\.12/);
+  assert.match(read('public/en/index.html'), /https:\/\/github\.com\/CH563\/oralo\/releases\/tag\/macos-v0\.1\.0-beta\.12/);
 });

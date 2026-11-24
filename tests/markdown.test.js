@@ -33,3 +33,21 @@ A [safe link](https://oralo.fun/zh/tools/speech-length/) and a [blocked link](ht
   assert.match(html, /<blockquote><p>Remember/);
   assert.match(html, /<ul><li>one<\/li><li>two<\/li><\/ul>/);
 });
+
+test('markdown images keep approved local files and drop remote or unsafe sources', () => {
+  const {html, images} = renderMarkdown(`![现场照片](dingtalk-window-casting-redacted.jpg)
+
+![指南](dingtalk-window-guide.png)
+
+![远程](https://example.com/secret.jpg)
+
+![穿越](../original.jpg)
+`, {
+    resolveImage: name => ({src: `/zh/blog/dingtalk-window-casting-teleprompter/${name}`, width: 1280, height: 1707})
+  });
+  assert.deepEqual(images, ['dingtalk-window-casting-redacted.jpg', 'dingtalk-window-guide.png']);
+  assert.match(html, /<img src="\/zh\/blog\/dingtalk-window-casting-teleprompter\/dingtalk-window-casting-redacted.jpg" alt="现场照片" width="1280" height="1707" loading="lazy" decoding="async">/);
+  assert.match(html, /!\[远程\]\(https:\/\/example\.com\/secret\.jpg\)/);
+  assert.match(html, /!\[穿越\]\(\.\.\/original\.jpg\)/);
+  assert.doesNotMatch(html, /<(?:a|img)\b[^>]*(?:href|src)="(?:https?:|javascript:|\.\.|data:)/);
+});

@@ -19,5 +19,7 @@
 .blog-card p{font-size:16px;line-height:1.7;color:var(--muted);margin-top:10px}
 .blog-card .blog-draft-banner{margin-top:16px}
 .blog-dates{margin-top:16px;color:var(--muted);font-size:14px}
+.blog-figure{margin:1.25em 0}
+.blog-figure img{display:block;width:100%;max-width:100%;height:auto;border:1px solid var(--line);border-radius:16px;background:#fffefb}
 @media(max-width:700px){.blog-article p,.blog-article li{font-size:16px}.blog-card{padding:18px;border-radius:18px}.blog-article th,.blog-article td{padding:10px 8px}}
 @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
