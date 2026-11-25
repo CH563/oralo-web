@@ -5,7 +5,8 @@ function inline(value) {
   const text = escape(value).replace(/`([^`]+)`/g, (_, content) => `\u0000${code.push(content) - 1}\u0000`);
   const linked = text.replace(/\[([^\]]+)\]\((https:\/\/[^)\s]+)\)/g, (_, label, href) => `<a href="${href}">${label}</a>`);
   const strong = linked.replace(/\*\*([^*]+)\*\*/g, '<strong>$1</strong>');
-  return strong.replace(/\u0000(\d+)\u0000/g, (_, index) => `<code>${code[index]}</code>`);
+  const emphasis = strong.replace(/(^|[^*])\*([^*]+)\*/g, (_, prefix, content) => `${prefix}<em>${content}</em>`);
+  return emphasis.replace(/\u0000(\d+)\u0000/g, (_, index) => `<code>${code[index]}</code>`);
 }
 
 function slug(value, used) {

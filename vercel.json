@@ -88,7 +88,7 @@
       ]
     },
     {
-      "source": "/:lang(zh|en)/blog/:slug((?!(?:five-minute-work-update|get-back-on-script|dingtalk-window-casting-teleprompter)(?:/|$))[a-z0-9-]+)",
+      "source": "/:lang(zh|en)/blog/:slug((?!(?:five-minute-work-update|get-back-on-script|dingtalk-window-casting-teleprompter|from-slides-to-script)(?:/|$))[a-z0-9-]+)",
       "headers": [
         {
           "key": "X-Robots-Tag",
