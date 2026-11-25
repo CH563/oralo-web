@@ -14,23 +14,22 @@ const articles = [
   'public/en/blog/from-slides-to-script/index.html'
 ];
 
-test('the shared article column stays a centered reading measure, not a full-width or sidebar grid', () => {
+test('blog pages use the shared site column instead of a narrower reading measure', () => {
   const css = read('public/blog.css');
-  const articleRule = css.match(/\.blog-article\{([^}]*)\}/);
-  assert.ok(articleRule, 'public/blog.css is missing .blog-article');
-  assert.match(articleRule[1], /max-width:42rem/);
-  assert.match(articleRule[1], /margin-inline:auto/);
-  assert.doesNotMatch(articleRule[1], /max-width:\s*(?:none|100%|1120px)|width:\s*(?:100%|1120px)|grid-template-columns|display:\s*grid/);
+  const site = read('public/styles.css');
+  assert.match(site, /\.wrap\{max-width:1120px;width:calc\(100% - 96px\);margin-inline:auto\}/);
+  assert.doesNotMatch(css, /42rem|46rem|672px|736px/);
+  assert.match(css, /\.blog-page \.guide-heading,\.blog-page \.guide-intro\{max-width:none\}/);
   assert.doesNotMatch(css, /\.blog-page\{[^}]*grid-template-columns|\.blog-page\{[^}]*display:\s*grid/);
-  assert.match(css, /\.blog-page:has\(>\.blog-article\)>\.guide-breadcrumb,\.blog-page:has\(>\.blog-article\)>\.blog-draft-banner\{max-width:42rem;margin-inline:auto\}/);
   assert.match(css, /\.blog-figure img\{[^}]*max-width:100%/);
   assert.match(css, /\.blog-figure img\{[^}]*height:auto/);
+  assert.doesNotMatch(read('public/guides.css'), /\.blog-article|\.blog-toc|max-width:none/);
 });
 
 test('every published article keeps one centered column and a side contents control outside that column', () => {
   const css = read('public/blog.css');
   assert.match(css, /\.blog-toc\{display:none\}/);
-  assert.match(css, /@media\(min-width:1240px\)\{[^}]*\.blog-toc\{[^}]*position:fixed/);
+  assert.match(css, /@media\(min-width:1700px\)\{[^}]*\.blog-toc\{[^}]*position:fixed/);
   assert.match(css, /\.blog-toc button:focus-visible\{[^}]*outline:3px solid/);
   assert.match(css, /\.blog-toc \.guide-contents\{display:none\}/);
   assert.match(css, /\.blog-toc button\[aria-expanded=true\]\+\.guide-contents\{display:block/);
@@ -65,10 +64,10 @@ test('every published article keeps one centered column and a side contents cont
   assert.doesNotMatch(read('public/guides.css'), /\.blog-article|\.blog-toc/);
 });
 
-test('the shared blog index is centered on its own measure and does not reuse the article width', () => {
+test('the shared blog index uses the site column and keeps the published card order', () => {
   const css = read('public/blog.css');
-  assert.match(css, /\.blog-page:not\(:has\(>\.blog-article\)\)>\.guide-breadcrumb,\.blog-page:not\(:has\(>\.blog-article\)\)>\.guide-heading,\.blog-page:not\(:has\(>\.blog-article\)\)>\.blog-list,\.blog-page:not\(:has\(>\.blog-article\)\)>\.blog-draft-banner\{max-width:46rem;margin-inline:auto\}/);
-  assert.doesNotMatch(css.match(/\.blog-page:not\(:has\(>\.blog-article\)\)[^}]*\}/)[0], /42rem|672px/);
+  assert.match(css, /\.blog-list\{display:grid;gap:18px\}/);
+  assert.doesNotMatch(css, /\.blog-list\{[^}]*max-width/);
   for (const file of ['public/zh/blog/index.html', 'public/en/blog/index.html']) {
     const html = read(file);
     assert.match(html, /<main id="main" class="wrap guide-page blog-page"/, file);

@@ -47,6 +47,7 @@ test('the Vercel upload keeps every file npm run build imports and still builds'
   try {
     const imported = [...localImports(path.join(root, 'scripts/build-site.mjs'))];
     assert.deepEqual(imported.sort(), [
+      'scripts/blog-byline.mjs',
       'scripts/build-site.mjs',
       'scripts/render-markdown.mjs',
       'scripts/structured-data.mjs',
@@ -69,6 +70,7 @@ test('the Vercel upload keeps every file npm run build imports and still builds'
       'public/zh/blog/from-slides-to-script/from-slides-to-script-demo-chart-slide-and-prompter.jpg',
       'public/en/blog/from-slides-to-script/from-slides-to-script-demo-chart-slide-and-prompter.jpg',
       'src/templates/device-tool.html',
+      'public/assets/liwen-chen.jpg',
       'public/privacy/index.html',
       'public/support/index.html'
     ]) assert.ok(kept.includes(file), file);

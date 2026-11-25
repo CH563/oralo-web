@@ -17,7 +17,30 @@ const slidesPublishedPattern = slidesPublishedAt.replace(/[.*+?^${}()|[\]\\]/g, 
 const publishedSlugs = ['five-minute-work-update', 'get-back-on-script', 'dingtalk-window-casting-teleprompter', 'from-slides-to-script'];
 const draftSlugHeader = '/:lang(zh|en)/blog/:slug((?!(?:five-minute-work-update|get-back-on-script|dingtalk-window-casting-teleprompter|from-slides-to-script)(?:/|$))[a-z0-9-]+)';
 
-test('the reviewed first article is published at the Shanghai release time without an author', () => {
+const visibleTime = {
+  zh: {
+    [publishedAt]: '2026年11月23日 18:06',
+    [secondPublishedAt]: '2026年11月24日 12:43',
+    [thirdPublishedAt]: '2026年11月24日 19:22',
+    [slidesPublishedAt]: '2026年11月25日 10:42'
+  },
+  en: {
+    [publishedAt]: 'Nov 23, 2026, 18:06',
+    [secondPublishedAt]: 'Nov 24, 2026, 12:43',
+    [thirdPublishedAt]: 'Nov 24, 2026, 19:22',
+    [slidesPublishedAt]: 'Nov 25, 2026, 10:42'
+  }
+};
+const publisher = {
+  '@type': 'Person',
+  name: 'LiWen Chen',
+  url: 'https://x.com/LiWen563',
+  image: 'https://oralo.fun/assets/liwen-chen.jpg',
+  sameAs: ['https://x.com/LiWen563', 'https://github.com/CH563']
+};
+const timeTag = (iso, lang) => `<time datetime="${iso}">${visibleTime[lang][iso]}</time>`;
+
+test('the reviewed first article keeps its Shanghai publication instant', () => {
   for (const file of ['src/content/blog/five-minute-work-update.zh.md', 'src/content/blog/five-minute-work-update.en.md']) {
     const source = read(file);
     assert.match(source, /^status: published$/m);
@@ -74,7 +97,7 @@ test('the reviewed blog indexes and first article are public, and other blog URL
       assert.match(html, new RegExp(`hreflang="en" href="${origin}/en${route.slice(3)}"`));
       assert.match(html, new RegExp(`hreflang="x-default" href="${origin}/en${route.slice(3)}"`));
       assert.doesNotMatch(html, /编辑预览，尚未发布|Editorial preview\. Not published/);
-      assert.doesNotMatch(html, /"author"|Person/);
+      assert.ok(html.includes(timeTag(publishedAt, lang)));
     }
     for (const route of [`/${lang}/blog/`, `/${lang}/blog/get-back-on-script/`]) {
       const html = read(`public${route}index.html`);
@@ -87,16 +110,16 @@ test('the reviewed blog indexes and first article are public, and other blog URL
       assert.match(html, new RegExp(`hreflang="en" href="${origin}/en${route.slice(3)}"`));
       assert.match(html, new RegExp(`hreflang="x-default" href="${origin}/en${route.slice(3)}"`));
       assert.doesNotMatch(html, /编辑预览，尚未发布|Editorial preview\. Not published/);
-      assert.doesNotMatch(html, /"author"|Person/);
+      if (route.endsWith('/blog/')) assert.doesNotMatch(html, /"author"|Person|blog-byline/);
     }
     const index = read(`public/${lang}/blog/index.html`);
     assert.match(index, /data-editorial-index="public"/);
-    assert.match(index, new RegExp(`<time datetime="${publishedPattern}">${publishedPattern}</time>`));
+    assert.ok(index.includes(timeTag(publishedAt, lang)));
     const article = read(`public/${lang}/blog/five-minute-work-update/index.html`);
     assert.match(article, /data-content-status="published"/);
     assert.match(article, /data-review-status="approved"/);
     assert.match(article, /data-drafted-at="2026-11-23"/);
-    assert.match(article, new RegExp(`<time datetime="${publishedPattern}">${publishedPattern}</time>`));
+    assert.ok(article.includes(timeTag(publishedAt, lang)));
     assert.doesNotMatch(article, /<time datetime="2026-11-23">/);
     assert.match(article, /900/);
     assert.match(article, /630/);
@@ -109,9 +132,10 @@ test('the reviewed blog indexes and first article are public, and other blog URL
     assert.ok(posting, lang);
     assert.equal(posting.datePublished, publishedAt);
     assert.equal(posting.dateModified, undefined);
-    assert.equal(posting.author, undefined);
+    assert.deepEqual(posting.author, publisher);
     assert.equal(posting.headline, lang === 'zh' ? '5 分钟工作汇报，怎样备稿和排练' : 'How to prepare and rehearse a five-minute work update');
-    assert.ok(graph['@graph'].every(node => node['@type'] !== 'Person' && node.author == null));
+    assert.ok(graph['@graph'].every(node => node['@type'] !== 'Person'));
+    assert.ok(graph['@graph'].filter(node => node !== posting).every(node => node.author == null));
     const indexGraph = JSON.parse(index.match(/<script id="site-structured-data" type="application\/ld\+json">([\s\S]*?)<\/script>/)[1]);
     assert.ok(indexGraph['@graph'].every(node => node['@type'] !== 'BlogPosting'));
   }
@@ -214,7 +238,7 @@ test('the reviewed second article is published in both languages without draft m
     assert.match(html, /data-content-status="published"/);
     assert.match(html, /data-review-status="approved"/);
     assert.match(html, /data-drafted-at="2026-11-24"/);
-    assert.match(html, new RegExp(`<time datetime="${secondPublishedPattern}">${secondPublishedPattern}</time>`));
+    assert.ok(html.includes(timeTag(secondPublishedAt, lang)));
     assert.doesNotMatch(html, /<time datetime="2026-11-24">/);
     assert.match(html, new RegExp(`<link rel="canonical" href="${origin}${route}">`));
     assert.match(html, new RegExp(`hreflang="zh-Hans" href="${origin}/zh/blog/get-back-on-script/"`));
@@ -227,9 +251,9 @@ test('the reviewed second article is published in both languages without draft m
     assert.equal(posting.headline, copy.title);
     assert.equal(posting.datePublished, secondPublishedAt);
     assert.equal(posting.dateModified, undefined);
-    assert.equal(posting.author, undefined);
+    assert.deepEqual(posting.author, publisher);
     assert.equal(posting.url, `${origin}${route}`);
-    assert.ok(graph['@graph'].every(node => node['@type'] !== 'Person' && node.author == null));
+    assert.ok(graph['@graph'].every(node => node['@type'] !== 'Person'));
     const index = read(`public/${lang}/blog/index.html`);
     const cards = [...index.matchAll(/<article class="blog-card">([\s\S]*?)<\/article>/g)].map(match => match[1]);
     assert.equal(cards.length, lang === 'zh' ? 4 : 3);
@@ -238,7 +262,7 @@ test('the reviewed second article is published in both languages without draft m
     assert.match(cards[1], new RegExp(`href="/${lang}/blog/get-back-on-script/"`));
     assert.ok(cards[1].includes(copy.title));
     assert.match(cards[1], new RegExp(copy.excerpt.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')));
-    assert.match(cards[1], new RegExp(`<time datetime="${secondPublishedPattern}">${secondPublishedPattern}</time>`));
+    assert.ok(cards[1].includes(timeTag(secondPublishedAt, lang)));
     assert.doesNotMatch(index, new RegExp(copy.otherTitle));
     assert.doesNotMatch(index, /blog-draft-banner|noindex, nofollow|内部交付|:\s*null\b/);
     assert.match(index, new RegExp(`<link rel="canonical" href="${origin}/${lang}/blog/">`));
@@ -292,8 +316,8 @@ test('the approved DingTalk article is Chinese only, published, and keeps both s
   assert.doesNotMatch(html, /hreflang="en"|og:locale:alternate|\/en\/blog\/dingtalk-window-casting-teleprompter/);
   assert.match(html, /property="og:locale" content="zh_CN"/);
   assert.match(html, /href="\/en\/blog\/" lang="en" data-language-fallback="blog-index" title="这篇只有中文" aria-label="这篇只有中文，前往英文指南列表" data-language-link="en"/);
-  assert.match(html, new RegExp(`<time datetime="${thirdPublishedPattern}">${thirdPublishedPattern}</time>`));
-  assert.doesNotMatch(html, /<time datetime="2026-11-24">|"author"|Person/);
+  assert.ok(html.includes(timeTag(thirdPublishedAt, 'zh')));
+  assert.doesNotMatch(html, /<time datetime="2026-11-24">/);
   for (const [name, [checksum, alt, width, height]] of Object.entries(images)) {
     const file = `public${route}${name}`;
     const bytes = readFileSync(new URL(`../${file}`, import.meta.url));
@@ -306,7 +330,7 @@ test('the approved DingTalk article is Chinese only, published, and keeps both s
   assert.equal(posting.headline, '钉钉投屏时，怎样让观众看汇报、自己看提词');
   assert.equal(posting.datePublished, thirdPublishedAt);
   assert.equal(posting.inLanguage, 'zh-Hans');
-  assert.equal(posting.author, undefined);
+  assert.deepEqual(posting.author, publisher);
   assert.equal(posting.url, `${origin}${route}`);
   const zhIndex = read('public/zh/blog/index.html');
   const enIndex = read('public/en/blog/index.html');
@@ -419,7 +443,7 @@ test('the approved slides-to-script article is published in both languages with 
     assert.match(html, /data-content-status="published"/);
     assert.match(html, /data-review-status="approved"/);
     assert.match(html, /data-drafted-at="2026-11-25"/);
-    assert.match(html, new RegExp(`<time datetime="${slidesPublishedPattern}">${slidesPublishedPattern}</time>`));
+    assert.ok(html.includes(timeTag(slidesPublishedAt, lang)));
     assert.doesNotMatch(html, /<time datetime="2026-11-25">/);
     assert.match(html, new RegExp(`<link rel="canonical" href="${origin}${route}">`));
     assert.match(html, new RegExp(`hreflang="zh-Hans" href="${origin}/zh/blog/${slug}/"`));
@@ -439,14 +463,14 @@ test('the approved slides-to-script article is published in both languages with 
     assert.equal(posting.headline, copy[lang].title);
     assert.equal(posting.datePublished, slidesPublishedAt);
     assert.equal(posting.dateModified, undefined);
-    assert.equal(posting.author, undefined);
+    assert.deepEqual(posting.author, publisher);
     assert.equal(posting.url, `${origin}${route}`);
-    assert.ok(graph['@graph'].every(node => node['@type'] !== 'Person' && node.author == null));
+    assert.ok(graph['@graph'].every(node => node['@type'] !== 'Person'));
     const index = read(`public/${lang}/blog/index.html`);
     const cards = [...index.matchAll(/<article class="blog-card">([\s\S]*?)<\/article>/g)].map(match => match[1]);
     assert.match(cards.at(-1), new RegExp(`href="${route}"`));
     assert.match(cards.at(-1), new RegExp(copy[lang].title.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')));
-    assert.match(cards.at(-1), new RegExp(`<time datetime="${slidesPublishedPattern}">${slidesPublishedPattern}</time>`));
+    assert.ok(cards.at(-1).includes(timeTag(slidesPublishedAt, lang)));
     assert.doesNotMatch(cards.at(-1), /blog-draft-banner|编辑预览|Editorial preview/);
     assert.match(read('public/sitemap.xml'), new RegExp(`<loc>${origin}${route}</loc><lastmod>${slidesPublishedPattern}</lastmod>`));
     assert.doesNotMatch(read('public/sitemap.xml'), /from-slides-to-script\/[^<]|status: draft|noindex/);

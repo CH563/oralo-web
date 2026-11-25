@@ -44,6 +44,7 @@ export function structuredData({canonical, title, description, language, kind, p
       publisher: {'@type': 'Organization', name: 'Oralo', url: origin}
     };
     if (article.dateModified) posting.dateModified = article.dateModified;
+    if (article.author) posting.author = article.author;
     page.mainEntity = {'@id': posting['@id']};
     graph.push(posting);
   }

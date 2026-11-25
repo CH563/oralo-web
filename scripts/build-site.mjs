@@ -3,6 +3,7 @@ import { readFile, writeFile, mkdir, readdir } from 'node:fs/promises';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { origin, structuredData, structuredDataScript } from './structured-data.mjs';
+import { blogPublisher, publicationLabel, publisherMarkup } from './blog-byline.mjs';
 import { renderMarkdown } from './render-markdown.mjs';
 import { deviceCopy } from '../src/content/device-tools.mjs';
 
@@ -241,7 +242,7 @@ for (const name of (await readdir(path.join(root, 'src/content/blog'))).filter(n
   if (article.meta.canonical !== canonical) throw new Error(`${name} canonical must be ${canonical}`);
   if (publishedArticle(article.meta)) {
     if (!article.meta.datePublished || article.meta.datePublished === article.meta.draftedAt) throw new Error(`${name} needs a publication time distinct from draftedAt`);
-    if (article.meta.author) throw new Error(`${name} must not name an author`);
+    if (article.meta.author) throw new Error(`${name} must not override the site publisher`);
   }
   blogArticles.push({lang, file: name, ...article});
 }
@@ -274,6 +275,9 @@ for (const article of blogArticles) {
 function byPublication(a, b) {
   return String(a.meta.datePublished || '9999').localeCompare(String(b.meta.datePublished || '9999')) || a.file.localeCompare(b.file);
 }
+function publishedTime(iso, lang) {
+  return `<time datetime="${escape(iso)}">${escape(publicationLabel(iso, lang))}</time>`;
+}
 for (const lang of ['zh', 'en']) {
   const indexCopy = blogIndexCopy[lang];
   const items = blogArticles.filter(article => article.lang === lang);
@@ -285,7 +289,7 @@ for (const lang of ['zh', 'en']) {
   const cards = visible.map(article => {
     const draft = !publishedArticle(article.meta);
     const href = `/${lang}/blog/${article.meta.slug}/`;
-    const date = !draft && article.meta.datePublished ? `<p class="blog-dates">${escape(indexCopy.publishedLabel)} <time datetime="${escape(article.meta.datePublished)}">${escape(article.meta.datePublished)}</time></p>` : '';
+    const date = !draft && article.meta.datePublished ? `<p class="blog-dates">${escape(indexCopy.publishedLabel)} ${publishedTime(article.meta.datePublished, lang)}</p>` : '';
     return `<article class="blog-card"><h2><a href="${href}">${escape(article.meta.title)}</a></h2><p>${escape(article.meta.excerpt)}</p>${date}<a class="section-link" href="${href}">${escape(indexCopy.read)}</a>${draft ? `<p class="blog-draft-banner" role="note">${escape(indexCopy.draftBanner)}</p>` : ''}</article>`;
   }).join('');
   const indexBody = `<a class="skip" href="#main">${escape(base.skip)}</a>
@@ -332,7 +336,8 @@ ${chrome(templates.footer)}`;
     });
     const articleChrome = blogChrome(articleBase);
     const toc = rendered.toc.length ? `<div class="blog-toc"><button type="button" aria-expanded="false" aria-controls="blog-toc-panel">${escape(indexCopy.contentsLabel)}</button><nav id="blog-toc-panel" class="guide-contents" aria-label="${escape(indexCopy.contentsLabel)}"><ul>${rendered.toc.map(item => `<li><a href="#${item.id}">${item.text}</a></li>`).join('')}</ul></nav></div>` : '';
-    const dates = !draft && article.meta.datePublished ? `<p class="blog-dates">${escape(indexCopy.publishedLabel)} <time datetime="${escape(article.meta.datePublished)}">${escape(article.meta.datePublished)}</time>${article.meta.dateModified ? ` · ${escape(indexCopy.updatedLabel)} <time datetime="${escape(article.meta.dateModified)}">${escape(article.meta.dateModified)}</time>` : ''}</p>` : '';
+    const byline = draft ? '' : publisherMarkup(lang);
+    const dates = !draft && article.meta.datePublished ? `<p class="blog-dates">${escape(indexCopy.publishedLabel)} ${publishedTime(article.meta.datePublished, lang)}${article.meta.dateModified ? ` · ${escape(indexCopy.updatedLabel)} ${publishedTime(article.meta.dateModified, lang)}` : ''}</p>` : '';
     const articleBody = `<a class="skip" href="#main">${escape(articleBase.skip)}</a>
 ${articleChrome(templates.header)}
 <main id="main" class="wrap guide-page blog-page" data-content-status="${escape(article.meta.status)}" data-review-status="${escape(article.meta.reviewStatus || '')}" data-drafted-at="${escape(article.meta.draftedAt || '')}">
@@ -340,7 +345,7 @@ ${articleChrome(templates.header)}
   <nav class="guide-breadcrumb" aria-label="${escape(articleBase.breadcrumbLabel)}"><a href="${articleBase.homePath}">${escape(articleBase.breadcrumbHome)}</a><span aria-hidden="true">›</span><a href="${articleBase.blogPath}">${escape(indexCopy.heading)}</a><span aria-hidden="true">›</span><span aria-current="page">${escape(article.meta.title)}</span></nav>
   ${toc}
   <article class="blog-article">
-    <header class="guide-heading"><h1>${escape(article.meta.title)}</h1><p class="guide-intro">${escape(article.meta.excerpt)}</p>${dates}</header>
+    <header class="guide-heading"><h1>${escape(article.meta.title)}</h1><p class="guide-intro">${escape(article.meta.excerpt)}</p>${byline}${dates}</header>
     ${rendered.html}
   </article>
 </main>
@@ -359,7 +364,18 @@ ${articleChrome(templates.footer)}`;
         {name: indexCopy.heading, url: `${origin}${articleBase.blogPath}`},
         {name: article.meta.title, url: articleBase.canonical}
       ],
-      article: draft ? undefined : {headline: article.meta.title, datePublished: article.meta.datePublished, dateModified: article.meta.dateModified}
+      article: draft ? undefined : {
+        headline: article.meta.title,
+        datePublished: article.meta.datePublished,
+        dateModified: article.meta.dateModified,
+        author: {
+          '@type': 'Person',
+          name: blogPublisher.name,
+          url: blogPublisher.x,
+          image: `${origin}${blogPublisher.avatar}`,
+          sameAs: [blogPublisher.x, blogPublisher.github]
+        }
+      }
     }));
     if (!draft) {
       urls.push(articleBase.canonical);
