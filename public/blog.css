@@ -18,7 +18,16 @@
 .blog-card h2{margin-top:0}
 .blog-card p{font-size:16px;line-height:1.7;color:var(--muted);margin-top:10px}
 .blog-card .blog-draft-banner{margin-top:16px}
+.blog-byline{display:flex;align-items:center;gap:12px;margin-top:22px;flex-wrap:wrap}
+.blog-byline img{width:40px;height:40px;border-radius:50%;object-fit:cover;flex:none}
+.blog-publisher{margin:0;font-size:15px;line-height:1.4}
+.blog-publisher-label{color:var(--muted)}
+.blog-publisher-name{font-weight:650}
+.blog-social{display:inline-flex;align-items:center;gap:8px}
+.blog-social a{display:inline-flex;align-items:center;justify-content:center;width:40px;height:40px;border:1px solid var(--line);border-radius:999px;background:#fffefb;color:var(--ink)}
+.blog-social svg{display:block;width:16px;height:16px}
 .blog-dates{margin-top:16px;color:var(--muted);font-size:14px}
+.blog-byline+.blog-dates{margin-top:8px}
 .blog-figure{margin:1.25em 0}
 .blog-figure img{display:block;width:100%;max-width:100%;height:auto;border:1px solid var(--line);border-radius:16px;background:#fffefb}
 .blog-article h2,.blog-article h3{scroll-margin-top:32px}
