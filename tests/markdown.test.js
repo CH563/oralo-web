@@ -34,6 +34,19 @@ A [safe link](https://oralo.fun/zh/tools/speech-length/) and a [blocked link](ht
   assert.match(html, /<ul><li>one<\/li><li>two<\/li><\/ul>/);
 });
 
+test('markdown emphasis renders captions and titles without leaving the marker', () => {
+  const {html} = renderMarkdown(`**Before:** read the bullets.
+
+In *PLOS Computational Biology*, one idea is enough.
+
+*Sample figures such as +18% are not actual performance.*
+`);
+  assert.match(html, /<strong>Before:<\/strong> read the bullets\./);
+  assert.match(html, /In <em>PLOS Computational Biology<\/em>, one idea is enough\./);
+  assert.match(html, /<p><em>Sample figures such as \+18% are not actual performance\.<\/em><\/p>/);
+  assert.doesNotMatch(html, /\*/);
+});
+
 test('markdown images keep approved local files and drop remote or unsafe sources', () => {
   const {html, images} = renderMarkdown(`![现场照片](dingtalk-window-casting-redacted.jpg)
 

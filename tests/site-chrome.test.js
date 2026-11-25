@@ -15,7 +15,8 @@ const localized = ['zh', 'en'].flatMap(lang => [
   ['tool', `/${lang}/tools/camera-test/`],
   ['blog', `/${lang}/blog/`],
   ['blog', `/${lang}/blog/five-minute-work-update/`],
-  ['blog', `/${lang}/blog/get-back-on-script/`]
+  ['blog', `/${lang}/blog/get-back-on-script/`],
+  ['blog', `/${lang}/blog/from-slides-to-script/`]
 ]);
 
 function chrome(html, lang) {

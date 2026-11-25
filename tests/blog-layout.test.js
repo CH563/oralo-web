@@ -9,7 +9,9 @@ const articles = [
   'public/en/blog/five-minute-work-update/index.html',
   'public/zh/blog/get-back-on-script/index.html',
   'public/en/blog/get-back-on-script/index.html',
-  'public/zh/blog/dingtalk-window-casting-teleprompter/index.html'
+  'public/zh/blog/dingtalk-window-casting-teleprompter/index.html',
+  'public/zh/blog/from-slides-to-script/index.html',
+  'public/en/blog/from-slides-to-script/index.html'
 ];
 
 test('the shared article column stays a centered reading measure, not a full-width or sidebar grid', () => {
@@ -78,12 +80,14 @@ test('the shared blog index is centered on its own measure and does not reuse th
       assert.deepEqual(hrefs, [
         '/zh/blog/five-minute-work-update/',
         '/zh/blog/get-back-on-script/',
-        '/zh/blog/dingtalk-window-casting-teleprompter/'
+        '/zh/blog/dingtalk-window-casting-teleprompter/',
+        '/zh/blog/from-slides-to-script/'
       ]);
     } else {
       assert.deepEqual(hrefs, [
         '/en/blog/five-minute-work-update/',
-        '/en/blog/get-back-on-script/'
+        '/en/blog/get-back-on-script/',
+        '/en/blog/from-slides-to-script/'
       ]);
     }
   }
