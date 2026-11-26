@@ -12,7 +12,9 @@ const pages = [
   ['en', 'get-back-on-script', '2026-11-24T12:43:08+08:00', 'Nov 24, 2026, 12:43'],
   ['zh', 'dingtalk-window-casting-teleprompter', '2026-11-24T19:22:47+08:00', '2026年11月24日 19:22'],
   ['zh', 'from-slides-to-script', '2026-11-25T10:42:42+08:00', '2026年11月25日 10:42'],
-  ['en', 'from-slides-to-script', '2026-11-25T10:42:42+08:00', 'Nov 25, 2026, 10:42']
+  ['en', 'from-slides-to-script', '2026-11-25T10:42:42+08:00', 'Nov 25, 2026, 10:42'],
+  ['zh', 'on-camera-update', '2026-11-26T10:36:00+08:00', '2026年11月26日 10:36'],
+  ['en', 'on-camera-update', '2026-11-26T10:36:00+08:00', 'Nov 26, 2026, 10:36']
 ];
 
 test('publication labels use the Asia/Shanghai clock without shifting to the runtime zone', () => {
