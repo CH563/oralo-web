@@ -11,7 +11,9 @@ const articles = [
   'public/en/blog/get-back-on-script/index.html',
   'public/zh/blog/dingtalk-window-casting-teleprompter/index.html',
   'public/zh/blog/from-slides-to-script/index.html',
-  'public/en/blog/from-slides-to-script/index.html'
+  'public/en/blog/from-slides-to-script/index.html',
+  'public/zh/blog/on-camera-update/index.html',
+  'public/en/blog/on-camera-update/index.html'
 ];
 
 test('blog pages use the shared site column instead of a narrower reading measure', () => {
@@ -80,13 +82,15 @@ test('the shared blog index uses the site column and keeps the published card or
         '/zh/blog/five-minute-work-update/',
         '/zh/blog/get-back-on-script/',
         '/zh/blog/dingtalk-window-casting-teleprompter/',
-        '/zh/blog/from-slides-to-script/'
+        '/zh/blog/from-slides-to-script/',
+        '/zh/blog/on-camera-update/'
       ]);
     } else {
       assert.deepEqual(hrefs, [
         '/en/blog/five-minute-work-update/',
         '/en/blog/get-back-on-script/',
-        '/en/blog/from-slides-to-script/'
+        '/en/blog/from-slides-to-script/',
+        '/en/blog/on-camera-update/'
       ]);
     }
   }
