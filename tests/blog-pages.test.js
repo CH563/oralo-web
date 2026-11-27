@@ -16,8 +16,10 @@ const slidesPublishedAt = '2026-11-25T10:42:42+08:00';
 const slidesPublishedPattern = slidesPublishedAt.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
 const cameraPublishedAt = '2026-11-26T10:36:00+08:00';
 const cameraPublishedPattern = cameraPublishedAt.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
-const publishedSlugs = ['five-minute-work-update', 'get-back-on-script', 'dingtalk-window-casting-teleprompter', 'from-slides-to-script', 'on-camera-update'];
-const draftSlugHeader = '/:lang(zh|en)/blog/:slug((?!(?:five-minute-work-update|get-back-on-script|dingtalk-window-casting-teleprompter|from-slides-to-script|on-camera-update)(?:/|$))[a-z0-9-]+)';
+const standupPublishedAt = '2026-11-27T10:19:31+08:00';
+const standupPublishedPattern = standupPublishedAt.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+const publishedSlugs = ['five-minute-work-update', 'get-back-on-script', 'dingtalk-window-casting-teleprompter', 'from-slides-to-script', 'on-camera-update', 'one-minute-standup'];
+const draftSlugHeader = '/:lang(zh|en)/blog/:slug((?!(?:five-minute-work-update|get-back-on-script|dingtalk-window-casting-teleprompter|from-slides-to-script|on-camera-update|one-minute-standup)(?:/|$))[a-z0-9-]+)';
 
 const visibleTime = {
   zh: {
@@ -25,14 +27,16 @@ const visibleTime = {
     [secondPublishedAt]: '2026年11月24日 12:43',
     [thirdPublishedAt]: '2026年11月24日 19:22',
     [slidesPublishedAt]: '2026年11月25日 10:42',
-    [cameraPublishedAt]: '2026年11月26日 10:36'
+    [cameraPublishedAt]: '2026年11月26日 10:36',
+    [standupPublishedAt]: '2026年11月27日 10:19'
   },
   en: {
     [publishedAt]: 'Nov 23, 2026, 18:06',
     [secondPublishedAt]: 'Nov 24, 2026, 12:43',
     [thirdPublishedAt]: 'Nov 24, 2026, 19:22',
     [slidesPublishedAt]: 'Nov 25, 2026, 10:42',
-    [cameraPublishedAt]: 'Nov 26, 2026, 10:36'
+    [cameraPublishedAt]: 'Nov 26, 2026, 10:36',
+    [standupPublishedAt]: 'Nov 27, 2026, 10:19'
   }
 };
 const publisher = {
@@ -106,7 +110,7 @@ test('the reviewed blog indexes and first article are public, and other blog URL
     for (const route of [`/${lang}/blog/`, `/${lang}/blog/get-back-on-script/`]) {
       const html = read(`public${route}index.html`);
       assert.doesNotMatch(html, /<meta name="robots" content="noindex, nofollow">/);
-      const lastmod = route.endsWith('/blog/') ? cameraPublishedPattern : secondPublishedPattern;
+      const lastmod = route.endsWith('/blog/') ? standupPublishedPattern : secondPublishedPattern;
       assert.match(sitemap, new RegExp(`<loc>${origin}${route}</loc><lastmod>${lastmod}</lastmod>`));
       assert.equal((html.match(/<h1\b/g) || []).length, 1);
       assert.match(html, new RegExp(`<link rel="canonical" href="${origin}${route}">`));
@@ -149,7 +153,8 @@ test('the reviewed blog indexes and first article are public, and other blog URL
     'five-minute-work-update.en.md', 'five-minute-work-update.zh.md',
     'from-slides-to-script.en.md', 'from-slides-to-script.zh.md',
     'get-back-on-script.en.md', 'get-back-on-script.zh.md',
-    'on-camera-update.en.md', 'on-camera-update.zh.md'
+    'on-camera-update.en.md', 'on-camera-update.zh.md',
+    'one-minute-standup.en.md', 'one-minute-standup.zh.md'
   ]);
   for (const file of ['src/content/blog/five-minute-work-update.zh.md', 'src/content/blog/five-minute-work-update.en.md']) {
     assert.doesNotMatch(read(file), /get-back-on-script/);
@@ -165,12 +170,14 @@ test('the reviewed second article is published in both languages without draft m
     `${origin}/en/blog/from-slides-to-script/`,
     `${origin}/en/blog/get-back-on-script/`,
     `${origin}/en/blog/on-camera-update/`,
+    `${origin}/en/blog/one-minute-standup/`,
     `${origin}/zh/blog/`,
     `${origin}/zh/blog/dingtalk-window-casting-teleprompter/`,
     `${origin}/zh/blog/five-minute-work-update/`,
     `${origin}/zh/blog/from-slides-to-script/`,
     `${origin}/zh/blog/get-back-on-script/`,
-    `${origin}/zh/blog/on-camera-update/`
+    `${origin}/zh/blog/on-camera-update/`,
+    `${origin}/zh/blog/one-minute-standup/`
   ]);
   assert.doesNotMatch(sitemap, /future-draft|another-update|get-back-on-script\/[^<]/);
   const articles = {
@@ -263,7 +270,7 @@ test('the reviewed second article is published in both languages without draft m
     assert.ok(graph['@graph'].every(node => node['@type'] !== 'Person'));
     const index = read(`public/${lang}/blog/index.html`);
     const cards = [...index.matchAll(/<article class="blog-card">([\s\S]*?)<\/article>/g)].map(match => match[1]);
-    assert.equal(cards.length, lang === 'zh' ? 5 : 4);
+    assert.equal(cards.length, lang === 'zh' ? 6 : 5);
     assert.match(cards[0], new RegExp(`href="/${lang}/blog/five-minute-work-update/"`));
     assert.match(cards[0], new RegExp(`<time datetime="${publishedPattern}">`));
     assert.match(cards[1], new RegExp(`href="/${lang}/blog/get-back-on-script/"`));
@@ -342,7 +349,7 @@ test('the approved DingTalk article is Chinese only, published, and keeps both s
   const zhIndex = read('public/zh/blog/index.html');
   const enIndex = read('public/en/blog/index.html');
   const zhCards = [...zhIndex.matchAll(/<article class="blog-card">([\s\S]*?)<\/article>/g)].map(match => match[1]);
-  assert.equal(zhCards.length, 5);
+  assert.equal(zhCards.length, 6);
   assert.match(zhCards[2], new RegExp(`href="${route}"`));
   assert.match(zhCards[2], /钉钉投屏时，怎样让观众看汇报、自己看提词/);
   assert.match(zhCards[2], new RegExp(`<time datetime="${thirdPublishedPattern}">`));
@@ -610,13 +617,164 @@ test('the approved on-camera article is published in both languages without phot
     assert.ok(graph['@graph'].every(node => node['@type'] !== 'Person'));
     const index = read(`public/${lang}/blog/index.html`);
     const cards = [...index.matchAll(/<article class="blog-card">([\s\S]*?)<\/article>/g)].map(match => match[1]);
-    assert.match(cards.at(-1), new RegExp(`href="${route}"`));
-    assert.match(cards.at(-1), new RegExp(copy[lang].title.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')));
-    assert.ok(cards.at(-1).includes(timeTag(cameraPublishedAt, lang)));
-    assert.doesNotMatch(cards.at(-1), /blog-draft-banner|编辑预览|Editorial preview/);
+    const card = cards.find(item => item.includes(`href="${route}"`));
+    assert.ok(card, route);
+    assert.match(card, new RegExp(copy[lang].title.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')));
+    assert.ok(card.includes(timeTag(cameraPublishedAt, lang)));
+    assert.doesNotMatch(card, /blog-draft-banner|编辑预览|Editorial preview/);
     assert.match(read('public/sitemap.xml'), new RegExp(`<loc>${origin}${route}</loc><lastmod>${cameraPublishedPattern}</lastmod>`));
     assert.doesNotMatch(read('public/sitemap.xml'), /on-camera-update\/[^<]|status: draft|noindex/);
   }
-  assert.match(read('public/sitemap.xml'), new RegExp(`<loc>${origin}/zh/blog/</loc><lastmod>${cameraPublishedPattern}</lastmod>`));
-  assert.match(read('public/sitemap.xml'), new RegExp(`<loc>${origin}/en/blog/</loc><lastmod>${cameraPublishedPattern}</lastmod>`));
+});
+
+test('the approved one-minute standup article is published in both languages without photos, drafts, or internal notes', () => {
+  const slug = 'one-minute-standup';
+  const copy = {
+    zh: {
+      hash: 'af9b132b8dc899894bcb83816f454572eedbaa092da0d1d29f7916a7478e4a88',
+      title: '一分钟站会，怎样把进展和阻塞讲清楚',
+      seoTitle: '一分钟站会怎么说：把进展、下一步和阻塞讲清楚 · Oralo',
+      limits: [
+        '站会通常整场只有大约 15 分钟。',
+        '并不规定必须用哪三个问题。',
+        '这是该指南中的实践说明，不是所有团队的强制规则，也不等于 2020 版 Scrum Guide 的规定。',
+        '下面是虚构的教学示例，不代表真实团队、项目或权限流程',
+        '「支付确认页」「退款权限」只属于这个示例',
+        '估算结果不是你开口后的真实时长。',
+        '不要默认加上该工具示例里为幻灯片预留的 30 秒。',
+        '只是可调整的算例，不是标准语速',
+        '合成声音读完用了多久，不等于你会讲多久。',
+        '不要把保密内容粘贴进网页工具。',
+        '而不是规定每个人必须说满一分钟。本稿的「一分钟」是个人备稿时的起点',
+        '那篇文章以当时的预览条件为准。',
+        'Oralo 已支持 iPhone 与 iPad。',
+        '不保证能跳到任意较远的段落',
+        '系统相机拍照预览已在 iPhone 15 Pro／iOS 18.1 验证',
+        '不把上述记录写成「已在所有会议软件中测试成功」',
+        '这是普通下载链接，不会把文章或工具里的稿件传给 App。',
+        '简短说「目前没有卡住的事」即可。'
+      ],
+      links: [
+        'https://oralo.fun/zh/blog/five-minute-work-update/',
+        'https://oralo.fun/zh/blog/from-slides-to-script/',
+        'https://oralo.fun/zh/tools/speech-length/',
+        'https://oralo.fun/zh/tools/speech-preview/',
+        'https://oralo.fun/zh/blog/get-back-on-script/',
+        'https://oralo.fun/zh/blog/dingtalk-window-casting-teleprompter/',
+        'https://oralo.fun/zh/voice-following/',
+        'https://oralo.fun/zh/floating-prompt/',
+        'https://oralo.fun/zh/blog/on-camera-update/',
+        'https://oralo.fun/zh/tools/camera-test/',
+        'https://oralo.fun/zh/tools/microphone-test/',
+        'https://apps.apple.com/app/oralo-ai-teleprompter/id6835449605'
+      ]
+    },
+    en: {
+      hash: '95e4d1e96724f763a9c9360c419e138a00e60c2cebc89c30a53f70b37d7a58bc',
+      title: 'How to give a one-minute standup update without rambling',
+      seoTitle: 'How to give a one-minute standup update without rambling · Oralo',
+      limits: [
+        'A daily standup is usually about 15 minutes for the whole team.',
+        'Developers may choose any structure or technique',
+        'That is their practice guidance, not a rule for every team, and it is not a requirement in the 2020 Scrum Guide.',
+        'The following is a fictional teaching example. It does not describe a real team, project, or access process.',
+        '“Payment confirmation page” and “refund access” belong only to this example.',
+        'The estimate is not your actual speaking time.',
+        'do not add the 30-second slide allowance',
+        'adjustable examples, not a standard pace',
+        'How long the synthetic voice takes is not how long you will take.',
+        'Do not paste confidential material into a website tool.',
+        'not a rule that every person must fill a minute. The “one minute” in this article is a starting point for your own preparation.',
+        'Oralo is available for iPhone and iPad.',
+        'A jump to a distant paragraph is not guaranteed.',
+        'System Camera photo preview was checked on iPhone 15 Pro / iOS 18.1.',
+        'This article does not include a new screen recording or device test, and it does not treat the published scope as proof that every meeting app works.',
+        'This is an ordinary download link.',
+        'A brief “nothing is blocking me” is enough.',
+        'Hear your script before you speak'
+      ],
+      links: [
+        'https://oralo.fun/en/blog/five-minute-work-update/',
+        'https://oralo.fun/en/blog/from-slides-to-script/',
+        'https://oralo.fun/en/tools/speech-length/',
+        'https://oralo.fun/en/tools/speech-preview/',
+        'https://oralo.fun/en/blog/get-back-on-script/',
+        'https://oralo.fun/en/voice-following/',
+        'https://oralo.fun/en/floating-prompt/',
+        'https://oralo.fun/en/blog/on-camera-update/',
+        'https://oralo.fun/en/tools/camera-test/',
+        'https://oralo.fun/en/tools/microphone-test/',
+        'https://apps.apple.com/app/oralo-ai-teleprompter/id6835449605'
+      ]
+    }
+  };
+  for (const lang of ['zh', 'en']) {
+    const source = read(`src/content/blog/${slug}.${lang}.md`);
+    const body = source.replace(/^---\n[\s\S]*?\n---\n/, '');
+    assert.equal(createHash('sha256').update(body).digest('hex'), copy[lang].hash);
+    assert.match(source, /^status: published$/m);
+    assert.match(source, /^reviewStatus: approved$/m);
+    assert.match(source, /^draftedAt: 2026-11-27$/m);
+    assert.match(source, new RegExp(`^datePublished: ${standupPublishedPattern}$`, 'm'));
+    assert.notEqual(standupPublishedAt, '2026-11-27');
+    assert.match(source, /^dateModified: null$/m);
+    assert.match(source, /^author: null$/m);
+    assert.match(source, /^heroImage: null$/m);
+    assert.doesNotMatch(source, /^author: (?!null$)/m);
+    assert.doesNotMatch(source, /<!--|zh-article-|en-article-|内部交付说明|内部编辑说明|editorial-notes|pending-editorial|status: draft|!\[/);
+    const route = `/${lang}/blog/${slug}/`;
+    const html = read(`public${route}index.html`);
+    const visible = html.replace(/<script\b[^>]*>[\s\S]*?<\/script>/g, '');
+    const article = visible.match(/<article class="blog-article">([\s\S]*?)<\/article>/)[1];
+    assert.equal((visible.match(/<h1\b/g) || []).length, 1);
+    assert.match(visible, new RegExp(`<title>${copy[lang].seoTitle.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')}</title>`));
+    assert.match(visible, new RegExp(`<h1>${copy[lang].title.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')}</h1>`));
+    assert.equal((article.match(/<h2\b/g) || []).length, 6);
+    assert.equal((article.match(/<figure\b/g) || []).length, 0);
+    assert.equal((article.match(/<img\b/g) || []).length, 1);
+    assert.match(article, /src="\/assets\/liwen-chen.jpg"/);
+    assert.doesNotMatch(article, /<video\b|\.mp4|blog-figure|Mac|限免|价格|测试预览版|通用购买|正式上架|macos-v0/);
+    for (const sentence of copy[lang].limits) assert.ok(article.includes(sentence), sentence);
+    for (const link of copy[lang].links) assert.match(article, new RegExp(`href="${link.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')}"`));
+    if (lang === 'en') assert.doesNotMatch(html, /dingtalk-window-casting-teleprompter|钉钉/);
+    if (lang === 'zh') {
+      assert.match(article, /href="https:\/\/oralo\.fun\/zh\/blog\/dingtalk-window-casting-teleprompter\/"/);
+      assert.doesNotMatch(html, /\/en\/blog\/dingtalk-window-casting-teleprompter/);
+    }
+    assert.doesNotMatch(visible, /内部交付说明|内部编辑说明|editorial-notes|contentId|reviewStatus|pending-editorial|datePublished:|heroImage|status: draft|author:|seoTitle:|```|:\s*null\b|\bnull\b|zh-article-|en-article-|已测试成功|Search Console|free_credit/);
+    assert.doesNotMatch(html, /<meta name="robots" content="noindex, nofollow">|blog-draft-banner|编辑预览，尚未发布|Editorial preview\. Not published/);
+    assert.match(html, /data-content-status="published"/);
+    assert.match(html, /data-review-status="approved"/);
+    assert.match(html, /data-drafted-at="2026-11-27"/);
+    assert.ok(html.includes(timeTag(standupPublishedAt, lang)));
+    assert.doesNotMatch(html, /<time datetime="2026-11-27">|\+08:00<|CST|UTC|时区/);
+    assert.match(html, new RegExp(`<link rel="canonical" href="${origin}${route}">`));
+    assert.match(html, new RegExp(`hreflang="zh-Hans" href="${origin}/zh/blog/${slug}/"`));
+    assert.match(html, new RegExp(`hreflang="en" href="${origin}/en/blog/${slug}/"`));
+    assert.match(html, new RegExp(`hreflang="x-default" href="${origin}/en/blog/${slug}/"`));
+    assert.match(html, new RegExp(`href="/zh/blog/${slug}/"[^>]*data-language-link="zh"`));
+    assert.match(html, new RegExp(`href="/en/blog/${slug}/"[^>]*data-language-link="en"`));
+    const graph = JSON.parse(html.match(/<script id="site-structured-data" type="application\/ld\+json">([\s\S]*?)<\/script>/)[1]);
+    const posting = graph['@graph'].find(node => node['@type'] === 'BlogPosting');
+    assert.equal(posting.headline, copy[lang].title);
+    assert.equal(posting.datePublished, standupPublishedAt);
+    assert.equal(posting.dateModified, undefined);
+    assert.deepEqual(posting.author, publisher);
+    assert.equal(posting.url, `${origin}${route}`);
+    assert.equal(posting.image, undefined);
+    assert.ok(graph['@graph'].every(node => node['@type'] !== 'Person'));
+    const index = read(`public/${lang}/blog/index.html`);
+    const cards = [...index.matchAll(/<article class="blog-card">([\s\S]*?)<\/article>/g)].map(match => match[1]);
+    assert.equal(cards.length, lang === 'zh' ? 6 : 5);
+    assert.match(cards.at(-1), new RegExp(`href="${route}"`));
+    assert.match(cards.at(-1), new RegExp(copy[lang].title.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')));
+    assert.ok(cards.at(-1).includes(timeTag(standupPublishedAt, lang)));
+    assert.doesNotMatch(cards.at(-1), /blog-draft-banner|编辑预览|Editorial preview/);
+    assert.match(read('public/sitemap.xml'), new RegExp(`<loc>${origin}${route}</loc><lastmod>${standupPublishedPattern}</lastmod>`));
+    assert.doesNotMatch(read('public/sitemap.xml'), /one-minute-standup\/[^<]|status: draft|noindex/);
+  }
+  assert.match(read('public/sitemap.xml'), new RegExp(`<loc>${origin}/zh/blog/</loc><lastmod>${standupPublishedPattern}</lastmod>`));
+  assert.match(read('public/sitemap.xml'), new RegExp(`<loc>${origin}/en/blog/</loc><lastmod>${standupPublishedPattern}</lastmod>`));
+  assert.doesNotMatch(read('public/en/blog/one-minute-standup/index.html'), /dingtalk/);
+  assert.equal(existsSync(new URL('../public/en/blog/dingtalk-window-casting-teleprompter/index.html', import.meta.url)), false);
 });

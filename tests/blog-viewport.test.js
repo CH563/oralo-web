@@ -153,15 +153,16 @@ async function setViewport(page, width, height) {
   await evaluate(page, 'new Promise(resolve => requestAnimationFrame(() => requestAnimationFrame(resolve)))');
 }
 
-test('on-camera pages keep the reading column inside 390px and open the 1700px contents list beside it', {timeout: 90000}, async () => {
+test('published guide pages keep the reading column inside 390px and open the 1700px contents list beside it', {timeout: 180000}, async () => {
   assert.ok(chromePath, 'Chrome is required for the viewport check');
+  const articles = ['on-camera-update', 'one-minute-standup'];
   const server = await startServer();
   const profile = mkdtempSync(path.join(tmpdir(), 'oralo-chrome-'));
   const port = await freePort();
   const chrome = await launchChrome(port, profile);
   const origin = `http://127.0.0.1:${server.address().port}`;
   try {
-    for (const route of ['/zh/blog/on-camera-update/', '/en/blog/on-camera-update/', '/zh/blog/', '/en/blog/']) {
+    for (const route of [...articles.flatMap(slug => [`/zh/blog/${slug}/`, `/en/blog/${slug}/`]), '/zh/blog/', '/en/blog/']) {
       const page = await openPage(port, `${origin}${route}`);
       try {
         await setViewport(page, 390, 844);
@@ -188,7 +189,7 @@ test('on-camera pages keep the reading column inside 390px and open the 1700px c
         assert.equal(narrow.scrollWidth <= narrow.clientWidth + 1, true, `${route} ${JSON.stringify(narrow)}`);
         assert.deepEqual(narrow.overflow, [], route);
         assert.equal(narrow.drawer, false, route);
-        if (route.includes('on-camera-update')) {
+        if (articles.some(slug => route.includes(`/${slug}/`))) {
           assert.equal(narrow.tocDisplay, 'none', route);
           await evaluate(page, 'document.documentElement.style.scrollBehavior = "auto"; window.scrollTo(0, document.body.scrollHeight)');
           await evaluate(page, 'new Promise(resolve => requestAnimationFrame(() => requestAnimationFrame(resolve)))');
@@ -200,8 +201,9 @@ test('on-camera pages keep the reading column inside 390px and open the 1700px c
       }
     }
 
+    for (const slug of articles) {
     for (const lang of ['zh', 'en']) {
-      const page = await openPage(port, `${origin}/${lang}/blog/on-camera-update/`);
+      const page = await openPage(port, `${origin}/${lang}/blog/${slug}/`);
       try {
         await setViewport(page, 1699, 900);
         assert.equal(await evaluate(page, 'getComputedStyle(document.querySelector(".blog-toc")).display'), 'none');
@@ -266,10 +268,11 @@ test('on-camera pages keep the reading column inside 390px and open the 1700px c
         assert.equal(dismissed.afterEscape, 'false', lang);
         assert.equal(dismissed.stillClosed, 'false', lang);
         assert.equal(dismissed.focused, true, lang);
-        assert.equal(dismissed.reopened, 'true', lang);
+        assert.equal(dismissed.reopened, 'true', `${lang}/${slug}`);
       } finally {
         page.close();
       }
+    }
     }
   } finally {
     chrome.kill();
