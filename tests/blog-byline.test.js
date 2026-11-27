@@ -14,7 +14,9 @@ const pages = [
   ['zh', 'from-slides-to-script', '2026-11-25T10:42:42+08:00', '2026年11月25日 10:42'],
   ['en', 'from-slides-to-script', '2026-11-25T10:42:42+08:00', 'Nov 25, 2026, 10:42'],
   ['zh', 'on-camera-update', '2026-11-26T10:36:00+08:00', '2026年11月26日 10:36'],
-  ['en', 'on-camera-update', '2026-11-26T10:36:00+08:00', 'Nov 26, 2026, 10:36']
+  ['en', 'on-camera-update', '2026-11-26T10:36:00+08:00', 'Nov 26, 2026, 10:36'],
+  ['zh', 'one-minute-standup', '2026-11-27T10:19:31+08:00', '2026年11月27日 10:19'],
+  ['en', 'one-minute-standup', '2026-11-27T10:19:31+08:00', 'Nov 27, 2026, 10:19']
 ];
 
 test('publication labels use the Asia/Shanghai clock without shifting to the runtime zone', () => {
